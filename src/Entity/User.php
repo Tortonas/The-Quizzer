@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -39,6 +41,16 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\QuestionAnswer", mappedBy="user")
+     */
+    private $questionAnswers;
+
+    public function __construct()
+    {
+        $this->questionAnswers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -127,5 +139,36 @@ class User implements UserInterface
     public function setEmail($email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return Collection|QuestionAnswer[]
+     */
+    public function getQuestionAnswers(): Collection
+    {
+        return $this->questionAnswers;
+    }
+
+    public function addQuestionAnswer(QuestionAnswer $questionAnswer): self
+    {
+        if (!$this->questionAnswers->contains($questionAnswer)) {
+            $this->questionAnswers[] = $questionAnswer;
+            $questionAnswer->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestionAnswer(QuestionAnswer $questionAnswer): self
+    {
+        if ($this->questionAnswers->contains($questionAnswer)) {
+            $this->questionAnswers->removeElement($questionAnswer);
+            // set the owning side to null (unless already changed)
+            if ($questionAnswer->getUser() === $this) {
+                $questionAnswer->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
