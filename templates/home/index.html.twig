@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+    <!--
+    <div class="card mx-auto transparent mt-5 card-size">
+        <img src="https://i.imgur.com/i4SufCS.png" class="card-img-top" alt="SUSIGALVOTI ALT DECSRIPTION">
+        <div class="card-body">
+            <h3 class="card-title">Labas! Prašau, nusistatyk savo slapyvardį!</h3>
+            <p class="card-text">Norint atsakyti į klausimus, būtina nurodyti savo slapyvardį arba <a href="#">užsiregistruoti</a>. Tik registruoti naudotojai už atsakytus klausimus galės išsigryninti laimėtus taškus! Esi jau narys? Tada prašau tavęs <a href="#">prisijungti</a>! :)</p>
+            <form method="POST">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text transparent" id="basic-addon1">😍</span>
+                    </div>
+                    <input type="text" class="form-control transparent" placeholder="Slapyvardis" aria-label="Answer" aria-describedby="basic-addon1">
+                </div>
+                <button type="submit" class="btn btn-primary">Išsaugoti</button>
+            </form>
+        </div>
+    </div>
+    -->
+
+    <div class="card mx-auto mt-5 transparent card-size">
+        <div class="card-body">
+            <h1>Sveiki atvykę į The Quizzer!</h1>
+            <h3 class="text-muted">- Kas mes?</h3>
+            <h4>- Automatizuota klausimanijos sistema kurioje Jūs galite atsakinėti į klausimus bei varžytis su kitais nariais 😍 Daugiau apie mus galite sužinoti <a href="#">dažniausiai užduodamuose klausimuose</a></h4>
+            <form method="POST">
+                <button type="submit" class="btn btn-danger">Panaikinti langą!</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mx-auto mt-5 transparent card-size">
+        <div class="card-body">
+            <h5 class="card-title text-center">Klausimas</h5>
+            <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - Anonimas</h6>
+            <h6 class="card-subtitle mb-2">Klausimas atsinaujins - 2019-12-28 21:10</h6>
+            <h3 class="card-text">This is random question. When ____ was created?</h3>
+            <form method="POST">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text transparent" id="basic-addon1">🤔</span>
+                    </div>
+                    <input type="text" class="form-control transparent" placeholder="Atsakymas" aria-label="Answer" aria-describedby="basic-addon1">
+                </div>
+                <button type="submit" class="btn btn-primary">Pateikti</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

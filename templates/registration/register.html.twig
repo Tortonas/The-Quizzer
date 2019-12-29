@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+        <div class="">
+            <h1 class="mt-5">Registracija</h1>
+
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.username , {'attr': {'class': 'form-control transparent'}}) }}
+            {{ form_row(registrationForm.plainPassword , {'attr': {'class': 'form-control transparent'}}) }}
+            {{ form_row(registrationForm.email , {'attr': {'class': 'form-control transparent'}}) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+
+            <button class="btn btn-primary">Registruotis</button>
+            {{ form_end(registrationForm) }}
+        </div>
+{% endblock %}
