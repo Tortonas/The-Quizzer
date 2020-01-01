@@ -3,8 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Question;
-use App\Form\ClosePopupFormType;
-use App\Form\SetCustomNicknameFormType;
+use App\Form\EmptyFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +16,12 @@ class HomeController extends AbstractController
      * @Route("/", name="app_home")
      * @param Request $request
      * @return Response
+     * @throws \Exception
      */
     public function index(Request $request)
     {
-        $closePopupForm = $this->createForm(ClosePopupFormType::class);
+        date_default_timezone_set('Europe/Vilnius');
+        $closePopupForm = $this->createForm(EmptyFormType::class);
         $closePopupForm->handleRequest($request);
 
         if($closePopupForm->isSubmitted())
@@ -31,7 +32,7 @@ class HomeController extends AbstractController
             $response->send();
         }
 
-        $customNicknameForm = $this->createForm(SetCustomNicknameFormType::class);
+        $customNicknameForm = $this->createForm(EmptyFormType::class);
 
         $customNicknameForm->handleRequest($request);
 
@@ -43,6 +44,7 @@ class HomeController extends AbstractController
             }
             else
             {
+                // TODO: Pachekinti ar toks useris neegzistuoja, jeigu egzistuoja neleisti tokio nick deti.
                 $cookie = new Cookie('username', $request->get('username'), strtotime('now + 1 year'));
                 $response = new Response();
                 $response->headers->setCookie($cookie);
@@ -51,9 +53,38 @@ class HomeController extends AbstractController
             }
         }
 
+
+
         $entityManager = $this->getDoctrine()->getManager();
 
-        $question = $entityManager->getRepository(Question::class)->findBy(array(), array('timeAnswered' => 'ASC'), 1);
+        /** @var Question $currentQuestion */
+        $currentQuestion = $entityManager->getRepository(Question::class)->findOneBy(array(
+            'active' => 1));
+
+        // Jeigu true, tada keiciam klausima i nauja.
+        $currentQuestionModifyTime = $currentQuestion->getTimeModified()->getTimestamp()+(60*20);
+        $currentQuestionModifyTime = date("Y-m-d H:i:s", $currentQuestionModifyTime);
+
+        $currentDateTime = date('Y-m-d H:i:s');
+        echo $currentQuestionModifyTime." <- dabartinio klausimo<br>";
+        echo $currentDateTime;
+        if($currentQuestionModifyTime < $currentDateTime)
+        {
+            $newQuestionArray = $entityManager->getRepository(Question::class)->findBy(array('active' => 0), array('timeModified' => 'ASC'), 1);
+            $newQuestion = $newQuestionArray[0];
+            /** @var Question $newQuestion */
+            $newQuestion->setActive(1);
+            $newQuestion->setTimeModified(new \DateTime($currentDateTime));
+
+            $currentQuestion->setActive(0);
+            $currentQuestion->setTimeModified(new \DateTime($currentDateTime));
+
+            $entityManager->persist($newQuestion);
+            $entityManager->persist($currentQuestion);
+            $entityManager->flush();
+        }
+
+        $question = $entityManager->getRepository(Question::class)->findBy(array('active' => 1), array('timeModified' => 'ASC'), 1);
 
         $showQuestion = false;
 

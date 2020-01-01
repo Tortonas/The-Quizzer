@@ -49,7 +49,7 @@
             <div class="card-body">
                 <h2 class="card-title text-center">Klausimas</h2>
                 <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - Anonimas</h6>
-                <h6 class="card-subtitle mb-2">Klausimas atsinaujins - {{ question[0].timeAnswered|date('Y-m-d h:m:s') }}</h6>
+                <h6 class="card-subtitle mb-2">Klausimas atsinaujins - {{ question[0].timeModified|date_modify("+20 minutes")|date('Y-m-d H:i:s') }}</h6>
                 <h3 class="card-text">{{ question[0].question }}</h3>
                 <form method="POST">
                     <div class="input-group mb-3">

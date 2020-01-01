@@ -31,12 +31,17 @@ class Question
     /**
      * @ORM\Column(type="datetime")
      */
-    private $timeAnswered;
+    private $timeModified;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\QuestionAnswer", mappedBy="question", orphanRemoval=true)
      */
     private $questionAnswers;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $active;
 
     public function __construct()
     {
@@ -72,14 +77,14 @@ class Question
         return $this;
     }
 
-    public function getTimeAnswered(): ?\DateTimeInterface
+    public function getTimeModified(): ?\DateTimeInterface
     {
-        return $this->timeAnswered;
+        return $this->timeModified;
     }
 
-    public function setTimeAnswered(\DateTimeInterface $timeAnswered): self
+    public function setTimeModified(\DateTimeInterface $timeModified): self
     {
-        $this->timeAnswered = $timeAnswered;
+        $this->timeModified = $timeModified;
 
         return $this;
     }
@@ -113,5 +118,21 @@ class Question
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param mixed $active
+     */
+    public function setActive($active): void
+    {
+        $this->active = $active;
     }
 }
