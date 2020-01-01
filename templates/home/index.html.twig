@@ -51,15 +51,25 @@
                 <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - Anonimas</h6>
                 <h6 class="card-subtitle mb-2">Klausimas atsinaujins - {{ question[0].timeModified|date_modify("+20 minutes")|date('Y-m-d H:i:s') }}</h6>
                 <h3 class="card-text">{{ question[0].question }}</h3>
-                <form method="POST">
+                {{ form_start(submitAnswerForm) }}
+                    {% for message in app.flashes('danger-submit-form') %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('success-submit-form') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text transparent" id="basic-addon1">🤔</span>
                         </div>
-                        <input type="text" class="form-control transparent" placeholder="Atsakymas" aria-label="Answer" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control transparent" name="answer" placeholder="Atsakymas" aria-label="Answer" aria-describedby="basic-addon1">
                     </div>
                     <button type="submit" class="btn btn-primary">Pateikti</button>
-                </form>
+                {{ form_end(submitAnswerForm) }}
             </div>
         </div>
 

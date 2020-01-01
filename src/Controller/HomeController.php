@@ -54,12 +54,28 @@ class HomeController extends AbstractController
         }
 
 
+        $submitAnswerForm = $this->createForm(EmptyFormType::class);
+        $submitAnswerForm->handleRequest($request);
 
         $entityManager = $this->getDoctrine()->getManager();
-
         /** @var Question $currentQuestion */
         $currentQuestion = $entityManager->getRepository(Question::class)->findOneBy(array(
             'active' => 1));
+
+        if($submitAnswerForm->isSubmitted())
+        {
+            echo $request->get('answer');
+            if($currentQuestion->getAnswer() == $request->get('answer'))
+            {
+                $this->addFlash('success-submit-form', 'Atsakymas teisingas!');
+            }
+            else
+            {
+                $this->addFlash('danger-submit-form', 'Atsakymas neteisingas!');
+            }
+        }
+
+
 
         // Jeigu true, tada keiciam klausima i nauja.
         $currentQuestionModifyTime = $currentQuestion->getTimeModified()->getTimestamp()+(60*20);
@@ -85,7 +101,6 @@ class HomeController extends AbstractController
         }
 
         $question = $entityManager->getRepository(Question::class)->findBy(array('active' => 1), array('timeModified' => 'ASC'), 1);
-
         $showQuestion = false;
 
         if($this->isGranted('ROLE_USER') || $request->cookies->get('username') != null)
@@ -98,6 +113,7 @@ class HomeController extends AbstractController
             'question' => $question,
             'setCustomNicknameForm' => $customNicknameForm->createView(),
             'showQuestion' => $showQuestion,
+            'submitAnswerForm' => $submitAnswerForm->createView(),
         ]);
     }
 }
