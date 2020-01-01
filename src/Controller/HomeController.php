@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Question;
+use App\Entity\QuestionAnswer;
 use App\Form\EmptyFormType;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,6 +63,7 @@ class HomeController extends AbstractController
         /** @var Question $currentQuestion */
         $currentQuestion = $entityManager->getRepository(Question::class)->findOneBy(array(
             'active' => 1));
+        $currentDateTime = date('Y-m-d H:i:s');
 
         if($submitAnswerForm->isSubmitted())
         {
@@ -68,6 +71,19 @@ class HomeController extends AbstractController
             if($currentQuestion->getAnswer() == $request->get('answer'))
             {
                 $this->addFlash('success-submit-form', 'Atsakymas teisingas!');
+                $newQuestionAnswer = new QuestionAnswer();
+                $newQuestionAnswer->setUser($this->getUser());
+                $newQuestionAnswer->setTimeAnswered(new \DateTime($currentDateTime));
+                if($this->getUser() != null)
+                    $newQuestionAnswer->setUsername($this->getUser()->getUsername());
+                else
+                    $newQuestionAnswer->setUsername($request->cookies->get('username'));
+                $newQuestionAnswer->setQuestion($currentQuestion);
+
+                $this->setNewQuestion($entityManager, $currentDateTime, $currentQuestion);
+
+                $entityManager->persist($newQuestionAnswer);
+                $entityManager->flush();
             }
             else
             {
@@ -81,23 +97,11 @@ class HomeController extends AbstractController
         $currentQuestionModifyTime = $currentQuestion->getTimeModified()->getTimestamp()+(60*20);
         $currentQuestionModifyTime = date("Y-m-d H:i:s", $currentQuestionModifyTime);
 
-        $currentDateTime = date('Y-m-d H:i:s');
-        echo $currentQuestionModifyTime." <- dabartinio klausimo<br>";
-        echo $currentDateTime;
+        //echo $currentQuestionModifyTime." <- dabartinio klausimo<br>";
+        //echo $currentDateTime;
         if($currentQuestionModifyTime < $currentDateTime)
         {
-            $newQuestionArray = $entityManager->getRepository(Question::class)->findBy(array('active' => 0), array('timeModified' => 'ASC'), 1);
-            $newQuestion = $newQuestionArray[0];
-            /** @var Question $newQuestion */
-            $newQuestion->setActive(1);
-            $newQuestion->setTimeModified(new \DateTime($currentDateTime));
-
-            $currentQuestion->setActive(0);
-            $currentQuestion->setTimeModified(new \DateTime($currentDateTime));
-
-            $entityManager->persist($newQuestion);
-            $entityManager->persist($currentQuestion);
-            $entityManager->flush();
+            $this->setNewQuestion($entityManager, $currentDateTime, $currentQuestion);
         }
 
         $question = $entityManager->getRepository(Question::class)->findBy(array('active' => 1), array('timeModified' => 'ASC'), 1);
@@ -115,5 +119,23 @@ class HomeController extends AbstractController
             'showQuestion' => $showQuestion,
             'submitAnswerForm' => $submitAnswerForm->createView(),
         ]);
+    }
+
+    public function setNewQuestion($entityManager, $currentDateTime, $currentQuestion)
+    {
+        $newQuestionArray = $entityManager->getRepository(Question::class)->findBy(array('active' => 0), array('timeModified' => 'ASC'), 1);
+        $newQuestion = $newQuestionArray[0];
+        /** @var Question $newQuestion */
+        $newQuestion->setActive(1);
+        $newQuestion->setTimeModified(new \DateTime($currentDateTime));
+
+        /** @var Question $currentQuestion */
+        $currentQuestion->setActive(0);
+        $currentQuestion->setTimeModified(new \DateTime($currentDateTime));
+
+        /** @var EntityManager $entityManager */
+        $entityManager->persist($newQuestion);
+        $entityManager->persist($currentQuestion);
+        $entityManager->flush();
     }
 }
