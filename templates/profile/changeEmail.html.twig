@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+    <div class="mt-5 card card-size transparent mx-auto">
+        <div class="card-body">
+            <a href="{{ path('app_profile') }}">Grįžti</a>
+            <form class="mt-3" method="POST">
+                <div class="form-group">
+                    <label for="email">Įveskite naują email adresą</label>
+                    <input type="email" class="form-control transparent" id="email" aria-describedby="emailHelp" placeholder="{{ user.email }}">
+                </div>
+                <button type="submit" class="btn btn-danger">Keisti!</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

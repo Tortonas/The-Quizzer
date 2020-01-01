@@ -5,13 +5,13 @@
 {% block body %}
     <div class="card card-size transparent mx-auto mt-5">
         <div class="card-body">
-            <h5 class="card-title text-center">Labas, $USERNAME !</h5>
-            <p class="card-text text-center">Pas mus nuo - $DATE 😊</p>
+            <h5 class="card-title text-center">Labas, {{ user.username }} !</h5>
+            <p class="card-text text-center">Pas mus nuo - {{ user.registerAt|date('Y-m-d') }} 😊</p>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
                 Elektroninis paštas
-                <span class="badge badge-warning badge-pill">$USER_EMAIL</span>
+                <span class="badge badge-warning badge-pill">{{ user.email }}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
                 Atsakyti klausimai per paskutiniąją savaitę
@@ -27,8 +27,8 @@
             </li>
         </ul>
         <div class="card-body">
-            <a href="#" class="card-link">Pasikeisti slaptažodį</a>
-            <a href="#" class="card-link">Pasikeisti el. paštą</a>
+            <a href="{{ path('app_profile_edit') }}?v=p" class="card-link">Pasikeisti slaptažodį</a>
+            <a href="{{ path('app_profile_edit') }}?v=e" class="card-link">Pasikeisti el. paštą</a>
         </div>
     </div>
 {% endblock %}
