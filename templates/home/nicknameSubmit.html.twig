@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+        <div class="card mx-auto transparent mt-5 card-size">
+            <img src="https://i.imgur.com/i4SufCS.png" class="card-img-top" alt="SUSIGALVOTI ALT DECSRIPTION">
+            <div class="card-body">
+                <h3 class="card-title">Ačiū, kad nusistatėi savo slapyvardį! Siūlyčiau <a href="{{ path('app_register') }}">užsiregistruoti</a>, nes tik užsiregistravus tavo atsakyti klausimai skaičiuosis 😉</h3>
+                <form method="POST">
+                    <button class="btn btn-primary">Į pagrindinį</button>
+                </form>
+            </div>
+        </div>
+
+{% endblock %}

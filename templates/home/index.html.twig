@@ -18,22 +18,28 @@
         </div>
     {% endif %}
 
-    {% if not app.user %}
+    {% if not showQuestion %}
 
         <div class="card mx-auto transparent mt-5 card-size">
             <img src="https://i.imgur.com/i4SufCS.png" class="card-img-top" alt="SUSIGALVOTI ALT DECSRIPTION">
             <div class="card-body">
                 <h3 class="card-title">Labas! Prašau, nusistatyk savo slapyvardį!</h3>
                 <p class="card-text">Norint atsakyti į klausimus, būtina nurodyti savo slapyvardį arba <a href="#">užsiregistruoti</a>. Tik registruoti naudotojai už atsakytus klausimus galės išsigryninti laimėtus taškus! Esi jau narys? Tada prašau tavęs <a href="#">prisijungti</a>! :)</p>
-                <form method="POST">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text transparent" id="basic-addon1">😍</span>
+                    {% for message in app.flashes('danger-nickname-form') %}
+                        <div class="alert alert-danger">
+                            {{ message }}
                         </div>
-                        <input type="text" class="form-control transparent" placeholder="Slapyvardis" aria-label="Answer" aria-describedby="basic-addon1">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Išsaugoti</button>
-                </form>
+                    {% endfor %}
+
+                    {{ form_start(setCustomNicknameForm) }}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text transparent" id="basic-addon1">😍</span>
+                            </div>
+                            <input type="text" name="username" class="form-control transparent" placeholder="Slapyvardis" aria-label="Answer" aria-describedby="basic-addon1">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Išsaugoti</button>
+                    {{ form_end(setCustomNicknameForm) }}
             </div>
         </div>
 
@@ -43,8 +49,8 @@
             <div class="card-body">
                 <h2 class="card-title text-center">Klausimas</h2>
                 <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - Anonimas</h6>
-                <h6 class="card-subtitle mb-2">Klausimas atsinaujins - 2019-12-28 21:10</h6>
-                <h3 class="card-text">This is random question. When ____ was created?</h3>
+                <h6 class="card-subtitle mb-2">Klausimas atsinaujins - {{ question[0].timeAnswered|date('Y-m-d h:m:s') }}</h6>
+                <h3 class="card-text">{{ question[0].question }}</h3>
                 <form method="POST">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
