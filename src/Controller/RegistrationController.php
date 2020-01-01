@@ -16,6 +16,7 @@ class RegistrationController extends AbstractController
 {
     /**
      * @Route("/register", name="app_register")
+     * @throws \Exception
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
@@ -32,6 +33,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $user->setRegisterAt(new \DateTime(date('Y-m-d')));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();

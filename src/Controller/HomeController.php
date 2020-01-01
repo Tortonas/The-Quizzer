@@ -26,7 +26,7 @@ class HomeController extends AbstractController
         $closePopupForm = $this->createForm(EmptyFormType::class);
         $closePopupForm->handleRequest($request);
 
-        if($closePopupForm->isSubmitted())
+        if($closePopupForm->isSubmitted() && $request->get('closeBtn'))
         {
             $cookie = new Cookie('closeWelcomeScreen', 'true', strtotime('now + 1 year'));
             $response = new Response();
@@ -38,7 +38,7 @@ class HomeController extends AbstractController
 
         $customNicknameForm->handleRequest($request);
 
-        if($customNicknameForm->isSubmitted())
+        if($customNicknameForm->isSubmitted() && $request->get('setNicknameBtn'))
         {
             if($request->get('username') == null)
             {
@@ -65,7 +65,7 @@ class HomeController extends AbstractController
             'active' => 1));
         $currentDateTime = date('Y-m-d H:i:s');
 
-        if($submitAnswerForm->isSubmitted())
+        if($submitAnswerForm->isSubmitted() && $request->get('answerBtn'))
         {
             echo $request->get('answer');
             if($currentQuestion->getAnswer() == $request->get('answer'))

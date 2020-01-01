@@ -43,6 +43,11 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @ORM\Column(type="date")
+     */
+    private $registerAt;
+    
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\QuestionAnswer", mappedBy="user")
      */
     private $questionAnswers;
@@ -50,6 +55,22 @@ class User implements UserInterface
     public function __construct()
     {
         $this->questionAnswers = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegisterAt()
+    {
+        return $this->registerAt;
+    }
+
+    /**
+     * @param mixed $registerAt
+     */
+    public function setRegisterAt($registerAt): void
+    {
+        $this->registerAt = $registerAt;
     }
 
     public function getId(): ?int

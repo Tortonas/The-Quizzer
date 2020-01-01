@@ -12,7 +12,7 @@
                 <h4>- Automatizuota klausimanijos sistema kurioje Jūs galite atsakinėti į klausimus bei varžytis su kitais nariais 😍 Daugiau apie mus galite sužinoti <a href="#">dažniausiai užduodamuose klausimuose</a></h4>
 
                 {{ form_start(closePopupForm) }}
-                <button type="submit" class="btn btn-danger">Panaikinti langą!</button>
+                <button name="closeBtn" value="closeBtn" type="submit" class="btn btn-danger">Panaikinti langą!</button>
                 {{ form_end(closePopupForm) }}
             </div>
         </div>
@@ -38,7 +38,7 @@
                             </div>
                             <input type="text" name="username" class="form-control transparent" placeholder="Slapyvardis" aria-label="Answer" aria-describedby="basic-addon1">
                         </div>
-                        <button type="submit" class="btn btn-primary">Išsaugoti</button>
+                        <button name="setNicknameBtn" value="setNicknameBtn" type="submit" class="btn btn-primary">Išsaugoti</button>
                     {{ form_end(setCustomNicknameForm) }}
             </div>
         </div>
@@ -68,7 +68,7 @@
                         </div>
                         <input type="text" class="form-control transparent" name="answer" placeholder="Atsakymas" aria-label="Answer" aria-describedby="basic-addon1">
                     </div>
-                    <button type="submit" class="btn btn-primary">Pateikti</button>
+                    <button name="answerBtn" value="answerBtn" type="submit" class="btn btn-primary">Pateikti</button>
                 {{ form_end(submitAnswerForm) }}
             </div>
         </div>
