@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+    {% if user is null %}
+        Quizzer - Neegzistuojamas profilis
+    {% else %}
+        Quizzer - {{ user.username }} profilis
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="card card-size transparent mx-auto mt-5">
+        {% if user is null %}
+            <div class="card-body">
+                <a href="{{ path('app_results') }}">Grįžti</a>
+                <h5 class="card-title text-center">Neegzistuojamas Profilis !</h5>
+                <p class="card-text text-center">O gal egzistuos ateityje? 😊</p>
+            </div>
+        {% else %}
+            <div class="card-body">
+                <a href="{{ path('app_results') }}">Grįžti</a>
+                <h5 class="card-title text-center">{{ user.username }} Profilis !</h5>
+                <p class="card-text text-center">Pas mus nuo - {{ user.registerAt|date('Y-m-d') }} 😊</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
+                    Elektroninis paštas
+                    <span class="badge badge-warning badge-pill">Paslėptas</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
+                    Atsakyti klausimai per paskutiniąją savaitę
+                    <span class="badge badge-warning badge-pill">{{ weeklyAnswers }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
+                    Atsakyti klausimai per paskutinįjį mėnesį
+                    <span class="badge badge-success badge-pill">{{ monthlyAnswers }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
+                    Atsakyti visų laikų klausimai
+                    <span class="badge badge-danger badge-pill">{{ allTimeAnswers }}</span>
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -17,57 +17,18 @@ class ProfileController extends AbstractController
      */
     public function index()
     {
-        $conn = $this->getDoctrine()->getConnection();
-        $queryWeeklyAnswers = 'SELECT user_id, COUNT(user_id) as count
-                FROM question_answer
-                JOIN user ON user.id = question_answer.user_id
-                WHERE user_id IS NOT NULL AND
-                question_answer.time_answered >= DATE(NOW()) - INTERVAL 7 DAY AND
-                user_id = '.$this->getUser()->getId().'
-                GROUP BY user_id';
-
-        $queryMonthlyAnswers = 'SELECT user_id, COUNT(user_id) as count
-                FROM question_answer
-                JOIN user ON user.id = question_answer.user_id
-                WHERE user_id IS NOT NULL AND
-                question_answer.time_answered >= DATE(NOW()) - INTERVAL 30 DAY AND
-                user_id = '.$this->getUser()->getId().'
-                GROUP BY user_id';
-
-        $queryAllTimeAnswers = 'SELECT user_id, COUNT(user_id) as count
-                FROM question_answer
-                JOIN user ON user.id = question_answer.user_id
-                WHERE user_id IS NOT NULL AND
-                user_id = '.$this->getUser()->getId().'
-                GROUP BY user_id';
-
-
-        $statement = $conn->prepare($queryWeeklyAnswers);
-        $statement->execute();
-        $weeklyAnswers = $statement->fetchAll();
-
-        $statement = $conn->prepare($queryMonthlyAnswers);
-        $statement->execute();
-        $monthlyAnswers = $statement->fetchAll();
-
-        $statement = $conn->prepare($queryAllTimeAnswers);
-        $statement->execute();
-        $allTimeAnswers = $statement->fetchAll();
-
-        if(empty($weeklyAnswers))
-            $weeklyAnswers[0]['count'] = 0;
-        if(empty($monthlyAnswers))
-            $monthlyAnswers[0]['count'] = 0;
-        if(empty($allTimeAnswers))
-            $allTimeAnswers[0]['count'] = 0;
+        $weeklyAnswers = $this->getWeeklyQuestionCount($this->getUser()->getId());
+        $monthlyAnswers = $this->getMonthlyQuestionCount($this->getUser()->getId());
+        $allTimeQuestions = $this->getAllTimeQuestionCount($this->getUser()->getId());
 
         return $this->render('profile/index.html.twig', [
             'user' => $this->getUser(),
-            'weeklyAnswers' => $weeklyAnswers[0]['count'],
-            'monthlyAnswers' => $monthlyAnswers[0]['count'],
-            'allTimeAnswers' => $allTimeAnswers[0]['count'],
+            'weeklyAnswers' => $weeklyAnswers,
+            'monthlyAnswers' => $monthlyAnswers,
+            'allTimeAnswers' => $allTimeQuestions,
         ]);
     }
+
 
     /**
      * @Route("/profilis/keisti", name="app_profile_edit")
@@ -148,5 +109,96 @@ class ProfileController extends AbstractController
                 'user' => $this->getUser(),
             ]);
         }
+    }
+
+    /**
+     * @Route("/profilis/{slug}", name="app_view_other_profile")
+     * @param $slug
+     * @return Response
+     */
+    public function viewOtherProfile($slug)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $slugUser = $entityManager->getRepository(User::class)->find($slug);
+
+        $weeklyAnswers = 0;
+        $monthlyAnswers = 0;
+        $allTimeQuestions = 0;
+
+        if($slugUser != null)
+        {
+            $weeklyAnswers = $this->getWeeklyQuestionCount($slugUser->getId());
+            $monthlyAnswers = $this->getMonthlyQuestionCount($slugUser->getId());
+            $allTimeQuestions = $this->getAllTimeQuestionCount($slugUser->getId());
+        }
+
+        return $this->render('profile/viewOtherProfile.html.twig', [
+            'user' => $slugUser,
+            'weeklyAnswers' => $weeklyAnswers,
+            'monthlyAnswers' => $monthlyAnswers,
+            'allTimeAnswers' => $allTimeQuestions,
+        ]);
+    }
+
+    private function getWeeklyQuestionCount($userId)
+    {
+        $conn = $this->getDoctrine()->getConnection();
+        $query = 'SELECT user_id, COUNT(user_id) as count
+                FROM question_answer
+                JOIN user ON user.id = question_answer.user_id
+                WHERE user_id IS NOT NULL AND
+                question_answer.time_answered >= DATE(NOW()) - INTERVAL 7 DAY AND
+                user_id = '.$userId.'
+                GROUP BY user_id';
+
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $answers = $statement->fetchAll();
+
+        if(empty($answers))
+            $answers[0]['count'] = 0;
+
+        return $answers[0]['count'];
+    }
+
+    private function getMonthlyQuestionCount($userId)
+    {
+        $conn = $this->getDoctrine()->getConnection();
+        $query = 'SELECT user_id, COUNT(user_id) as count
+                FROM question_answer
+                JOIN user ON user.id = question_answer.user_id
+                WHERE user_id IS NOT NULL AND
+                question_answer.time_answered >= DATE(NOW()) - INTERVAL 30 DAY AND
+                user_id = '.$userId.'
+                GROUP BY user_id';
+
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $answers = $statement->fetchAll();
+
+        if(empty($answers))
+            $answers[0]['count'] = 0;
+
+        return $answers[0]['count'];
+    }
+
+    private function getAllTimeQuestionCount($userId)
+    {
+        $conn = $this->getDoctrine()->getConnection();
+        $query = 'SELECT user_id, COUNT(user_id) as count
+                FROM question_answer
+                JOIN user ON user.id = question_answer.user_id
+                WHERE user_id IS NOT NULL AND
+                user_id = '.$userId.'
+                GROUP BY user_id';
+
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $answers = $statement->fetchAll();
+
+        if(empty($answers))
+            $answers[0]['count'] = 0;
+
+        return $answers[0]['count'];
     }
 }
