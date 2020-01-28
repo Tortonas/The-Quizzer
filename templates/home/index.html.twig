@@ -4,12 +4,12 @@
 
 {% block body %}
 
-    {% if not app.request.cookies.get('closeWelcomeScreen') == 'true' %}
+    {% if not app.request.cookies.get('closeWelcomeScreen') == 'true' and showWelcomeScreen %}
         <div class="card mx-auto mt-5 transparent card-size">
             <div class="card-body">
                 <h1>Sveiki atvykę į The Quizzer!</h1>
                 <h3 class="text-muted">- Kas mes?</h3>
-                <h4>- Automatizuota klausimanijos sistema kurioje Jūs galite atsakinėti į klausimus bei varžytis su kitais nariais 😍 Daugiau apie mus galite sužinoti <a href="#">dažniausiai užduodamuose klausimuose</a></h4>
+                <h4>- Automatizuota klausimanijos sistema kurioje Jūs galite atsakinėti į klausimus bei varžytis su kitais nariais 😍 Daugiau apie mus galite sužinoti <a href="#">čia</a></h4>
 
                 {{ form_start(closePopupForm) }}
                 <button name="closeBtn" value="closeBtn" type="submit" class="btn btn-danger">Panaikinti langą!</button>
@@ -24,7 +24,8 @@
             <img src="https://i.imgur.com/i4SufCS.png" class="card-img-top" alt="SUSIGALVOTI ALT DECSRIPTION">
             <div class="card-body">
                 <h3 class="card-title">Labas! Prašau, nusistatyk savo slapyvardį!</h3>
-                <p class="card-text">Norint atsakyti į klausimus, būtina nurodyti savo slapyvardį arba <a href="#">užsiregistruoti</a>. Tik registruoti naudotojai už atsakytus klausimus galės išsigryninti laimėtus taškus! Esi jau narys? Tada prašau tavęs <a href="#">prisijungti</a>! :)</p>
+                <p class="card-text">Norint atsakyti į klausimus, būtina nurodyti savo slapyvardį arba <a href="#">užsiregistruoti</a>. Esi jau narys? Tada prašau tavęs <a href="#">prisijungti</a>! Tą gali padaryti ir per
+                    <a href="{{ path('connect_google_start') }}"><img style="width:150px;" src="{{ asset('img/google-login.png') }}" alt="google login button"></a></p>
                     {% for message in app.flashes('danger-nickname-form') %}
                         <div class="alert alert-danger">
                             {{ message }}

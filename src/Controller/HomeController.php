@@ -28,12 +28,15 @@ class HomeController extends AbstractController
         $closePopupForm = $this->createForm(EmptyFormType::class);
         $closePopupForm->handleRequest($request);
 
+        $showWelcomeScreen = true;
+
         if($closePopupForm->isSubmitted() && $request->get('closeBtn'))
         {
             $cookie = new Cookie('closeWelcomeScreen', 'true', strtotime('now + 1 year'));
             $response = new Response();
             $response->headers->setCookie($cookie);
             $response->send();
+            $showWelcomeScreen = false;
         }
 
         $customNicknameForm = $this->createForm(EmptyFormType::class);
@@ -120,6 +123,7 @@ class HomeController extends AbstractController
             'setCustomNicknameForm' => $customNicknameForm->createView(),
             'showQuestion' => $showQuestion,
             'submitAnswerForm' => $submitAnswerForm->createView(),
+            'showWelcomeScreen' => $showWelcomeScreen,
         ]);
     }
 
