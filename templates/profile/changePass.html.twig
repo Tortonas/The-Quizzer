@@ -7,19 +7,44 @@
         <div class="card-body">
             <a href="{{ path('app_profile') }}">Grįžti</a>
             <form class="mt-3" method="POST">
-                <div class="form-group">
-                    <label for="oldPassword">Senas slaptažodis</label>
-                    <input type="password" class="form-control transparent" id="oldPassword" placeholder="Senas slaptažodis">
-                </div>
-                <div class="form-group">
-                    <label for="newPassword">Naujas slaptažodis</label>
-                    <input type="password" class="form-control transparent" id="newPassword" placeholder="Naujas slaptažodis">
-                </div>
-                <div class="form-group">
-                    <label for="repeatPassword">Pakartokite naują slaptažodį</label>
-                    <input type="password" class="form-control transparent" id="repeatPassword" placeholder="Pakartokitę naują slaptažodį">
-                </div>
-                <button type="submit" class="btn btn-danger">Keisti!</button>
+                {% for message in app.flashes('danger') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% if normalPasswordChangeForm %}
+                    <div class="form-group">
+                        <label for="oldPassword">Senas slaptažodis</label>
+                        <input name="oldPassword" type="password" class="form-control transparent" id="oldPassword" placeholder="Senas slaptažodis">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Naujas slaptažodis</label>
+                        <input type="password" class="form-control transparent" name="newPassword" id="newPassword" placeholder="Naujas slaptažodis">
+                    </div>
+                    <div class="form-group">
+                        <label for="repeatPassword">Pakartokite naują slaptažodį</label>
+                        <input type="password" class="form-control transparent" name="repeatPassword" id="repeatPassword" placeholder="Pakartokitę naują slaptažodį">
+                    </div>
+                    <button type="submit" class="btn btn-danger">Keisti!</button>
+                {% else %}
+                    <div class="alert alert-success">
+                        Tu buvai prisiregistravęs per Google todėl seno slaptažodžio neturi. Čia jį gali nusistatyti.
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Naujas slaptažodis</label>
+                        <input type="password" class="form-control transparent" name="newPasswordGoogle" id="newPassword" placeholder="Naujas slaptažodis">
+                    </div>
+                    <div class="form-group">
+                        <label for="repeatPassword">Pakartokite naują slaptažodį</label>
+                        <input type="password" class="form-control transparent" name="repeatPasswordGoogle" id="repeatPassword" placeholder="Pakartokitę naują slaptažodį">
+                    </div>
+                    <button type="submit" class="btn btn-danger">Nusistatyti!</button>
+                {% endif %}
             </form>
         </div>
     </div>

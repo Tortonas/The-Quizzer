@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,9 +61,6 @@ class ProfileController extends AbstractController
         if(empty($allTimeAnswers))
             $allTimeAnswers[0]['count'] = 0;
 
-//        var_dump($weeklyAnswers);
-//        die;
-
         return $this->render('profile/index.html.twig', [
             'user' => $this->getUser(),
             'weeklyAnswers' => $weeklyAnswers[0]['count'],
@@ -81,8 +79,62 @@ class ProfileController extends AbstractController
     {
         if($request->get('v') == 'p')
         {
+            $normalPasswordChangeForm = true; // true - normal; false - google login and password wasn't set
+
+            if($this->getUser()->getPassword() == 'google login')
+            {
+                $normalPasswordChangeForm = false;
+                if($request->isMethod('POST'))
+                {
+                    if($request->get('newPasswordGoogle') == $request->get('repeatPasswordGoogle') && strlen($request->get('newPasswordGoogle')) >= 3)
+                    {
+                        /** @var User $currentUser */
+                        $currentUser = $this->getUser();
+
+                        $newPassword = password_hash($request->get('newPasswordGoogle'), PASSWORD_ARGON2ID);
+
+                        $currentUser->setPassword($newPassword);
+                        $entityManager = $this->getDoctrine()->getManager();
+                        $entityManager->persist($currentUser);
+                        $entityManager->flush();
+
+                        $this->addFlash('success', 'Naujas slaptažodis nustatytas!');
+                    }
+                    else
+                    {
+                        $this->addFlash('danger', 'Nauji slaptažodžiai nesutampa arba yra per trumpi!');
+                    }
+                }
+            }
+            else
+            {
+                if($request->isMethod('POST'))
+                {
+                    if(password_verify($request->get('oldPassword'), $this->getUser()->getPassword()) == 1
+                        && $request->get('newPassword') == $request->get('repeatPassword') && strlen($request->get('newPassword')) >= 3)
+                    {
+                        /** @var User $currentUser */
+                        $currentUser = $this->getUser();
+
+                        $newPassword = password_hash($request->get('newPassword'), PASSWORD_ARGON2ID);
+
+                        $currentUser->setPassword($newPassword);
+                        $entityManager = $this->getDoctrine()->getManager();
+                        $entityManager->persist($currentUser);
+                        $entityManager->flush();
+
+                        $this->addFlash('success', 'Slaptažodis pakeistas!');
+                    }
+                    else
+                    {
+                        $this->addFlash('danger', 'Blogas senas slaptažodis arba naujas slaptažodis neteisingai pakartotas!');
+                    }
+                }
+            }
+
+
             return $this->render('profile/changePass.html.twig', [
-                'user' => $this->getUser(),
+                'normalPasswordChangeForm' => $normalPasswordChangeForm
             ]);
         }
         else if($request->get('v') == 'e')
