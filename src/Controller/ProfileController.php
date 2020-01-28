@@ -139,6 +139,11 @@ class ProfileController extends AbstractController
         }
         else if($request->get('v') == 'e')
         {
+            if($request->isMethod('POST'))
+            {
+                echo $request->get('newEmail');
+                $this->addFlash('danger', 'test');
+            }
             return $this->render('profile/changeEmail.html.twig', [
                 'user' => $this->getUser(),
             ]);

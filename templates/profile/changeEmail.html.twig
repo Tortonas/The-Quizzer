@@ -6,13 +6,34 @@
     <div class="mt-5 card card-size transparent mx-auto">
         <div class="card-body">
             <a href="{{ path('app_profile') }}">Grįžti</a>
-            <form class="mt-3" method="POST">
+            {% if user.password == "google login" %}
+                <div class="alert alert-danger">
+                    Hey, tu esi prisiregistravęs su GOOGLE, todėl neturi nusistatęs slaptažodžio. Jeigu norėtum pasikeisti el. paštą, reikėtu <a href="{{ path('app_profile_edit') }}?v=p" class="card-link">nusistatyti slaptažodį</a>.
+                </div>
                 <div class="form-group">
                     <label for="email">Įveskite naują email adresą</label>
-                    <input type="email" class="form-control transparent" id="email" aria-describedby="emailHelp" placeholder="{{ user.email }}">
+                    <input type="email" class="form-control transparent" id="email" aria-describedby="emailHelp" placeholder="{{ user.email }}" disabled>
                 </div>
-                <button type="submit" class="btn btn-danger">Keisti!</button>
-            </form>
+                <button type="submit" class="btn btn-danger" disabled>Keisti!</button>
+            {% else %}
+                <form class="mt-3" method="POST">
+                    {% for message in app.flashes('danger') %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <div class="form-group">
+                        <label for="email">Įveskite naują email adresą</label>
+                        <input type="email" class="form-control transparent" name="newEmail" id="email" aria-describedby="emailHelp" placeholder="{{ user.email }}">
+                    </div>
+                    <button type="submit" class="btn btn-danger">Keisti!</button>
+                </form>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
