@@ -114,6 +114,8 @@ class HomeController extends AbstractController
             $showQuestion = true;
         }
 
+        $lastQuestionAnswerer = $entityManager->getRepository(QuestionAnswer::class)->findOneBy(array(), array('id' => 'DESC'));
+
         return $this->render('home/index.html.twig', [
             'closePopupForm' => $closePopupForm->createView(),
             'question' => $question,
@@ -121,6 +123,7 @@ class HomeController extends AbstractController
             'showQuestion' => $showQuestion,
             'submitAnswerForm' => $submitAnswerForm->createView(),
             'showWelcomeScreen' => $showWelcomeScreen,
+            'lastQuestionAnswerer' => $lastQuestionAnswerer->getUsername(),
         ]);
     }
 

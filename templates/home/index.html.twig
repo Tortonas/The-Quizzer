@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Quizzer - Bene didžiausias klausimanijos žaidimas{% endblock %}
+{% block description %}Quizzer - {% endblock %}
 
 {% block body %}
 
@@ -49,7 +50,7 @@
         <div class="card mx-auto mt-5 transparent card-size">
             <div class="card-body">
                 <h2 class="card-title text-center">Klausimas</h2>
-                <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - Anonimas</h6>
+                <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - {{ lastQuestionAnswerer }}</h6>
                 <h6 class="card-subtitle mb-2">Klausimas atsinaujins - {{ question[0].timeModified|date_modify("+10 minutes")|date('Y-m-d H:i:s') }}</h6>
                 <h3 class="card-text">{{ question[0].question }}</h3>
                 {{ form_start(submitAnswerForm) }}
