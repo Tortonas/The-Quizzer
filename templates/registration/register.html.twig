@@ -13,7 +13,10 @@
             {{ form_row(registrationForm.email , {'attr': {'class': 'form-control transparent'}}) }}
             {{ form_row(registrationForm.agreeTerms) }}
 
-            <button class="btn btn-primary">Registruotis</button>
+            <div>
+                <button class="btn btn-primary">Registruotis</button>
+                <a href="{{ path('connect_google_start') }}"><img class="rounded" src="{{ asset('img/google-login.png') }}" alt="google login button"></a>
+            </div>
             {{ form_end(registrationForm) }}
         </div>
 {% endblock %}

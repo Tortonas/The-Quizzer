@@ -18,9 +18,6 @@
             <h1 class="h1 mb-3 font-weight-normal">Prašau prisijungti!</h1>
             <h2 class="h2 mb-3 font-weight-normal">Neturi paskyros? <a href="{{ path('app_register') }}">Užsiregistruok!</a></h2>
 
-            <a href="{{ path('connect_google_start') }}"><img src="{{ asset('img/google-login.png') }}" alt="google login button"></a><br>
-
-
             <label for="inputUsername">Slapyvardis</label>
             <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control transparent" required autofocus>
             <label for="inputPassword">Slaptažodis</label>
@@ -40,8 +37,11 @@
                 </div>
 
 
-            <button class="btn btn-lg btn-primary" type="submit">
-                Prisijungti
-            </button>
+            <div>
+                <button class="btn btn-primary" type="submit">
+                    Prisijungti
+                </button>
+                <a href="{{ path('connect_google_start') }}"><img class="rounded" src="{{ asset('img/google-login.png') }}" alt="google login button"></a>
+            </div>
         </form>
 {% endblock %}

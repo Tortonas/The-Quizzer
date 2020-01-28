@@ -72,7 +72,6 @@ class HomeController extends AbstractController
 
         if($submitAnswerForm->isSubmitted() && $request->get('answerBtn'))
         {
-            echo $request->get('answer');
             if($currentQuestion->getAnswer() == $request->get('answer'))
             {
                 $this->addFlash('success-submit-form', 'Atsakymas teisingas!');
@@ -99,11 +98,9 @@ class HomeController extends AbstractController
 
 
         // Jeigu true, tada keiciam klausima i nauja.
-        $currentQuestionModifyTime = $currentQuestion->getTimeModified()->getTimestamp()+(60*20);
+        $currentQuestionModifyTime = $currentQuestion->getTimeModified()->getTimestamp()+(60*10);
         $currentQuestionModifyTime = date("Y-m-d H:i:s", $currentQuestionModifyTime);
 
-        //echo $currentQuestionModifyTime." <- dabartinio klausimo<br>";
-        //echo $currentDateTime;
         if($currentQuestionModifyTime < $currentDateTime)
         {
             $this->setNewQuestion($entityManager, $currentDateTime, $currentQuestion);
