@@ -6,9 +6,8 @@
     <h1 class="text-center mt-5">Dažniausiai užduodami klausimai</h1>
 
     <ul class="list-group col-sm-10 mx-auto">
-        <li class="list-group-item list-group-item-action transparent mt-1"><b>Random Klausimas?</b><br> Random atsakymas </li>
-        <li class="list-group-item list-group-item-action transparent mt-1"><b>Random Klausimas?</b><br> Random atsakymas </li>
-        <li class="list-group-item list-group-item-action transparent mt-1"><b>Random Klausimas?</b><br> Random atsakymas </li>
-        <li class="list-group-item list-group-item-action transparent mt-1"><b>Random Klausimas?</b><br> Random atsakymas </li>
+        {% for question in questions %}
+            <li class="list-group-item list-group-item-action transparent mt-1"><b>{{ question.question }}</b><br> {{ question.answer }} </li>
+        {% endfor %}
     </ul>
 {% endblock %}

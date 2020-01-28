@@ -20,6 +20,7 @@ class ResultsController extends AbstractController
                 JOIN user ON user.id = question_answer.user_id
                 WHERE user_id IS NOT NULL
                 GROUP BY user_id
+                ORDER BY count DESC
                 LIMIT 5';
 
         $queryTopUsersWeekly = 'SELECT user_id, user.username, COUNT(user_id) as count
@@ -28,6 +29,7 @@ class ResultsController extends AbstractController
                 WHERE user_id IS NOT NULL AND
                 question_answer.time_answered >= DATE(NOW()) - INTERVAL 7 DAY
                 GROUP BY user_id
+                ORDER BY count DESC
                 LIMIT 5';
 
         $queryTopUsersMonthly = 'SELECT user_id, user.username, COUNT(user_id) as count
@@ -36,6 +38,7 @@ class ResultsController extends AbstractController
                 WHERE user_id IS NOT NULL AND
                 question_answer.time_answered >= DATE(NOW()) - INTERVAL 30 DAY
                 GROUP BY user_id
+                ORDER BY count DESC
                 LIMIT 5';
 
         $statement = $conn->prepare($queryTopUsersGlobal);

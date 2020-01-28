@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\FreqAskedQuestion;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,8 +13,13 @@ class FAQController extends AbstractController
      */
     public function index()
     {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $questions = $entityManager->getRepository(FreqAskedQuestion::class)->findAll();
+
+
         return $this->render('faq/index.html.twig', [
-            'controller_name' => 'FAQController',
+            'questions' => $questions,
         ]);
     }
 }
