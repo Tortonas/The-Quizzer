@@ -49,7 +49,11 @@
         <div class="card mx-auto mt-5 transparent card-size">
             <div class="card-body">
                 <h2 class="card-title text-center">Klausimas</h2>
-                <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - {{ lastQuestionAnswerer }}</h6>
+                {% if lastQuestionAnswererUserId == -1 %}
+                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - {{ lastQuestionAnswerer }}</h6>
+                {% else %}
+                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - <a href="{{ path('app_view_other_profile', { 'slug': lastQuestionAnswererUserId }) }}">{{ lastQuestionAnswerer }}</a></h6>
+                {% endif %}
                 <h6 id="timer" class="card-subtitle mb-2">Klausimas atsinaujins už</h6>
                 <h3 class="card-text">{{ question[0].question }}</h3>
                 {{ form_start(submitAnswerForm) }}

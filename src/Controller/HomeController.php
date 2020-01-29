@@ -135,6 +135,17 @@ class HomeController extends AbstractController
 
         $lastQuestionAnswerer = $entityManager->getRepository(QuestionAnswer::class)->findOneBy(array(), array('id' => 'DESC'));
 
+        // This checks if previous question answerer (user) has a valid account, then his name will be displayed as link.
+
+
+        $lastQuestionAnswererUserId = -1;
+
+        if($lastQuestionAnswerer->getUser() != null)
+        {
+            $lastQuestionAnswererUserId = $lastQuestionAnswerer->getUser()->getId();
+        }
+
+
         return $this->render('home/index.html.twig', [
             'closePopupForm' => $closePopupForm->createView(),
             'question' => $question,
@@ -143,6 +154,7 @@ class HomeController extends AbstractController
             'submitAnswerForm' => $submitAnswerForm->createView(),
             'showWelcomeScreen' => $showWelcomeScreen,
             'lastQuestionAnswerer' => $lastQuestionAnswerer->getUsername(),
+            'lastQuestionAnswererUserId' => $lastQuestionAnswererUserId,
         ]);
     }
 
