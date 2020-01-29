@@ -72,7 +72,21 @@ class HomeController extends AbstractController
 
         if($submitAnswerForm->isSubmitted() && $request->get('answerBtn'))
         {
-            if($currentQuestion->getAnswer() == $request->get('answer'))
+            $plainAnswer = $currentQuestion->getAnswer();
+            $plainAnswerSubmission = $request->get('answer');
+
+            $lithuanianLetters = array('ą', 'č', 'ę', 'ė', 'į', 'š', 'ų', 'ū', 'ž', 'Ą', 'Č', 'Ę', 'Ė', 'Į', 'Š', 'Ų', 'Ū', 'Ž');
+            $latinLetters = array('a', 'c', 'e', 'e', 'i', 's', 'u', 'u', 'z', 'a', 'c', 'e', 'e', 'i', 's', 'u', 'u', 'z');
+
+            // TODO: Patikrinti ar naudotojo submissionas turi lietuviškų raidžių, jeigu jo, pranešti jam, kad gal nereik.
+
+            $plainAnswerSubmission = str_replace($lithuanianLetters, $latinLetters, $plainAnswerSubmission);
+
+            $plainAnswer = strtolower($plainAnswer);
+            $plainAnswerSubmission = strtolower($plainAnswerSubmission);
+
+
+            if($plainAnswer == $plainAnswerSubmission)
             {
                 $this->addFlash('success-submit-form', 'Atsakymas teisingas!');
                 $newQuestionAnswer = new QuestionAnswer();
