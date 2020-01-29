@@ -88,7 +88,6 @@ class HomeController extends AbstractController
 
             if(count($plainAnswerSubmissionSplit) != strlen($plainAnswerSubmission) && count($plainAnswerSubmissionSplit) != 1 && strlen($plainAnswerSubmission) != 0)
             {
-                echo count($plainAnswerSubmissionSplit).strlen($plainAnswerSubmission);
                 $this->addFlash('info-submit-form', 'Hey psst, atsakymus gali rašyti ir be lietuviškų raidžių (gali ir su) 😇 Jeigu jis tiks, jis bus užskaitytas.');
             }
 
