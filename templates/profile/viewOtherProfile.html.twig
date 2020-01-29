@@ -13,13 +13,13 @@
     <div class="card card-size transparent mx-auto mt-5">
         {% if user is null %}
             <div class="card-body">
-                <a href="{{ path('app_results') }}">Grįžti</a>
+                <a href="javascript:history.go(-1)">Grįžti</a>
                 <h5 class="card-title text-center">Neegzistuojamas Profilis !</h5>
                 <p class="card-text text-center">O gal egzistuos ateityje? 😊</p>
             </div>
         {% else %}
             <div class="card-body">
-                <a href="{{ path('app_results') }}">Grįžti</a>
+                <a href="javascript:history.go(-1)">Grįžti</a>
                 <h5 class="card-title text-center">{{ user.username }} Profilis !</h5>
                 <p class="card-text text-center">Pas mus nuo - {{ user.registerAt|date('Y-m-d') }} 😊</p>
             </div>

@@ -5,7 +5,7 @@
 {% block body %}
     <div class="mt-5 card card-size transparent mx-auto">
         <div class="card-body">
-            <a href="{{ path('app_profile') }}">Grįžti</a>
+            <a href="javascript:history.go(-1)">Grįžti</a>
             <form class="mt-3" method="POST">
                 {% for message in app.flashes('danger') %}
                     <div class="alert alert-danger">

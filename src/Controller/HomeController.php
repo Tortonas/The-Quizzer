@@ -6,6 +6,7 @@ use App\Entity\Question;
 use App\Entity\QuestionAnswer;
 use App\Form\EmptyFormType;
 use Doctrine\ORM\EntityManager;
+use http\Url;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -144,7 +145,6 @@ class HomeController extends AbstractController
         {
             $lastQuestionAnswererUserId = $lastQuestionAnswerer->getUser()->getId();
         }
-
 
         return $this->render('home/index.html.twig', [
             'closePopupForm' => $closePopupForm->createView(),

@@ -5,7 +5,7 @@
 {% block body %}
     <div class="mt-5 card card-size transparent mx-auto">
         <div class="card-body">
-            <a href="{{ path('app_profile') }}">Grįžti</a>
+            <a href="javascript:history.go(-1)">Grįžti</a>
             {% if user.password == "google login" %}
                 <div class="alert alert-danger">
                     Hey, tu esi prisiregistravęs su GOOGLE, todėl neturi nusistatęs slaptažodžio. Jeigu norėtum pasikeisti el. paštą, reikėtu <a href="{{ path('app_profile_edit') }}?v=p" class="card-link">nusistatyti slaptažodį</a>.
