@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 29, 2020 at 12:11 AM
--- Server version: 10.1.39-MariaDB
--- PHP Version: 7.3.5
+-- Host: localhost
+-- Generation Time: Jan 29, 2020 at 09:16 PM
+-- Server version: 5.7.28-0ubuntu0.18.04.4
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -39,8 +39,10 @@ CREATE TABLE `freq_asked_question` (
 --
 
 INSERT INTO `freq_asked_question` (`id`, `question`, `answer`) VALUES
-(1, 'Kas yra laimė?', 'Niekas nežino'),
-(2, 'Antras klausimas', 'Antras atsakymas');
+(1, 'Susisiekimo el. paštas?', 'info@quizzer.lt'),
+(2, 'Kiek klausimų yra sistemoje?', 'Virš 10 000!'),
+(3, 'Ar galima atsisiųsti visus klausimus bei atsakymus?', 'Parašykite į el. paštą, susitarsim.'),
+(4, 'Kokia tvarka renkami nauji klausimai?', 'Seniausiai užduoti klausimai turi didžiausią prioritetą tapti naujais.');
 
 -- --------------------------------------------------------
 
@@ -82,10 +84,10 @@ CREATE TABLE `question` (
 --
 
 INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
-(1, 'Kas yra laime?', 'nezinau', '2020-01-28 23:56:16', 0),
-(2, 'pog?', 'ne pog', '2020-01-29 00:54:42', 0),
-(3, 'Žalgirio mūšio data', '1410', '2020-01-29 00:54:42', 1),
-(7, 'ï»¿Kada lietuvoje pradeta kurti skautu organizacija?', '1917', '2000-01-01 00:00:00', 0),
+(1, 'Kokios kavinės marketingo šūkis yra? \"TIKRAI TAVO Nuo 2007\"', 'vero cafe', '2020-01-28 23:56:16', 0),
+(2, '2+2? :)', '4', '2020-01-29 00:54:42', 0),
+(3, 'Žalgirio mūšio data', '1410', '2020-01-29 13:27:12', 0),
+(7, 'Kada lietuvoje pradeta kurti skautu organizacija?', '1917', '2000-01-01 00:00:00', 0),
 (8, 'Mikalojaus Konstantino Ciurlionio teviske', 'Druskininkai', '2000-01-01 00:00:00', 0),
 (9, 'Penktas pagal dydi Lietuvos miestas', 'Panevezys', '2000-01-01 00:00:00', 0),
 (10, 'Zemaitijos sostine', 'Telsiai', '2000-01-01 00:00:00', 0),
@@ -156,12 +158,11 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (75, 'Kokia pirma klonuota avis pasaulyje?', 'Doly', '2000-01-01 00:00:00', 0),
 (76, 'Iswersti raides nba', 'National basketball asotiation', '2000-01-01 00:00:00', 0),
 (77, 'Kataliku vienuolyno virsininkas', 'Abatas', '2000-01-01 00:00:00', 0),
-(78, 'Atleidimas nuo bausmÃ©s ar jos sumazinimas', 'Amnestija', '2000-01-01 00:00:00', 0),
+(78, 'Atleidimas nuo bausmės ar jos sumazinimas', 'Amnestija', '2000-01-01 00:00:00', 0),
 (79, 'Karinis dalinys,susidedantis is keliu kuopu', 'Batalionas', '2000-01-01 00:00:00', 0),
-(80, 'Laisvas zemÃ©s sklypas,kuris duodamas naujakuriams', 'Homstedas', '2000-01-01 00:00:00', 0),
+(80, 'Laisvas zemės sklypas, kuris duodamas naujakuriams', 'Homstedas', '2000-01-01 00:00:00', 0),
 (81, 'Karinis isiverzimas i swetima sali', 'Invazija', '2000-01-01 00:00:00', 0),
 (82, 'Prancuzijos sostine', 'Paryzius', '2000-01-01 00:00:00', 0),
-(83, 'Kiek euru galima gauti uz 1kg aukso', '356000', '2000-01-01 00:00:00', 0),
 (84, 'Zymiausia grigaliskojo choralo giesme', 'Dies irae', '2000-01-01 00:00:00', 0),
 (85, 'Kaip vadinama geometrijos atsaka kur sprendziami brezimo uzdaviniai?', 'Konstruktyvioji geometrija', '2000-01-01 00:00:00', 0),
 (86, 'Viesai,iskilmingai skelbti', 'Deklaruoti', '2000-01-01 00:00:00', 0),
@@ -179,11 +180,10 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (98, 'Zmoniu atsikelimas gyventi is kitu saliu', 'Imigrcija', '2000-01-01 00:00:00', 0),
 (99, 'Koks baikalo ezero gylis?', '1631', '2000-01-01 00:00:00', 0),
 (100, 'Turtingiausias pasaulyje futbolo klubas', 'Real madrid', '2000-01-01 00:00:00', 0),
-(101, 'Online zaidimas?', 'Bloodmoon', '2000-01-01 00:00:00', 0),
-(102, 'Kokio dydzio Afrika?', '44mln/km', '2000-01-01 00:00:00', 0),
-(103, 'Reciause firma', 'Diadora', '2000-01-01 00:00:00', 0),
+(101, 'Ką dabar žaidžiate?', 'Quizzer', '2000-01-01 00:00:00', 0),
+(102, 'Kokio dydzio Afrika? mln/km', '44', '2000-01-01 00:00:00', 0),
 (104, 'Kokio ilgio buvo didziausia knyga?', '320cm', '2000-01-01 00:00:00', 0),
-(105, 'Kieno baznycia stowi wilniuja?', 'Onos', '2000-01-01 00:00:00', 0),
+(105, 'Kieno baznycia stovi Vilniuje?', 'Onos', '2000-01-01 00:00:00', 0),
 (106, 'Koks kompozitorius sukure dabartini europos himna?', 'Bethovenas', '2000-01-01 00:00:00', 0),
 (107, 'Europa nuo Azijos skiriantys kalnai', 'Uralo', '2000-01-01 00:00:00', 0),
 (108, 'Kaip vadinami Estijoje esantys skardziai?', 'Glintas', '2000-01-01 00:00:00', 0),
@@ -224,7 +224,6 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (143, 'Baltaodzio(-es) ir juodaodzio(-es) palikuonis.', 'Mulatas', '2000-01-01 00:00:00', 0),
 (144, 'Kokio linksnio nera rusu kalboje?', 'Sauksmininko', '2000-01-01 00:00:00', 0),
 (145, 'Lietuvos kompozitorius,gyvenes klaipedoje ir ikures konservatorija?', 'Stasys simkus', '2000-01-01 00:00:00', 0),
-(146, 'Daugiausiai pinigu per metus uzdirbantis sportininkas?', 'T.Woodsas', '2000-01-01 00:00:00', 0),
 (147, 'Kiek metu truko karas tarp Anglijos ir Prancuzyjos?', '100', '2000-01-01 00:00:00', 0),
 (148, 'Pawadinimas masinos volswagen kitas zodis?', 'Sharan', '2000-01-01 00:00:00', 0),
 (149, 'Is ko pagamintas stiklas?', 'Smelio', '2000-01-01 00:00:00', 0),
@@ -242,7 +241,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (161, 'Kas parase knyga drakula', 'Bram stoker', '2000-01-01 00:00:00', 0),
 (162, 'Kas parase Lietuvos himna?', 'Vincas Kudirka', '2000-01-01 00:00:00', 0),
 (163, 'Musio ir krepsinio komandos pavadinimas?', 'Zalgiris', '2000-01-01 00:00:00', 0),
-(164, 'Kiek km tesiasi Lietuvos pajuris?', '99km', '2000-01-01 00:00:00', 0),
+(164, 'Kiek km tesiasi Lietuvos pajuris?', '99', '2000-01-01 00:00:00', 0),
 (165, 'Ilgiausia Lietuvos upe?', 'Nemunas', '2000-01-01 00:00:00', 0),
 (166, 'Kokia upe teka per Vilniu?', 'Neris', '2000-01-01 00:00:00', 0),
 (167, 'Legendinis laivas gulintis Atlanto vandenyno dugne?', 'Titanic', '2000-01-01 00:00:00', 0),
@@ -334,9 +333,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (253, 'Kelintame amziuje atsirado orkestrai?', 'XVIa. pabaigoje', '2000-01-01 00:00:00', 0),
 (254, 'Koks antikines kulturos laikotarpis buvo VIII-VIa. pr. Kr?', 'Archaikos', '2000-01-01 00:00:00', 0),
 (255, 'Koks antikines kulturos laikotarpis buvo nuo Va. iki 330m. pr. Kr?', 'Klasikos', '2000-01-01 00:00:00', 0),
-(256, 'Koks antikines kulturos laikotarpis buvo nuo 330m. Iki 146m. pr. Kr?', 'Helinistinis', '2000-01-01 00:00:00', 0),
-(257, 'Koks antikines kulturos laikotarpis buvo nuo 146m. pr. Kr. - 395m. po Kr.?', 'Romos valdymo', '2000-01-01 00:00:00', 0),
-(258, 'Muzika senoves graikijoje buvo glaudziai susijusi su poezija ir ... ?', 'Sokiu', '2000-01-01 00:00:00', 0),
+(256, 'Koks antikines kulturos laikotarpis buvo nuo 330m. Iki 146m. pr. Kr?', 'Helinistinis', '2020-01-29 13:37:13', 0),
+(257, 'Koks antikines kulturos laikotarpis buvo nuo 146m. pr. Kr. - 395m. po Kr.?', 'Romos valdymo', '2020-01-29 19:03:44', 0),
+(258, 'Muzika senoves graikijoje buvo glaudziai susijusi su poezija ir ... ?', 'Sokiu', '2020-01-29 21:58:50', 0),
 (259, 'Kaip vadinamas vienbalsis, lotyniskas, liturginis, kataliku baznycios giedojimas?', 'Grigaliskasis choralas', '2000-01-01 00:00:00', 0),
 (260, 'Kas ikure grigaliskaji giedojima?', 'Grigalius pirmasis', '2000-01-01 00:00:00', 0),
 (261, 'Trubaduru zanras', 'Alba', '2000-01-01 00:00:00', 0),
@@ -348,7 +347,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (267, 'Kada buvo israsta pirma garo masina ?', '1769', '2000-01-01 00:00:00', 0),
 (268, 'Kaip vadinasi zmones kurie kure zemelapius', 'Kartografai', '2000-01-01 00:00:00', 0),
 (269, 'Sunkiausio fortepijoninio kurinio autorius?', 'Balakirevas', '2000-01-01 00:00:00', 0),
-(270, 'Azuolo waisiai _____?', 'Giles', '2000-01-01 00:00:00', 0),
+(270, 'Azuolo vaisiai _____?', 'Giles', '2000-01-01 00:00:00', 0),
 (271, 'Kas isrado elektros lempute?', 'Tomas Edisonas', '2000-01-01 00:00:00', 0),
 (272, 'Kas atrado realityvumo teorija?', 'Einsteinas', '2000-01-01 00:00:00', 0),
 (273, 'Kas parase literaturos kurini Skerdzius?', 'Vincas Kreve', '2000-01-01 00:00:00', 0),
@@ -430,7 +429,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (349, 'Vengrijos sostine', 'Budapestas', '2000-01-01 00:00:00', 0),
 (350, 'Didziausias juru uostas?', 'Roterdamas', '2000-01-01 00:00:00', 0),
 (351, 'Indijos simbolis', 'Tigras', '2000-01-01 00:00:00', 0),
-(352, 'JAV simbolis', 'Baltagalvis erelis', '2000-01-01 00:00:00', 0),
+(352, 'JAV simbolis', 'Erelis', '2000-01-01 00:00:00', 0),
 (353, 'Auksciausias Zemeje augantis medis?', 'Karaliskasis eukaliptas', '2000-01-01 00:00:00', 0),
 (354, 'Vienintelis zmogaus statinys, matomas is Menulio?', 'Didzioji kinu siena', '2000-01-01 00:00:00', 0),
 (355, 'Kelintais metais Prancuzija padovanojo amerikieciams laisves statula?', '1884', '2000-01-01 00:00:00', 0),
@@ -448,7 +447,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (367, 'Vandeningiausia pasaulio upe?', 'Amazone', '2000-01-01 00:00:00', 0),
 (368, 'Kas laimejo kelias i zvaigzdes 2?', 'Merunas', '2000-01-01 00:00:00', 0),
 (369, 'Kaip vadinamas priesiskumas zydams?', 'Antisemitizmas', '2000-01-01 00:00:00', 0),
-(370, 'Kas veda lajda sesi nuliai milijonas?', 'Arunas valinskas', '2000-01-01 00:00:00', 0),
+(370, 'Kas veda laida sesi nuliai milijonas?', 'Arunas valinskas', '2000-01-01 00:00:00', 0),
 (371, 'Italijos sostine?', 'Roma', '2000-01-01 00:00:00', 0),
 (372, 'Ka japoniskai reiskia bakano?', 'Kvailys', '2000-01-01 00:00:00', 0),
 (373, 'Kaip vadinami Japonijos ninziu svaidomieji ginklai?', 'Surikenai', '2000-01-01 00:00:00', 0),
@@ -590,9 +589,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (509, 'Kada buvo isrinktas pirmasis Lietuvos prezidentas A. Smetona?', '1919', '2000-01-01 00:00:00', 0),
 (510, 'Kada Lietuvos Respublika priimta i JTO (Jungtiniu Tautu Organizacija)?', '1991', '2000-01-01 00:00:00', 0),
 (511, 'Kada buvo Antrasis pasaulinis karas?', '1939-1945', '2000-01-01 00:00:00', 0),
-(512, 'Kada Klaipedos krastas  prijungtas prie Lietuvos?', '1923-01-15', '2000-01-01 00:00:00', 0),
-(513, 'Rytu Timoro sostine.', 'Dilis', '2000-01-01 00:00:00', 0),
-(514, 'Brunejaus sostine.', 'Bandar Seri Begavanas', '2000-01-01 00:00:00', 0),
+(512, 'Kada Klaipedos krastas  prijungtas prie Lietuvos?', '1923-01-15', '2020-01-29 13:47:14', 0),
+(513, 'Rytu Timoro sostine.', 'Dilis', '2020-01-29 19:04:30', 0),
+(514, 'Brunejaus sostine.', 'Bandar Seri Begavanas', '2020-01-29 22:00:07', 0),
 (515, 'Koks cheminis elementas yra 4 periode ir VIIB grupeje?', 'Manganas', '2000-01-01 00:00:00', 0),
 (516, 'Didelis pasaku herojus.', 'Milzinas', '2000-01-01 00:00:00', 0),
 (517, 'Austrijos sostine', 'Viena', '2000-01-01 00:00:00', 0),
@@ -691,10 +690,10 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (610, '28-a valstija, prijungta prie jav 29.12.1845 m., sostine austinas [liet.]', 'teksasas', '2000-01-01 00:00:00', 0),
 (611, 'Vienetinis vektorius', 'ortas', '2000-01-01 00:00:00', 0),
 (612, 'Pareigunas, tvarkantis apskaita', 'apskaitininkas', '2000-01-01 00:00:00', 0),
-(613, 'Musulmonu elgetaujantis vienuolis', 'dervisas', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(613, 'Musulmonu elgetaujantis vienuolis', 'dervisas', '2000-01-01 00:00:00', 0),
 (614, 'Medis, is kurio virsunes senoves lietuviai darydavo akecias', 'egle', '2000-01-01 00:00:00', 0),
-(615, 'Kataliku gedulo pamaldos', 'egzekvijos', '2000-01-01 00:00:00', 0),
+(615, 'Kataliku gedulo pamaldos', 'egzekvijos', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (616, 'Sportine grupe pagal pajegumo klase', 'lyga', '2000-01-01 00:00:00', 0),
 (617, 'Pescioji kariuomene, pestininkai', 'infanterija', '2000-01-01 00:00:00', 0),
 (618, 'Medziaga dantims valyti', 'pasta', '2000-01-01 00:00:00', 0),
@@ -847,9 +846,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (765, 'Gambijos smulkus pinigas', 'bututas', '2000-01-01 00:00:00', 0),
 (766, 'Vienas svarbiausiu induizmo, budizmoir dzainizmo doktrinu elementu', 'samsara', '2000-01-01 00:00:00', 0),
 (767, 'Universaliausias ivairiu procesu irjudejimo rusiu matas', 'energija', '2000-01-01 00:00:00', 0),
-(768, 'Brutualus holivudo filmu herojus, kurisuvaidino sstalone', 'rembo', '2000-01-01 00:00:00', 0),
-(769, 'Ka reiskia irc angliskai', 'internet relay chat', '2000-01-01 00:00:00', 0),
-(770, 'Viduramziu europos laisvuju miestuaristokratas', 'patricijus', '2000-01-01 00:00:00', 0),
+(768, 'Brutualus holivudo filmu herojus, kurisuvaidino sstalone', 'rembo', '2020-01-29 14:09:09', 0),
+(769, 'Ka reiskia irc angliskai', 'internet relay chat', '2020-01-29 19:04:56', 0),
+(770, 'Viduramziu europos laisvuju miestuaristokratas', 'patricijus', '2020-01-29 22:10:08', 0),
 (771, 'Garsi aktore, daininke, modelis isukrainos, vaidinusi filme penktas elementas', 'jovovich', '2000-01-01 00:00:00', 0),
 (772, 'Sengraiku mitologijoje - paklydimo,proto uztemimo deive, dzeuso dukra, kuria sis supykes nusviede zemen', 'ata', '2000-01-01 00:00:00', 0),
 (773, 'Is varles padeto vandenyje kiausinioissiritusi lerva', 'buozgalvis', '2000-01-01 00:00:00', 0),
@@ -1103,9 +1102,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (1021, 'Baltu mitologijoje - auksciausiasdievas', 'praamzius', '2000-01-01 00:00:00', 0),
 (1022, 'Sumanymas ir pasiulymas pradeti kokianors veikla', 'iniciatyva', '2000-01-01 00:00:00', 0),
 (1023, 'Italu kompozitorius, operu manonlesko, bohema, toska, madam baterflai ir ktautorius', 'pucinis', '2000-01-01 00:00:00', 0),
-(1024, 'Senojo testamento, filosofiniuapmastymu, pamokymu knyga', 'ekleziastas', '2000-01-01 00:00:00', 0),
-(1025, 'Paskutinis nba klubas, kuriame zaidesmarciulionis [angl.]', 'nuggets', '2000-01-01 00:00:00', 0),
-(1026, 'Planetos regimasis kampinis nuotolisnuo saules, arba palydovo kampinis nuotolis nuo planetos', 'elongacija', '2000-01-01 00:00:00', 0),
+(1024, 'Senojo testamento, filosofiniuapmastymu, pamokymu knyga', 'ekleziastas', '2020-01-29 14:25:50', 0),
+(1025, 'Paskutinis nba klubas, kuriame zaidesmarciulionis [angl.]', 'nuggets', '2020-01-29 19:07:18', 0),
+(1026, 'Planetos regimasis kampinis nuotolisnuo saules, arba palydovo kampinis nuotolis nuo planetos', 'elongacija', '2020-01-29 22:10:52', 0),
 (1027, 'Irenginys, puciantis ora i zaizdra, kad kaitriau degtu ugnis', 'dumples', '2000-01-01 00:00:00', 0),
 (1028, 'Zmogus smerkiantis karus ir prievarta, pasyviomis priemonemis remiantis taika', 'pacifistas', '2000-01-01 00:00:00', 0),
 (1029, 'Angolos smulkus pinigas', 'santimas', '2000-01-01 00:00:00', 0),
@@ -1153,9 +1152,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (1071, 'Mineralu ar organiniu medziagu kaupimasis zemes pavirsiuje; formuoja vulkanines ir nuosedines uolienas, reljefa', 'akumuliacija', '2000-01-01 00:00:00', 0),
 (1072, 'Atminties susilpnejimas', 'hipomnezija', '2000-01-01 00:00:00', 0),
 (1073, 'Vilniaus generalgubernatorius 1798-1799 metais', 'lasis', '2000-01-01 00:00:00', 0),
-(1074, 'Saskaitybos tvarka, kai apskaitos registruose ukines operacijos irasomos padarymo diena arba apskaitos darbai atliekami pagal grafika', 'azuras', '2000-01-01 00:00:00', 0);
+(1074, 'Saskaitybos tvarka, kai apskaitos registruose ukines operacijos irasomos padarymo diena arba apskaitos darbai atliekami pagal grafika', 'azuras', '2000-01-01 00:00:00', 0),
+(1075, 'Medziaga, gauta dviem ar daugiau elementu susijungus chemines reakcijos metu', 'junginys', '2000-01-01 00:00:00', 0);
 INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
-(1075, 'Medziaga, gauta dviem ar daugiau elementu susijungus chemines reakcijos metu', 'junginys', '2000-01-01 00:00:00', 0),
 (1076, 'Pirmasis garso irasymo ir atkurimo aparatas, kuri sukonstravo t.aedisonas 1878 m.', 'fonografas', '2000-01-01 00:00:00', 0),
 (1077, 'Kelintais metais anglijos parlamente priimtas istatymas, draudziantis kolonistams keltis i vakarus', '1763', '2000-01-01 00:00:00', 0),
 (1078, 'Kaip vadinama ziedo piesteles dalis, ant kurios turi buti pernestos ziedadulkes', 'purka', '2000-01-01 00:00:00', 0),
@@ -1360,9 +1359,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (1277, 'Burlaivio laivavirviu ir lynu bendrinis pavadinimas', 'takelazas', '2000-01-01 00:00:00', 0),
 (1278, 'Nedideles apimties prozos kurinys, kurio veiksmas glaustas, o pradzia ir pabaiga labai isryskinta', 'novele', '2000-01-01 00:00:00', 0),
 (1279, 'Psichikos ligos simptomas - ligonis priesinasi paliepimams arba ju nevykdo', 'negatyvizmas', '2000-01-01 00:00:00', 0),
-(1280, 'Telekomunikaciju kompanija, pagaminusi mobiliu telefonu modelius: v66, v50, a6188, t180', 'motorola', '2000-01-01 00:00:00', 0),
-(1281, 'Asmuo, esantis kelyje ne transporto priemoneje, taip pat vaziuojantis bemotoriu invalidu vezimeliu, vedantis dvirati, mopeda, motocikla, traukiantis (stumiantis) rogutes, vaikiska ar kitoki vezimeli', 'pestysis', '2000-01-01 00:00:00', 0),
-(1282, 'Cheminis elementas, kurio simbolis ni [numeris 28]', 'nikelis', '2000-01-01 00:00:00', 0),
+(1280, 'Telekomunikaciju kompanija, pagaminusi mobiliu telefonu modelius: v66, v50, a6188, t180', 'motorola', '2020-01-29 14:36:56', 0),
+(1281, 'Asmuo, esantis kelyje ne transporto priemoneje, taip pat vaziuojantis bemotoriu invalidu vezimeliu, vedantis dvirati, mopeda, motocikla, traukiantis (stumiantis) rogutes, vaikiska ar kitoki vezimeli', 'pestysis', '2020-01-29 19:07:46', 0),
+(1282, 'Cheminis elementas, kurio simbolis ni [numeris 28]', 'nikelis', '2020-01-29 22:12:50', 0),
 (1283, 'Sunkus silkinis audinys su iaustais aukso ir sidabro siulais', 'brokatas', '2000-01-01 00:00:00', 0),
 (1284, 'Salis, kurioje 1720 mikurtas seniausias pasaulyje jachtu klubas royal cork yacht club', 'airija', '2000-01-01 00:00:00', 0),
 (1285, 'Tam tikro vandens baseino karo laivu junginys', 'flotile', '2000-01-01 00:00:00', 0),
@@ -1592,10 +1591,10 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (1509, 'Antras pagal dydi lietuvos miestas, isikures nemuno ir neries santakoje', 'kaunas', '2000-01-01 00:00:00', 0),
 (1510, 'Sventuju gyvenimo aprasymai krikscioniskoje tradicijoje', 'hagiografija', '2000-01-01 00:00:00', 0),
 (1511, 'Vienas is keliu skirtingu to paties dalyku aiskinimas', 'versija', '2000-01-01 00:00:00', 0),
-(1512, 'Ivairiablakstieniu infuzoriju burio pirmuonis', 'balantidija', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(1512, 'Ivairiablakstieniu infuzoriju burio pirmuonis', 'balantidija', '2000-01-01 00:00:00', 0),
 (1513, 'Lynas kroviniams kelti strele', 'gordenis', '2000-01-01 00:00:00', 0),
-(1514, 'Kas isrado gyvsidabrio termometra', 'farenheitas', '2000-01-01 00:00:00', 0),
+(1514, 'Kas isrado gyvsidabrio termometra', 'farenheitas', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (1515, 'Senoves graikijoje nimfa visiskai sunykusi del meiles narcizui', 'echo', '2000-01-01 00:00:00', 0),
 (1516, 'Vokieciai si augala vadina pagonisku javu', 'grikis', '2000-01-01 00:00:00', 0),
 (1517, 'Nebaigtas fkafkos romanas apie individa, susidurusi su nesuvokiamais ir neapciuopiamais valdzios mechanizmais', 'pilis', '2000-01-01 00:00:00', 0),
@@ -1617,9 +1616,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (1533, 'Iskilmiu diena', 'svente', '2000-01-01 00:00:00', 0),
 (1534, 'Valdzios ir teises sistema, grindziama vyro pranasumu pries seimos ar gimines moteris ir vaikus', 'patriarchatas', '2000-01-01 00:00:00', 0),
 (1535, 'Kaip vadinamas savaiminis medziagu judanciu daleliu maisymasis', 'difuzija', '2000-01-01 00:00:00', 0),
-(1536, 'Jav prezidentas, kuris buvo atsakingas uz nasa sukurima, antrojo pasaulinio karo metu vadovaves d-day operacijai normandijoje', 'eizenhaueris', '2000-01-01 00:00:00', 0),
-(1537, 'Gyventoju atsikelimas gyventi kitos salies', 'imigracija', '2000-01-01 00:00:00', 0),
-(1538, 'Valstybe, kurios futbolo nacionaline rinktine 1998mpusfinalyje po baudiniu serijos pralaimejo brazilams', 'olandija', '2000-01-01 00:00:00', 0),
+(1536, 'Jav prezidentas, kuris buvo atsakingas uz nasa sukurima, antrojo pasaulinio karo metu vadovaves d-day operacijai normandijoje', 'eizenhaueris', '2020-01-29 14:47:20', 0),
+(1537, 'Gyventoju atsikelimas gyventi kitos salies', 'imigracija', '2020-01-29 19:07:55', 0),
+(1538, 'Valstybe, kurios futbolo nacionaline rinktine 1998mpusfinalyje po baudiniu serijos pralaimejo brazilams', 'olandija', '2020-01-29 22:38:01', 0),
 (1539, 'Jupiterio palydovas, pavadintas nimfos, kuria pagrobe dzeusas, vardu', 'tebe', '2000-01-01 00:00:00', 0),
 (1540, 'Oficiali kalba gvinejoje [ekvatorineje gvinejoje]', 'ispanu', '2000-01-01 00:00:00', 0),
 (1541, 'Japonijos smulkus pinigas', 'senas', '2000-01-01 00:00:00', 0),
@@ -1813,7 +1812,6 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (1729, 'Argentinos smulkus pinigas', 'sentavas', '2000-01-01 00:00:00', 0),
 (1730, 'Kaledu senis arba santa ...', 'klausas', '2000-01-01 00:00:00', 0),
 (1731, 'Arabu saliu religija', 'islamas', '2000-01-01 00:00:00', 0),
-(1732, '..tyrimas (nuoseklus, tesingas, pilnas)', 'nuodugnus', '2000-01-01 00:00:00', 0),
 (1733, 'Graiku mitologijoje - dangus, titanu tevas, gejos(zemes) vyras', 'uranas', '2000-01-01 00:00:00', 0),
 (1734, 'Kurios nors zmoniu socialines bendrijos elgesio ypatybes, priklausancios nuo visuomenines psichologijos', 'iprociai', '2000-01-01 00:00:00', 0),
 (1735, 'Vabzdziaedis augalas, kartais uzkandziaujantis varlemis', 'dioneja', '2000-01-01 00:00:00', 0),
@@ -1873,9 +1871,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (1789, 'Kurio nors junginio ar misinio sudedamoji dalis', 'ingredientas', '2000-01-01 00:00:00', 0),
 (1790, 'Kieno nors ukines ir gamybines apyvokos daiktu visuma', 'inventorius', '2000-01-01 00:00:00', 0),
 (1791, 'Boulingo figura', 'keglis', '2000-01-01 00:00:00', 0),
-(1792, 'Bokso taisykliu pazeidimas - priesininkai suima vienas kito rankas arba liemeni', 'klincas', '2000-01-01 00:00:00', 0),
-(1793, 'Tanki antonimas', 'reta', '2000-01-01 00:00:00', 0),
-(1794, 'Alegoriskas pamokomasis pasakojimas', 'pasakecia', '2000-01-01 00:00:00', 0),
+(1792, 'Bokso taisykliu pazeidimas - priesininkai suima vienas kito rankas arba liemeni', 'klincas', '2020-01-29 15:04:21', 0),
+(1793, 'Tanki antonimas', 'reta', '2020-01-29 19:08:42', 0),
+(1794, 'Alegoriskas pamokomasis pasakojimas', 'pasakecia', '2020-01-29 22:52:58', 0),
 (1795, 'Senoves egiptieciu rastas', 'hieroglifai', '2000-01-01 00:00:00', 0),
 (1796, 'Griztamojo proceso, vykstancio be silumos mainu su aplinka kreive', 'adiabate', '2000-01-01 00:00:00', 0),
 (1797, 'Raugintas pasaras', 'silosas', '2000-01-01 00:00:00', 0),
@@ -2074,11 +2072,11 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (1990, 'Kas parase aukso puodas ir kitos istorijos', 'hofmanas', '2000-01-01 00:00:00', 0),
 (1991, 'Humoristine ar lyrine rusu liaudies dainele', 'ciastuska', '2000-01-01 00:00:00', 0),
 (1992, 'Valstybe tarp nigerio ir mauritanijos', 'malis', '2000-01-01 00:00:00', 0),
-(1993, 'Menotyros saka, tirianti daile', 'dailetyra', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(1993, 'Menotyros saka, tirianti daile', 'dailetyra', '2000-01-01 00:00:00', 0),
 (1994, 'Zemesnysis diplomatinis rangas', 'atase', '2000-01-01 00:00:00', 0),
 (1995, 'Zemes plutos sluoksniu islinkimas del tektoniniu judesiu', 'fleksura', '2000-01-01 00:00:00', 0),
-(1996, 'Mokslas, tiriantis priimtinus samprotavimo budus', 'logika', '2000-01-01 00:00:00', 0),
+(1996, 'Mokslas, tiriantis priimtinus samprotavimo budus', 'logika', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (1997, 'Klavisiniu muzikos instrumetu, ivairiu aparatu ir mechanizmu klavisu arba mygtuku sistema', 'klaviatura', '2000-01-01 00:00:00', 0),
 (1998, 'Zydu velyku valgis - paplotelis is neraugintos, nesudytos kvietiniu miltu teslos', 'macas', '2000-01-01 00:00:00', 0),
 (1999, 'Mazaseriu zieduotuju kirmeliu klases bestuburis gyvunas', 'sliekas', '2000-01-01 00:00:00', 0),
@@ -2130,9 +2128,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (2045, 'Dantims reikalinga medziaga (dantu pastos sudetine dalis)', 'fluoridas', '2000-01-01 00:00:00', 0),
 (2046, 'Koks paukstis simbolizuoja treciaji svenciausiostrejybes asmeni - sventaja dvasia', 'balandis', '2000-01-01 00:00:00', 0),
 (2047, 'Doroviniu reikalavimu ir isipareigojimu suvokimas ir vykdymas', 'pareiga', '2000-01-01 00:00:00', 0),
-(2048, 'Ledo zvake', 'varveklis', '2000-01-01 00:00:00', 0),
-(2049, 'Tapetu ritinys', 'rulonas', '2000-01-01 00:00:00', 0),
-(2050, 'Prancuzu dailininkas, nutapes kurinius ruano katedra, aguonu laukas, ziema bei ispudis, nuo kurio kilo impresionizmo pavadinimas', 'mone', '2000-01-01 00:00:00', 0),
+(2048, 'Ledo zvake', 'varveklis', '2020-01-29 15:11:29', 0),
+(2049, 'Tapetu ritinys', 'rulonas', '2020-01-29 19:08:50', 0),
+(2050, 'Prancuzu dailininkas, nutapes kurinius ruano katedra, aguonu laukas, ziema bei ispudis, nuo kurio kilo impresionizmo pavadinimas', 'mone', '2020-01-29 22:54:54', 0),
 (2051, 'Senoves egiptieciu deive, derlingumo ir motinystes globeja', 'izide', '2000-01-01 00:00:00', 0),
 (2052, 'Norvegijos administracinis vienetas', 'apskritis', '2000-01-01 00:00:00', 0),
 (2053, 'Silpnas demesio sutelkimas i objekta', 'issiblaskymas', '2000-01-01 00:00:00', 0),
@@ -2386,9 +2384,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (2301, 'Siuzetinis, paprastai liaudies kurybos eilerastis, poema', 'balade', '2000-01-01 00:00:00', 0),
 (2302, 'Augalas, kurio seklos yra smulkiausios', 'orchideja', '2000-01-01 00:00:00', 0),
 (2303, 'Valstybes, kuriose gaminami western digital kompanijos kietieji diskai (hdd): malaizija ir ...', 'tailandas', '2000-01-01 00:00:00', 0),
-(2304, 'Spaustuves prietaisas, automatiskai kontroliuojantis sluoksnio stori spausdinimo metu', 'idotronas', '2000-01-01 00:00:00', 0),
-(2305, 'Riebus, degus zemes gelmiu skystis', 'nafta', '2000-01-01 00:00:00', 0),
-(2306, 'Pastatas arba pastatu ansamblis, skirtas religinems apeigoms', 'sventykla', '2000-01-01 00:00:00', 0),
+(2304, 'Spaustuves prietaisas, automatiskai kontroliuojantis sluoksnio stori spausdinimo metu', 'idotronas', '2020-01-29 15:12:13', 0),
+(2305, 'Riebus, degus zemes gelmiu skystis', 'nafta', '2020-01-29 19:08:57', 0),
+(2306, 'Pastatas arba pastatu ansamblis, skirtas religinems apeigoms', 'sventykla', '2020-01-29 22:55:11', 0),
 (2307, 'Cheminis elementas, pavadintas prancuzijos garbei', 'francis', '2000-01-01 00:00:00', 0),
 (2308, 'Spalva, kuria nudazyti anglies dioksido pripildyti balionai', 'juoda', '2000-01-01 00:00:00', 0),
 (2309, 'Instrumentine pjese is ivairiu kuriniu istrauku - operu, liaudies dainu', 'popuri', '2000-01-01 00:00:00', 0),
@@ -2406,7 +2404,6 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (2321, 'Medziaga, suteikianti augalams zalia spalva', 'chlorofilas', '2000-01-01 00:00:00', 0),
 (2322, 'Ar sutampa zemes poliai su magnetiniais poliais taip/ne', 'ne', '2000-01-01 00:00:00', 0),
 (2323, 'Ilgas, platus susisegamas arba susijuosiamas kambarinis, ligoniu, darbo drabuzis', 'chalatas', '2000-01-01 00:00:00', 0),
-(2324, '..kiaule gilia sakni knisa', 'tyli', '2000-01-01 00:00:00', 0),
 (2325, 'Kvailas, kvaisas', 'paikas', '2000-01-01 00:00:00', 0),
 (2326, 'Keturiu muzikos atlikeju ansamblis', 'kvartetas', '2000-01-01 00:00:00', 0),
 (2327, 'Karsta vulkaniniu duju arba garu srove, trykstanti is vulkano plysiu arba is ka tik issiliejusios lavos srauto pavirsiaus', 'fumarole', '2000-01-01 00:00:00', 0),
@@ -2555,12 +2552,12 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (2470, 'Metu laikas gruodzio-vasario menesiais', 'ziema', '2000-01-01 00:00:00', 0),
 (2471, 'Evoliuciniai pakitimai, del kuriu tobuleja visa organizmo sandara, suintensiveja gyvybine veikla; taciau tai nera siauri prisitaikymai prie grieztai ribotu gyvenimo salygu', 'aromorfoze', '2000-01-01 00:00:00', 0),
 (2472, 'Didziausia pasaulyje telekomunikaciju ir informaciniu technologiju paroda', 'cebit', '2000-01-01 00:00:00', 0),
-(2473, 'Per didele knygu kaupimo aistra', 'bibliomanija', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(2473, 'Per didele knygu kaupimo aistra', 'bibliomanija', '2000-01-01 00:00:00', 0),
 (2474, 'Princeses rozes mylimasis pasakoje batuotas katinas', 'kalava', '2000-01-01 00:00:00', 0),
 (2475, 'Kada ivyko pirmoji lietuvos dainu svente', '1924', '2000-01-01 00:00:00', 0),
 (2476, '1924-48mvokietijos piniginis vienetas', 'reichsmarke', '2000-01-01 00:00:00', 0),
-(2477, 'Graiku ginco deive, arejo sesuo', 'eride', '2000-01-01 00:00:00', 0),
+(2477, 'Graiku ginco deive, arejo sesuo', 'eride', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (2478, 'Atminimui isigytas nedidelis dailus daiktas', 'suvenyras', '2000-01-01 00:00:00', 0),
 (2479, 'Priebalsis, kurio tarimas yra sudetinis - prasideda sprogimu, o baigiasi putimu (c, dz)', 'afrikata', '2000-01-01 00:00:00', 0),
 (2480, 'Elektrinio laidumo vienetas', 'simensas', '2000-01-01 00:00:00', 0),
@@ -2643,9 +2640,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (2557, 'Pusiasalis europoje, kuriame isikurusios norvegijos ir svedijos valstybes', 'skandinavijos', '2000-01-01 00:00:00', 0),
 (2558, 'Lietuviu rasytojas, romanu po vasaros dangum, nesetu rugiu zydejimas, pilnaties valanda, kvietimas, rudens ekvinokcija, piemeneliu misios, teatsiveria tavo akys, z', 'bubnys', '2000-01-01 00:00:00', 0),
 (2559, 'Lietuviu misku ir piemenu dievas', 'ganiklis', '2000-01-01 00:00:00', 0),
-(2560, 'Aukstuju valstybes pareigunu, kurie nusikalto istatymams, apkaltinimo ir bylu nagrinejimo budas', 'apkalta', '2000-01-01 00:00:00', 0),
-(2561, 'Status ir aukstas juros kranto skardis, susidares pajuryje, kur vyko arba vyksta intensyvi kranto abrazija', 'klifas', '2000-01-01 00:00:00', 0),
-(2562, 'Vieno leidinio egzemplioriu visuma', 'tirazas', '2000-01-01 00:00:00', 0),
+(2560, 'Aukstuju valstybes pareigunu, kurie nusikalto istatymams, apkaltinimo ir bylu nagrinejimo budas', 'apkalta', '2020-01-29 15:22:36', 0),
+(2561, 'Status ir aukstas juros kranto skardis, susidares pajuryje, kur vyko arba vyksta intensyvi kranto abrazija', 'klifas', '2020-01-29 19:09:42', 0),
+(2562, 'Vieno leidinio egzemplioriu visuma', 'tirazas', '2020-01-29 22:59:25', 0),
 (2563, 'Planetos, jos palydovo ar zvaigzdes isorinis dujinis apvalkalas', 'atmosfera', '2000-01-01 00:00:00', 0),
 (2564, 'Kelintais metais ivyko pirmasis kryziaus zygis', '1095', '2000-01-01 00:00:00', 0),
 (2565, 'Popiezius, isakes liuteriui atsisakyti savo ideju', 'leonas', '2000-01-01 00:00:00', 0),
@@ -2660,7 +2657,6 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (2574, 'Kabantis sviestuvas', 'liustra', '2000-01-01 00:00:00', 0),
 (2575, '49-a valstija, prijungta prie jav 01.03.1959 m., sostine juneau [liet.]', 'aliaska', '2000-01-01 00:00:00', 0),
 (2576, 'Senoves pirato, kontrabandininko pavadinimas', 'flibustjeras', '2000-01-01 00:00:00', 0),
-(2577, '..capone', 'al', '2000-01-01 00:00:00', 0),
 (2578, 'Japonu poezijos rusis, pazodziui isvertus reiskianti suvertos eiles', 'renga', '2000-01-01 00:00:00', 0),
 (2579, 'Siaurine etiopijos kaimyne', 'eritreja', '2000-01-01 00:00:00', 0),
 (2580, 'Porinis sporto zaidimas: raketemis kamuoliukasmusamas per tinkla aiksteleje - korte', 'tenisas', '2000-01-01 00:00:00', 0),
@@ -2899,9 +2895,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (2813, 'Trecio kurso medicinos studentas, atrades kasos endokrinio audinio saleles, sintetinancias insulina', 'langerhansas', '2000-01-01 00:00:00', 0),
 (2814, 'Austru kompozitorius, vienos klasikines mokyklos atstovas, daugiau kaip 100 simfoniju (tarp ju atsisveikinimo), 14 misiu, oratoriju, kitu kuriniu instrumentiniams ansambliams autorius', 'haidnas', '2000-01-01 00:00:00', 0),
 (2815, 'Apsaugines suvirinimo dujos placiai naudojamos karineje pramoneje', 'helis', '2000-01-01 00:00:00', 0),
-(2816, 'Sviesiai rausva spalva, panasi i zmogaus odos spalva', 'inkarnatas', '2000-01-01 00:00:00', 0),
-(2817, '1000 kg', 'tona', '2000-01-01 00:00:00', 0),
-(2818, 'Rusu senovinio gyvenamojo namo virsutinis aukstas', 'teremas', '2000-01-01 00:00:00', 0),
+(2816, 'Sviesiai rausva spalva, panasi i zmogaus odos spalva', 'inkarnatas', '2020-01-29 15:35:09', 0),
+(2817, '1000 kg', 'tona', '2020-01-29 19:09:47', 0),
+(2818, 'Rusu senovinio gyvenamojo namo virsutinis aukstas', 'teremas', '2020-01-29 23:02:26', 0),
 (2819, 'Atgaiva dykumoje', 'oaze', '2000-01-01 00:00:00', 0),
 (2820, 'Koks nors materialus objektas', 'daiktas', '2000-01-01 00:00:00', 0),
 (2821, 'Kardinolu susirinkimas, saukiamas popieziui rinkti', 'konklava', '2000-01-01 00:00:00', 0),
@@ -3028,12 +3024,12 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (2942, 'Jura skalaujanti graikijos krantus', 'jonijos', '2000-01-01 00:00:00', 0),
 (2943, 'Prie kryziaus prikalto kristaus figura', 'krucifiksas', '2000-01-01 00:00:00', 0),
 (2944, 'Programiniu ir techniniu priemoniu visuma informacijai persiusti dideliais atstumais', 'telekomunikacija', '2000-01-01 00:00:00', 0),
-(2945, 'Kataliku sventove', 'baznycia', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(2945, 'Kataliku sventove', 'baznycia', '2000-01-01 00:00:00', 0),
 (2946, 'Ezeras, didziausias pasaulyje gelo vandens telkinys', 'baikalas', '2000-01-01 00:00:00', 0),
 (2947, 'Puosni sege rubams susegti, galvos apdangalu plunksnoms pritvirtinti', 'agrafa', '2000-01-01 00:00:00', 0),
 (2948, 'Vitamino b2 cheminis pavadinimas', 'riboflavinas', '2000-01-01 00:00:00', 0),
-(2949, 'Cirko, kino menines israiskos priemone - vikrus, efektingas veiksmas', 'triukas', '2000-01-01 00:00:00', 0),
+(2949, 'Cirko, kino menines israiskos priemone - vikrus, efektingas veiksmas', 'triukas', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (2950, 'Spalva, kuria paprastai dazomos lektuvu juodosios dezes', 'oranzine', '2000-01-01 00:00:00', 0),
 (2951, 'Jav meno kino prizas', 'oskaras', '2000-01-01 00:00:00', 0),
 (2952, 'Kaliniu kambarys kalejime', 'kamera', '2000-01-01 00:00:00', 0),
@@ -3156,9 +3152,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (3069, 'Medziagu pasigaminimo liaukose procesas', 'sekrecija', '2000-01-01 00:00:00', 0),
 (3070, 'Jura, kurioje sutinkama daugiausia zuvu rusiu', 'japonijos', '2000-01-01 00:00:00', 0),
 (3071, 'Egles dukra', 'drebule', '2000-01-01 00:00:00', 0),
-(3072, 'Nedidelio storio biriu uolienu sluoksnis, imirkes gruntinio, lietaus ar sniego tirpsmo vandeniu ir slenkantis slaitu zemyn', 'sliuogas', '2000-01-01 00:00:00', 0),
-(3073, 'Muzikos instrumentai, kuriu garsa sukelia korpuse vibruojantis oras', 'aerofonai', '2000-01-01 00:00:00', 0),
-(3074, 'Karpatu maradona', 'hagi', '2000-01-01 00:00:00', 0),
+(3072, 'Nedidelio storio biriu uolienu sluoksnis, imirkes gruntinio, lietaus ar sniego tirpsmo vandeniu ir slenkantis slaitu zemyn', 'sliuogas', '2020-01-29 15:46:46', 0),
+(3073, 'Muzikos instrumentai, kuriu garsa sukelia korpuse vibruojantis oras', 'aerofonai', '2020-01-29 19:11:08', 0),
+(3074, 'Karpatu maradona', 'hagi', '2020-01-29 23:11:43', 0),
 (3075, 'Kalnai azijoje: tian ...', 'sanis', '2000-01-01 00:00:00', 0),
 (3076, 'Zinduoliu pasitenkinimo ir bendravimo veiksmai, kurie reiskiasi vienas kito kailio prieziura', 'grumingas', '2000-01-01 00:00:00', 0),
 (3077, 'Kuriai nors grupei priklausancio zmogaus veiksmu priderinimas prie tos grupes poziurio, poreikiu, kai jis pats turi kita nuomone', 'konformiskumas', '2000-01-01 00:00:00', 0),
@@ -3207,7 +3203,6 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (3120, 'Funkcinio pobudzio balso sutrikimas', 'fonastenija', '2000-01-01 00:00:00', 0),
 (3121, 'Kiek procentu cukraus turi cukrinis runkelis [apyt.]', '27', '2000-01-01 00:00:00', 0),
 (3122, 'Ispanu liaudies sokis', 'chota', '2000-01-01 00:00:00', 0),
-(3123, 'Koks yra apskritimo spindulys, nureztas viduryje futbolo aikstes [', '.', '2000-01-01 00:00:00', 0),
 (3124, 'Joint picture encoding group', 'jpeg', '2000-01-01 00:00:00', 0),
 (3125, 'Priemone valgiams virti, valgyti (lekste, puodas ir t.t.)', 'indas', '2000-01-01 00:00:00', 0),
 (3126, 'Valstybe (dabar neegzistuoja), kuriai klaipedos krastas priklause nuo xiii aiki 1919 metu', 'prusija', '2000-01-01 00:00:00', 0),
@@ -3412,9 +3407,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (3325, 'Antikvarinis 2,70m ilgio motociklas, kuris buvo skirtas vaziuoti 3 zmonems (orig.)', 'bohmerland', '2000-01-01 00:00:00', 0),
 (3326, 'Seiseliu sostine', 'viktorija', '2000-01-01 00:00:00', 0),
 (3327, 'Mokslas, tiriantis dumblius', 'algologija', '2000-01-01 00:00:00', 0),
-(3328, 'Valdovo sauklys skelbiantis karaliaus ar kunigaikscio istatymus', 'heroldas', '2000-01-01 00:00:00', 0),
-(3329, 'Lietuviu poetas, eilerasciu rinkiniu intymios giesmes, imago mortis, uzgese chimeros akys, katarsis, publicistikos rinkinio milfordo gatves elegijos autorius', 'aistis', '2000-01-01 00:00:00', 0),
-(3330, 'Irankis ir alkoholinis kokteilis tuo paciu pavadinimu', 'atsuktuvas', '2000-01-01 00:00:00', 0),
+(3328, 'Valdovo sauklys skelbiantis karaliaus ar kunigaikscio istatymus', 'heroldas', '2020-01-29 15:58:06', 0),
+(3329, 'Lietuviu poetas, eilerasciu rinkiniu intymios giesmes, imago mortis, uzgese chimeros akys, katarsis, publicistikos rinkinio milfordo gatves elegijos autorius', 'aistis', '2020-01-29 19:12:54', 0),
+(3330, 'Irankis ir alkoholinis kokteilis tuo paciu pavadinimu', 'atsuktuvas', '2020-01-29 23:14:44', 0),
 (3331, 'Viszalis augalas', 'egle', '2000-01-01 00:00:00', 0),
 (3332, 'Pateike pirmuju svariu irodymu, kad visata pleciasi1924 atrado galaktikas uz pauksciu tako ribu', 'hablis', '2000-01-01 00:00:00', 0),
 (3333, 'Didziausias lietuvos dienrastis', 'lietuvos rytas', '2000-01-01 00:00:00', 0),
@@ -3504,14 +3499,14 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (3417, 'Visuomenes ekonominiu santykiu atspindys, ju socialiniu principu pagrindimo t-ja, skleidziama ivairiomis visuomenes samones formomis', 'ideologija', '2000-01-01 00:00:00', 0),
 (3418, 'Metaline, kauline arba medine plokstele buku galu', 'mentele', '2000-01-01 00:00:00', 0),
 (3419, 'Religiniu apeigu vietos irenginys - pakyla aukojimui, aukuras', 'altorius', '2000-01-01 00:00:00', 0),
-(3420, 'Ispanu dainininke (sopranas), viena zymiausiu italu belkanto primadonu: montserat ????.[liet.]', 'kabalje', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(3420, 'Ispanu dainininke (sopranas), viena zymiausiu italu belkanto primadonu: montserat ????.[liet.]', 'kabalje', '2000-01-01 00:00:00', 0),
 (3421, 'Istorine prusu zeme priegliaus intako alnos desiniajame krante', 'barta', '2000-01-01 00:00:00', 0),
 (3422, 'Smulkaus arba vidutinio zemes ukio savininkas', 'fermeris', '2000-01-01 00:00:00', 0),
 (3423, 'Medine arba metaline svirtis sunkumams pakelti ir kilnoti i kitas vietas laive', 'handspugas', '2000-01-01 00:00:00', 0),
 (3424, '7-as pagal dydi ezeras pasaulyje [vard.]', 'tanganjika', '2000-01-01 00:00:00', 0),
 (3425, 'Kubos diktatorius', 'kastro', '2000-01-01 00:00:00', 0),
-(3426, 'Saudymo anga senoviniu laivu bortuose', 'ambrazura', '2000-01-01 00:00:00', 0),
+(3426, 'Saudymo anga senoviniu laivu bortuose', 'ambrazura', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (3427, 'Baltarusijos administracinis vienetas', 'sritis', '2000-01-01 00:00:00', 0),
 (3428, 'Laikotarpis, per kuri suyra puse radioaktyvios medziagos atomu, skylant ju branduoliams', 'pusamzis', '2000-01-01 00:00:00', 0),
 (3429, 'Vyrvardas, kiles is lotkalbos, reiskia svelnus, malonus', 'klemensas', '2000-01-01 00:00:00', 0),
@@ -3669,9 +3664,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (3581, 'Gerumas kitaip', 'geris', '2000-01-01 00:00:00', 0),
 (3582, 'Turtingo asmens meiluze', 'kurtizane', '2000-01-01 00:00:00', 0),
 (3583, 'Mauglio drauges panteros vardas', 'bagira', '2000-01-01 00:00:00', 0),
-(3584, 'Tekstiles dirbinio gamyba: ataudu siulu perverimas per statmena metmenu pluosta', 'audimas', '2000-01-01 00:00:00', 0),
-(3585, 'Skliautine saramine konstrukcija', 'arka', '2000-01-01 00:00:00', 0),
-(3586, 'Netiketas patikrinimas', 'reidas', '2000-01-01 00:00:00', 0),
+(3584, 'Tekstiles dirbinio gamyba: ataudu siulu perverimas per statmena metmenu pluosta', 'audimas', '2020-01-29 16:10:25', 0),
+(3585, 'Skliautine saramine konstrukcija', 'arka', '2020-01-29 19:13:26', 0),
+(3586, 'Netiketas patikrinimas', 'reidas', '2020-01-29 23:14:44', 1),
 (3587, 'Kurios planetos skersmuo yra artimiausias zemes skersmeniui', 'veneros', '2000-01-01 00:00:00', 0),
 (3588, 'Virsutiniu kvepavimo taku apsauginis motorinis refleksas', 'ciaudulys', '2000-01-01 00:00:00', 0),
 (3589, 'Asmuo, savo parasu patvirtines koki nors svarbu dokumenta, deklaracija (pvz., nepriklausomybes akta)', 'signataras', '2000-01-01 00:00:00', 0),
@@ -3925,8 +3920,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (3837, 'Filmas, uz kuri julia roberts gavo rekordini 20 mlndoleriu honorara: erin ..[orig.]', 'brockovich', '2000-01-01 00:00:00', 0),
 (3838, 'Graiku mitologijoje - pozemio karalystes dievas', 'hadas', '2000-01-01 00:00:00', 0),
 (3839, 'Tekstiles zaliava', 'pluostas', '2000-01-01 00:00:00', 0),
-(3840, 'Periodinis leidinys, kuris reiskia vyriausybes poziuri, bet nera jos oficialus organas', 'oficiozas', '2000-01-01 00:00:00', 0),
-(3841, 'Dekoratyvine tapyba vienos spalvos tonais, daznai imituojanti reljefa', 'grizaile', '2000-01-01 00:00:00', 0),
+(3840, 'Periodinis leidinys, kuris reiskia vyriausybes poziuri, bet nera jos oficialus organas', 'oficiozas', '2020-01-29 16:20:26', 0),
+(3841, 'Dekoratyvine tapyba vienos spalvos tonais, daznai imituojanti reljefa', 'grizaile', '2020-01-29 19:14:27', 0),
 (3842, 'Reiskinys, apibudinantis masiska masinu dauzyma anglijoje pramones perversmo metu', 'ludizmas', '2000-01-01 00:00:00', 0),
 (3843, 'Kokio nors isiminto reiskinio, isgyvenimo sukeltas pedsakas (pakitimas) smegenyse', 'engrama', '2000-01-01 00:00:00', 0),
 (3844, 'Graiku mitologijoje - ugnies ir kalvystes dievas', 'hefaistas', '2000-01-01 00:00:00', 0),
@@ -3980,13 +3975,13 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (3892, 'Laivo kursas, sutampantis su vejo kryptimi', 'fordevindas', '2000-01-01 00:00:00', 0),
 (3893, 'Si sistemoje medziagos kiekio vienetas', 'molis', '2000-01-01 00:00:00', 0),
 (3894, 'Nerangus, nevikrus zmogus ar gyvulys', 'netiksa', '2000-01-01 00:00:00', 0),
-(3895, 'Tikriniai zodziai', 'onimai', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(3895, 'Tikriniai zodziai', 'onimai', '2000-01-01 00:00:00', 0),
 (3896, 'Zymiausias danu astronomas', 'brahe', '2000-01-01 00:00:00', 0),
 (3897, 'Atitinkantis siu dienu reikalavimus', 'modernus', '2000-01-01 00:00:00', 0),
 (3898, 'Kvadratine naturiniu skaiciu lentele, kurios visu eiluciu, visu stulpeliu ir abieju istrizainiu skaiciu sumos yra lygios', 'magiskasis kvadratas', '2000-01-01 00:00:00', 0),
 (3899, 'Denio komandos virsininkas, atsakingas uz laivo takelazo, rangauto, inkaro, denio irenginiu ir valciu tvarkinguma, uz svara laive', 'bocmanas', '2000-01-01 00:00:00', 0),
-(3900, 'Porines prie apavo tvirtinamos pavazeles ciuozti ledu', 'paciuzos', '2000-01-01 00:00:00', 0),
+(3900, 'Porines prie apavo tvirtinamos pavazeles ciuozti ledu', 'paciuzos', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (3901, 'Pinigu ir vertybiniu popieriu leidejas', 'emitentas', '2000-01-01 00:00:00', 0),
 (3902, 'Futbolininkas, daugiausiai kartu atstovaves vokietijos rinktinei [origin.]', 'mattheus', '2000-01-01 00:00:00', 0),
 (3903, 'Kai kuriu viduramziu valstybiu auksine moneta', 'dinaras', '2000-01-01 00:00:00', 0),
@@ -4182,8 +4177,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (4093, 'Skaicius lygus 12 tuzinu, t.y144 vienetams', 'grosas', '2000-01-01 00:00:00', 0),
 (4094, 'Kaip vadinasi kova del buvio, kuri vyksta tarp kiekvienos rusies vienos populiacijos individu', 'vidurusine', '2000-01-01 00:00:00', 0),
 (4095, 'Kardo, kalavijo, peilio rankena, kotas', 'grifas', '2000-01-01 00:00:00', 0),
-(4096, 'Ii apabaigos - i apries musu era romos komedija', 'togata', '2000-01-01 00:00:00', 0),
-(4097, 'Valstybe, antroji (po nyderlandu) legalizavusi eutanazija [nuodu susvirkstimas serganciam nepagydoma liga]', 'belgija', '2000-01-01 00:00:00', 0),
+(4096, 'Senovės romoje žmonės vilkintys togomis vadinami? ____ Togata', 'Gens togata', '2020-01-29 16:30:27', 0),
+(4097, 'Valstybe, antroji (po nyderlandu) legalizavusi eutanazija [nuodu susvirkstimas serganciam nepagydoma liga]', 'belgija', '2020-01-29 19:15:21', 0),
 (4098, 'Baltas vyzdys', 'leukokorija', '2000-01-01 00:00:00', 0),
 (4099, 'Lietuvos didysis kunigaikstis, valdes xiii amziaus pabaigoje', 'butvydas', '2000-01-01 00:00:00', 0),
 (4100, 'Mokslas, tiriantis zmogaus ir gyvunu kaukoliu forma, sandara, raida', 'kraniologija', '2000-01-01 00:00:00', 0),
@@ -4359,7 +4354,6 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (4270, 'Filmas su michelle pfeiffer: \"baltasis ...\"', 'oleandras', '2000-01-01 00:00:00', 0),
 (4271, 'Anglijos futbolo rinktines namu aprangos spalva', 'balta', '2000-01-01 00:00:00', 0),
 (4272, 'Nesamoningas psichinis procesas - is samones isstumtas turinys (impulsai, prisiminimai, svajones) virsta kokios nors kuno ligos simptomais', 'konversija', '2000-01-01 00:00:00', 0),
-(4273, '..rugstis, vaistas salicilo rugsties darinys mazina karsciavima malsina skausma,aspirinas', 'acetilsalicilo', '2000-01-01 00:00:00', 0),
 (4274, 'Auksciausia austrijos virsune 3797 m.', 'grosglokneris', '2000-01-01 00:00:00', 0),
 (4275, 'Pastato isore, fasadas', 'eksterjeras', '2000-01-01 00:00:00', 0),
 (4276, 'Indas, deze arba patalpa vabzdziams laikyti ir veisti', 'insektariumas', '2000-01-01 00:00:00', 0),
@@ -4438,8 +4432,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (4349, 'Visiems zinoma, nuvalkiota tiesa', 'truizmas', '2000-01-01 00:00:00', 0),
 (4350, 'Gricio filmas \"lok, ..arba sauk\"', 'stauk', '2000-01-01 00:00:00', 0),
 (4351, 'Jav prezidentas atsistatydines is savo posto', 'niksonas', '2000-01-01 00:00:00', 0),
-(4352, 'Ldk ir lenkijos taikos sutartis su kryziuociu ordinu', 'melno taika', '2000-01-01 00:00:00', 0),
-(4353, 'Kas parase veikala \"naujausiu proistoriniu tyrynejimu duomenys\"', 'puzinas', '2000-01-01 00:00:00', 0),
+(4352, 'Ldk ir lenkijos taikos sutartis su kryziuociu ordinu', 'melno taika', '2020-01-29 16:42:20', 0),
+(4353, 'Kas parase veikala \"naujausiu proistoriniu tyrynejimu duomenys\"', 'puzinas', '2020-01-29 19:15:57', 0),
 (4354, 'Misle: jei atsistotu - dangu paremtu, jei prakalbetu - daug pasakytu', 'kelias', '2000-01-01 00:00:00', 0),
 (4355, 'Giedojimo budas, kai giedama pakaitomis, tarsi atsiliepiant vienas kitam', 'antifona', '2000-01-01 00:00:00', 0),
 (4356, 'Ka reiskia trumpinys \"es\"', 'europos sajunga', '2000-01-01 00:00:00', 0),
@@ -4462,14 +4456,14 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (4373, 'Vedybu apeigos ir pokylis', 'vestuves', '2000-01-01 00:00:00', 0),
 (4374, 'Mineralas, pastoviausia zemes plutoje grynosios anglies atmaina', 'grafitas', '2000-01-01 00:00:00', 0),
 (4375, 'Nacionaline butano gele: melynoji ...', 'aguona', '2000-01-01 00:00:00', 0),
-(4376, 'Prancuzu poetas, simbolistu pirmtakas [liet.]', 'bodleras', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(4376, 'Prancuzu poetas, simbolistu pirmtakas [liet.]', 'bodleras', '2000-01-01 00:00:00', 0),
 (4377, 'Izanga i pagrindini kurinio isdestyma; ivairaus pobudzio ir sandaros nedideli kuriniai vargonams, fortepijonui', 'preliudas', '2000-01-01 00:00:00', 0),
 (4378, 'Reiskinys, kai is ilgesni laika laikomu zoliu pradeda skirtis sugertas skystis', 'sinereze', '2000-01-01 00:00:00', 0),
 (4379, 'Kaip senoves egiptieciai vadino siela, gyvybine energija', 'ka', '2000-01-01 00:00:00', 0),
 (4380, 'Nedideles terotrijos arba inzinerinio irenginio sumazinta horizontalioji projekcija', 'planas', '2000-01-01 00:00:00', 0),
 (4381, 'Plieno strukturos komponentas, kuri sudaro ferito ir cementito dispersinis misinys', 'trostitas', '2000-01-01 00:00:00', 0),
-(4382, 'Detalus vieno klausimo nagrinejimas', 'ekskursas', '2000-01-01 00:00:00', 0),
+(4382, 'Detalus vieno klausimo nagrinejimas', 'ekskursas', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (4383, 'Organizmas, neturintis tikro branduolio', 'prokariotas', '2000-01-01 00:00:00', 0),
 (4384, 'Kuriais metais japonijoje prasidejo naros era', '710', '2000-01-01 00:00:00', 0),
 (4385, 'Sektinas dalykas', 'pavyzdys', '2000-01-01 00:00:00', 0),
@@ -4670,7 +4664,6 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (4580, 'Skaicius lygus 12 tuzinu, t.y144 vienetams', 'grosas', '2000-01-01 00:00:00', 0),
 (4581, 'Kaip vadinasi kova del buvio, kuri vyksta tarp kiekvienos rusies vienos populiacijos individu', 'vidurusine', '2000-01-01 00:00:00', 0),
 (4582, 'Kardo, kalavijo, peilio rankena, kotas', 'grifas', '2000-01-01 00:00:00', 0),
-(4583, 'Ii apabaigos - i apries musu era romos komedija', 'togata', '2000-01-01 00:00:00', 0),
 (4584, 'Valstybe, antroji (po nyderlandu) legalizavusi eutanazija [nuodu susvirkstimas serganciam nepagydoma liga]', 'belgija', '2000-01-01 00:00:00', 0),
 (4585, 'Baltas vyzdys', 'leukokorija', '2000-01-01 00:00:00', 0),
 (4586, 'Lietuvos didysis kunigaikstis, valdes xiii amziaus pabaigoje', 'butvydas', '2000-01-01 00:00:00', 0),
@@ -4695,8 +4688,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (4605, 'Lakunas, pirmasis pasaulyje atlikes aukstojo pilotazo figura \"mirties kilpa\"', 'nesterovas', '2000-01-01 00:00:00', 0),
 (4606, 'Diena, nuo kurios iki metu galo lieka 34 dienos (keliamaisiais metais)', 'lapkricio 27', '2000-01-01 00:00:00', 0),
 (4607, 'Zemes pavirsiaus plotas, kurio gretimu tasku auksciai mazai tesiskiria', 'lyguma', '2000-01-01 00:00:00', 0),
-(4608, 'Kokiame mieste nuo 1785 iki 1904mveike pirmoji lietuvoje muzikos mokykla', 'rokiskyje', '2000-01-01 00:00:00', 0),
-(4609, 'Saldytuvu gamykla alytuje', 'snaige', '2000-01-01 00:00:00', 0),
+(4608, 'Kokiame mieste nuo 1785 iki 1904mveike pirmoji lietuvoje muzikos mokykla', 'rokiskyje', '2020-01-29 16:52:21', 0),
+(4609, 'Saldytuvu gamykla alytuje', 'snaige', '2020-01-29 19:18:09', 0),
 (4610, 'Slogutis, slegiantis baisus sapnas, slegiantis regejimas', 'kosmaras', '2000-01-01 00:00:00', 0),
 (4611, '21-a valstija, prijungta prie jav 03.12.1818 m., sostine springfildas [liet.]', 'ilinojus', '2000-01-01 00:00:00', 0),
 (4612, 'Tinklas poilsiui tarp 2 medziu', 'hamakas', '2000-01-01 00:00:00', 0),
@@ -4836,7 +4829,6 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (4746, 'Filmas su michelle pfeiffer: \"baltasis ...\"', 'oleandras', '2000-01-01 00:00:00', 0),
 (4747, 'Anglijos futbolo rinktines namu aprangos spalva', 'balta', '2000-01-01 00:00:00', 0),
 (4748, 'Nesamoningas psichinis procesas - is samones isstumtas turinys (impulsai, prisiminimai, svajones) virsta kokios nors kuno ligos simptomais', 'konversija', '2000-01-01 00:00:00', 0),
-(4749, '..rugstis, vaistas salicilo rugsties darinys mazina karsciavima malsina skausma,aspirinas', 'acetilsalicilo', '2000-01-01 00:00:00', 0),
 (4750, 'Auksciausia austrijos virsune 3797 m.', 'grosglokneris', '2000-01-01 00:00:00', 0),
 (4751, 'Pastato isore, fasadas', 'eksterjeras', '2000-01-01 00:00:00', 0),
 (4752, 'Indas, deze arba patalpa vabzdziams laikyti ir veisti', 'insektariumas', '2000-01-01 00:00:00', 0),
@@ -4935,8 +4927,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (4845, 'Rumunu ir moldavu liaudies ratelis', 'hora', '2000-01-01 00:00:00', 0),
 (4846, 'Priespaskutine varzybu dalis, kurios nugaletojai arba nuostatu nurodytas komandu ar sportininku skaicius patenka i baigiamaja varzybu dali - finala', 'pusfinalis', '2000-01-01 00:00:00', 0),
 (4847, 'Zvejybos megejas', 'zvejys', '2000-01-01 00:00:00', 0),
-(4848, 'Daugiau nei 25 kraujo baltymu sistema, aktyvuojanti imunines sistemos lasteles, butina normaliai jos veiklai', 'komplementas', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(4848, 'Daugiau nei 25 kraujo baltymu sistema, aktyvuojanti imunines sistemos lasteles, butina normaliai jos veiklai', 'komplementas', '2000-01-01 00:00:00', 0),
 (4849, 'Pozemine arba pusiau izeminta laidojimo sale', 'kripta', '2000-01-01 00:00:00', 0),
 (4850, 'Melynas dazu pigmentas is vario rudos', 'azuritas', '2000-01-01 00:00:00', 0),
 (4851, 'Automobilio gimimo metai [gimdytojai benzas ir daimleris]', '1886', '2000-01-01 00:00:00', 0),
@@ -4945,15 +4936,16 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (4854, 'Ieskojimas pasleptu daiktu', 'krata', '2000-01-01 00:00:00', 0),
 (4855, 'Atograzu, tropiku jurine labai plesri zuvis, pavojinga kaip ryklys, savo isvaizda primenanti lydeka', 'barakuda', '2000-01-01 00:00:00', 0),
 (4856, 'Rasytojas, noveliu rinkinio \"dekameronas\" autorius (liet.)', 'bokacas', '2000-01-01 00:00:00', 0),
-(4857, 'Kuriais metais ikurtas jav elektrotechnikos pramones koncernas \"general electric\"', '1892', '2000-01-01 00:00:00', 0),
+(4857, 'Kuriais metais ikurtas jav elektrotechnikos pramones koncernas \"general electric\"', '1892', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (4858, 'Didysis kombinatorius, rasytoju iilfos ir jpetrovo romano \"dvylika kedziu\" pagrindinis veikejas: ostapas ...', 'benderis', '2000-01-01 00:00:00', 0),
 (4859, 'Sala, kurioje anksciausiai europoje buvo pradetos gristi gatves', 'kreta', '2000-01-01 00:00:00', 0),
 (4860, 'Horizontali pagrindine sija, kuri remiasi i kolonas ir laiko virsutine statinio dali', 'architravas', '2000-01-01 00:00:00', 0),
 (4861, 'Skaicius, rasomas 1 su 36 nuliais', 'sekstilijonas', '2000-01-01 00:00:00', 0),
 (4862, 'Etnine grupe, kuri sudaro belgu dauguma', 'flamandai', '2000-01-01 00:00:00', 0),
 (4863, 'Trajektorija, kuria erdveje skrieja gamtinis kosminis kunas arba dirbtinis kosminis aparatas aplink kita kosmini kuna, veikiamas gravitacijos jegos', 'orbita', '2000-01-01 00:00:00', 0),
-(4864, 'Lietuviu dailininkas-scenografas, zymiausi kuriniai operu dzverdzio \"traviata\", dzpucinio \"madam baterfly\", dzverdzio \"aida\" scenovaizdziai', 'truikys', '2000-01-01 00:00:00', 0),
-(4865, 'Kada \"gime\" termometras', '1592', '2000-01-01 00:00:00', 0),
+(4864, 'Lietuviu dailininkas-scenografas, zymiausi kuriniai operu dzverdzio \"traviata\", dzpucinio \"madam baterfly\", dzverdzio \"aida\" scenovaizdziai', 'truikys', '2020-01-29 17:02:23', 0),
+(4865, 'Kada \"gime\" termometras', '1592', '2020-01-29 19:19:49', 0),
 (4866, 'Jaunas marinuotas agurkas', 'kornisonas', '2000-01-01 00:00:00', 0),
 (4867, 'Kaip vadinamas zaidimas japonijoje vienodai skambanciais, bet skirtinga reiksme turinciais zodziais', 'kakekotoba', '2000-01-01 00:00:00', 0),
 (4868, 'Danijos taikos palaikymo batalionas', 'homeostaze', '2000-01-01 00:00:00', 0),
@@ -5208,8 +5200,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (5117, '3 pagal dydi japonijos miestas, populiacija 2.5 mln(1998mduom.)', 'osaka', '2000-01-01 00:00:00', 0),
 (5118, 'Raudonai geltoni dazai, gaunami is lavsonijos krumu', 'chna', '2000-01-01 00:00:00', 0),
 (5119, 'Valstybe saloje, kurios auksciausia virsune yra viktorijos kalnas', 'fidzis', '2000-01-01 00:00:00', 0),
-(5120, 'Degtine is ryziu', 'sake', '2000-01-01 00:00:00', 0),
-(5121, 'Lietuvos respublikos ministras pirmininkas 1924.06.18-1925.01.27', 'tumenas', '2000-01-01 00:00:00', 0),
+(5120, 'Degtine is ryziu', 'sake', '2020-01-29 17:16:08', 0),
+(5121, 'Lietuvos respublikos ministras pirmininkas 1924.06.18-1925.01.27', 'tumenas', '2020-01-29 19:20:53', 0),
 (5122, 'Nedideli senoves graiku bendruomeniu padaliniai [dgs.]', 'files', '2000-01-01 00:00:00', 0),
 (5123, 'Vyro apyvarpes atsismaukimas ir uzsiverzimas uz varpos galvos', 'parafimoze', '2000-01-01 00:00:00', 0),
 (5124, 'Irengimas, kurio pagalba i orbita arba tarpplanetine trajektorija paleidziamas dirbtinis zemes palydovas arba tarpplanetine stotis', 'raketa', '2000-01-01 00:00:00', 0),
@@ -5274,7 +5266,6 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (5183, 'Psichikos sutrikimas - isorinis pasaulis suvokiamas ir isgyvenamas kaip nerealus, tarsi svetimas, netikras, tolimas, sustinges ar bespalvis, tarsi sapnas ar filmas', 'derealizacija', '2000-01-01 00:00:00', 0),
 (5184, 'Pasakojamasis fantastinis kurinys', 'pasaka', '2000-01-01 00:00:00', 0),
 (5185, 'Nedegantis medis', 'bambukas', '2000-01-01 00:00:00', 0),
-(5186, '..premija - kasmetinis apdovanojimas uz geriausia romana, parasyta dbritanijos, airijos ir tautu sandraugos saliu autoriu', 'bukerio', '2000-01-01 00:00:00', 0),
 (5187, '\"oracle\" ikurejas', 'elisonas', '2000-01-01 00:00:00', 0),
 (5188, 'Porinis zmogaus salinimo organas', 'inkstas', '2000-01-01 00:00:00', 0),
 (5189, 'Juros arba ezero bangu ardomoji veikla staciame krante, o vidiniu bangu - priekranteje', 'abrazija', '2000-01-01 00:00:00', 0),
@@ -5372,7 +5363,6 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (5281, 'Jura tarp europos ir afrikos', 'vidurzemio', '2000-01-01 00:00:00', 0),
 (5282, 'Katalonijos sostine', 'barselona', '2000-01-01 00:00:00', 0),
 (5283, 'Asiru ir babilonieciu menulio dievas', 'sinas', '2000-01-01 00:00:00', 0),
-(5284, 'Isorinis, labai karstas (temperatura ~1.5', '10^6 k) ir retas saules atmosferos sluoksnis', '2000-01-01 00:00:00', 0),
 (5285, 'Priemone, naudojama piestukams laikyti', 'piestukine', '2000-01-01 00:00:00', 0),
 (5286, 'Senoves miestas, kuriame mire aleksandras makedonietis', 'babilonas', '2000-01-01 00:00:00', 0),
 (5287, 'Greitas krovinis keleivinis laivas, plaukiojantis tam tikra juru linija', 'laineris', '2000-01-01 00:00:00', 0),
@@ -5409,8 +5399,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (5318, 'Kuriais metais pirmakart automobilyje buvo itaisyta variklio uzvedimo spynele', '1947', '2000-01-01 00:00:00', 0),
 (5319, 'Tobulai grojantis muzikantas', 'virtuozas', '2000-01-01 00:00:00', 0),
 (5320, 'Kas sukonstravo pirmaji apple kompiuteri [orig.]', 'wozniak', '2000-01-01 00:00:00', 0),
-(5321, 'Tamsios plauku spalvos, odos ir akies tinklaines pigmentas', 'melaninas', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(5321, 'Tamsios plauku spalvos, odos ir akies tinklaines pigmentas', 'melaninas', '2000-01-01 00:00:00', 0),
 (5322, 'Tapytojas, \"sventos ursules isvykimas\" autorius', 'lorenas', '2000-01-01 00:00:00', 0),
 (5323, 'Pietu amerikos indenu kecuju dievybe, kukuruzu globeja', 'saramama', '2000-01-01 00:00:00', 0),
 (5324, 'Atenu politikas ir karvedyspasizymejo graiku-persu karuose (500-449m.)', 'aristidas', '2000-01-01 00:00:00', 0),
@@ -5422,7 +5411,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (5330, 'Statmenas kasinys, kurio gylis kelis kartus didesnis uz skerspjuvi, irengiamas vandeniui, naftai, surymui isgauti', 'sulinys', '2000-01-01 00:00:00', 0),
 (5331, 'Vienintele upe, istekanti is baikalo ezero', 'angara', '2000-01-01 00:00:00', 0),
 (5332, 'Keli blokai veikia ignalinos atomineje elektrineje', '2', '2000-01-01 00:00:00', 0),
-(5333, 'Linija jungianti abu asigalius ir parodanti ilgumas (rytu ir vakaru)', 'dienovidinis', '2000-01-01 00:00:00', 0),
+(5333, 'Linija jungianti abu asigalius ir parodanti ilgumas (rytu ir vakaru)', 'dienovidinis', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (5334, 'Kalva netoli jeruzales, kur budavo vykdomos mirties bausmes', 'golgota', '2000-01-01 00:00:00', 0),
 (5335, 'Miestas, kuriame yra nato ir es bustines', 'briuselis', '2000-01-01 00:00:00', 0),
 (5336, 'Tapytojas (1477-1510m.) \"veneros gimimas\", \"pavasaris\" autorius', 'boticelis', '2000-01-01 00:00:00', 0),
@@ -5465,8 +5455,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (5373, 'Tuvalu sostine', 'funafutis', '2000-01-01 00:00:00', 0),
 (5374, 'Ka reiskia, isvertus is arabu kalbos, kuveito valstybes pavadinimas', 'maza tvirtove', '2000-01-01 00:00:00', 0),
 (5375, 'Prekiu arba kito turto pardavimas, ju vertes pavertimas pinigais', 'realizacija', '2000-01-01 00:00:00', 0),
-(5376, 'Spartinancioji atmintis (orig.)', 'cache', '2000-01-01 00:00:00', 0),
-(5377, 'Formaliai apsikrikstije zydai [dgs.]', 'maranai', '2000-01-01 00:00:00', 0),
+(5376, 'Spartinancioji atmintis (orig.)', 'cache', '2020-01-29 17:26:09', 0),
+(5377, 'Formaliai apsikrikstije zydai [dgs.]', 'maranai', '2020-01-29 19:30:54', 0),
 (5378, 'Fraze: rubiko ...', 'kubikas', '2000-01-01 00:00:00', 0),
 (5379, 'Paradines kariskiu uniformos puosmena: perpetiniai raisciai, suvyti is ivairaus plocio pyneliu, daznai uzsibaigiantys metaliniais antgaliais [dgs.]', 'akselbantai', '2000-01-01 00:00:00', 0),
 (5380, 'Labiausiai pasaulyje paplitusi kalba', 'anglu', '2000-01-01 00:00:00', 0),
@@ -5721,8 +5711,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (5629, 'Teorija, teigianti, kad genetikos principais galima gerinti zmogaus paveldimasias savybes', 'eugenika', '2000-01-01 00:00:00', 0),
 (5630, 'Stambi spora, susiformavusi bacilos gale, panasi i bugno lazdele', 'plektridija', '2000-01-01 00:00:00', 0),
 (5631, 'Zinduoliu tam tikru liauku sekretas, isskiriamas per laktacijos perioda', 'pienas', '2000-01-01 00:00:00', 0),
-(5632, 'Termoso isradejas', 'diuaras', '2000-01-01 00:00:00', 0),
-(5633, 'Balsavimu isreikstas spendimas', 'votumas', '2000-01-01 00:00:00', 0),
+(5632, 'Termoso isradejas', 'diuaras', '2020-01-29 17:36:30', 0),
+(5633, 'Balsavimu isreikstas spendimas', 'votumas', '2020-01-29 19:31:56', 0),
 (5634, 'Koki kruvi turi protonas', 'teigiama', '2000-01-01 00:00:00', 0),
 (5635, 'Nesubrendusi lytine lastele', 'gonocitas', '2000-01-01 00:00:00', 0),
 (5636, 'Ezeras traku raj., 7 km i rytus nuo aukstadvario (pavadinimas - rubo, apredo sinonimas)', 'drabuzis', '2000-01-01 00:00:00', 0),
@@ -5884,8 +5874,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (5792, 'Tariamasis vaizdas', 'vizija', '2000-01-01 00:00:00', 0),
 (5793, 'Kada gime grupes simply red ikurejas, vokalistas ir lyderis mickas hucknallas', '1960', '2000-01-01 00:00:00', 0),
 (5794, 'I planetos pvz., zemes, atmosfera iskriejusio meteoroido ir jo irimo produktu svytejimas', 'meteoras', '2000-01-01 00:00:00', 0),
-(5795, 'Problemine vyriska lytine liauka', 'prostata', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(5795, 'Problemine vyriska lytine liauka', 'prostata', '2000-01-01 00:00:00', 0),
 (5796, 'Lietuviu rasytojas, eilerasciu rinkiniu \"verpetai\", \"aidu aiduziai\", \"suverstos vagos\", \"giesmes\", \"maldos ant akmens\", poemos \"pelenai\" autorius', 'kirsa', '2000-01-01 00:00:00', 0),
 (5797, 'Yra keturios civilizacijos: vakaru krikscioniskoji, kinijos konfucine, arabu islamiskoji ir indijos ...', 'budistine', '2000-01-01 00:00:00', 0),
 (5798, 'Arizonos sostine', 'fyniksas', '2000-01-01 00:00:00', 0),
@@ -5898,7 +5887,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (5805, 'Arklio suoliavimas cirko manieze', 'galopada', '2000-01-01 00:00:00', 0),
 (5806, 'Veido pertvarkymas filmavimui', 'grimas', '2000-01-01 00:00:00', 0),
 (5807, 'Kokiomis raidemis iki sos iteisinimo buvo uzkoduotas tarptautinis pavojaus signalas', 'cqd', '2000-01-01 00:00:00', 0),
-(5808, 'Mokslas apie nusikalstamuma', 'kriminologija', '2000-01-01 00:00:00', 0),
+(5808, 'Mokslas apie nusikalstamuma', 'kriminologija', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (5809, 'Zymusis prancuzas, siuolaikiniu olimpiniu zaidyniu, kaip pasaulines sporto sventes, organizatorius, 1894 misrinktas tok generaliniu sekretoriumi, ir kurio sirdis palaidota olimpijoje: pjeras de ...', 'kubertenas', '2000-01-01 00:00:00', 0),
 (5810, 'Samdyti ziurovai', 'klaka', '2000-01-01 00:00:00', 0),
 (5811, 'Kada sukonstruotas pirmasis traktorius', '1901', '2000-01-01 00:00:00', 0),
@@ -5978,8 +5968,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (5885, 'Pirmasis svyturys pasaulyje, vienas is 7 pasaulio stebuklu, iskiles faro saloje, veliau sugriautas zemes drebejimo', 'aleksandrijos', '2000-01-01 00:00:00', 0),
 (5886, 'Koks daiktas krikscioniskame mene laikomas proto ir tiesos simboliu', 'veidrodis', '2000-01-01 00:00:00', 0),
 (5887, 'Trumpas grozines prozos kurinio zanras; noveles atmaina', 'apsakymas', '2000-01-01 00:00:00', 0),
-(5888, 'Oficialus piniginio vieneto vertes sumazinimas', 'devalvacija', '2000-01-01 00:00:00', 0),
-(5889, 'Jezaus motina', 'marija', '2000-01-01 00:00:00', 0),
+(5888, 'Oficialus piniginio vieneto vertes sumazinimas', 'devalvacija', '2020-01-29 17:44:03', 0),
+(5889, 'Jezaus motina', 'marija', '2020-01-29 19:32:01', 0),
 (5890, 'Zeme gaubiantis vandens sluoksnis: vandenynu, juru, ezeru, upiu visuma', 'hidrosfera', '2000-01-01 00:00:00', 0),
 (5891, 'Svetimsalis ir paleistas i laisve vergas senoves graikijoje', 'metekas', '2000-01-01 00:00:00', 0),
 (5892, 'Mazas apskritas pastatas', 'rotonda', '2000-01-01 00:00:00', 0),
@@ -6234,8 +6224,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (6141, 'Valstybe kuria is visu pusiu supa par', 'lesotas', '2000-01-01 00:00:00', 0),
 (6142, 'Ceku rasytojas ir politinis veikejas, dramu \"svente sode\", \"pranesimas\" autorius', 'havelas', '2000-01-01 00:00:00', 0),
 (6143, 'Romano \"prarasto laiko beieskant\" autorius: marselis ...', 'prustas', '2000-01-01 00:00:00', 0),
-(6144, 'Malavio sostine', 'lilongve', '2000-01-01 00:00:00', 0),
-(6145, '\"iskirpte\" kitaip', 'dekolte', '2000-01-01 00:00:00', 0),
+(6144, 'Malavio sostine', 'lilongve', '2020-01-29 17:51:02', 0),
+(6145, '\"iskirpte\" kitaip', 'dekolte', '2020-01-29 19:32:40', 0),
 (6146, 'Zigzag in-line packages', 'zip', '2000-01-01 00:00:00', 0),
 (6147, 'Stambaus zemvaldzio sodyba su gyvenamaisiais, ukiniais ir gamybiniais pastatais', 'dvaras', '2000-01-01 00:00:00', 0),
 (6148, 'Izulus viesosios tvarkos pazeidejas', 'chuliganas', '2000-01-01 00:00:00', 0),
@@ -6355,8 +6345,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (6262, 'Pirmasis rudens menuo', 'rugsejis', '2000-01-01 00:00:00', 0),
 (6263, 'Vienas is vyriausiuju vedizmo dievu - ugnies dievas', 'agnis', '2000-01-01 00:00:00', 0),
 (6264, 'Blogo nepatyres, gero ...', 'nepazinsi', '2000-01-01 00:00:00', 0),
-(6265, 'Valstybes tarnautojas arba priklausantis valstybes administracijai', 'biurokratas', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(6265, 'Valstybes tarnautojas arba priklausantis valstybes administracijai', 'biurokratas', '2000-01-01 00:00:00', 0),
 (6266, 'Kiek minuciu trunka vienas amerikietiskojo futbolo kelinys', '15', '2000-01-01 00:00:00', 0),
 (6267, 'Bulviu derlius', 'pakasa', '2000-01-01 00:00:00', 0),
 (6268, 'Kokia diena buvo uzvakar, jei nuo dienos, kuri bus uzporyt, lieka dvi dienos iki sestadienio', 'sestadienis', '2000-01-01 00:00:00', 0),
@@ -6370,7 +6359,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (6276, 'Statulele, kasmet iteikiama jav kaip prizas uz geriausia radijo ir televizijos reklama', 'klijo', '2000-01-01 00:00:00', 0),
 (6277, 'Senoves graiku pietvakariu vejo dievas, atnesantis audras ir lietu', 'afrikas', '2000-01-01 00:00:00', 0),
 (6278, 'Organizmai, kuriu gyvybinei veiklai reikalingas laisvas deguonis', 'aerobai', '2000-01-01 00:00:00', 0),
-(6279, 'Trecioji rijimo faze', 'rykline', '2000-01-01 00:00:00', 0),
+(6279, 'Trecioji rijimo faze', 'rykline', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (6280, 'Matavimo vienetas ir viesbucio kambarys', 'liuksas', '2000-01-01 00:00:00', 0),
 (6281, 'Niujorko rajonas, kuriame gyvena daug negru ir lotynu amerikos gyventoju', 'harlemas', '2000-01-01 00:00:00', 0),
 (6282, 'Liuksemburgo sostine', 'liuksemburgas', '2000-01-01 00:00:00', 0),
@@ -6491,8 +6481,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (6397, 'Kirgizijos smulkus pinigas', 'tyna', '2000-01-01 00:00:00', 0),
 (6398, 'Retai gyvenama arba visiskai negyvenama teritorija, besidriekianti tarp skirtingu gentiniu sriciu', 'dykra', '2000-01-01 00:00:00', 0),
 (6399, 'Negyvu daiktu derinio - vazu, muzikos instrumentu, vaisiu, geliu ar kitu daiktu vaizdavimas', 'natiurmortas', '2000-01-01 00:00:00', 0),
-(6400, 'Nenuotakus afrikos ezeras', 'cadas', '2000-01-01 00:00:00', 0),
-(6401, 'Neistisinis zemes rutulio vandens apvalkalas, viena is jos geosferuja sudaro atmosferos vanduo zemes pavirsiuje ir jos plutos uolienose (vandenynai, juros, ezerai, upes, pelkes, pozeminis vanduo, taip pat sniego danga, ledynai)', 'hidrosfera', '2000-01-01 00:00:00', 0),
+(6400, 'Nenuotakus afrikos ezeras', 'cadas', '2020-01-29 18:01:03', 0),
+(6401, 'Neistisinis zemes rutulio vandens apvalkalas, viena is jos geosferuja sudaro atmosferos vanduo zemes pavirsiuje ir jos plutos uolienose (vandenynai, juros, ezerai, upes, pelkes, pozeminis vanduo, taip pat sniego danga, ledynai)', 'hidrosfera', '2020-01-29 19:42:42', 0),
 (6402, 'Krosnies kakta', 'gakta', '2000-01-01 00:00:00', 0),
 (6403, 'Salis, kurioje 1893 mivyko pirmasis pasaulyje greitojo ciuozimo cempionatas', 'olandija', '2000-01-01 00:00:00', 0),
 (6404, 'Ferrari komandai priklausanti trasa italijoje', 'mugello', '2000-01-01 00:00:00', 0),
@@ -6747,8 +6737,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (6653, 'Lapines darzoves', 'salotos', '2000-01-01 00:00:00', 0),
 (6654, 'Pirmasis amerikieciu astronautas, pabuvojes kosmose', 'glenas', '2000-01-01 00:00:00', 0),
 (6655, 'Kompanija, pagaminusi mobiliu telefonu modelius: fisio 610, xenium 9@9, xenium, azalis 268', 'philips', '2000-01-01 00:00:00', 0),
-(6656, 'Kaip vadinosi 1363 mlietuviu musis su mongolais totoriais: melynieji ...', 'vandenys', '2000-01-01 00:00:00', 0),
-(6657, 'Sunkiai ginkluotas senoves graiku kariuomenes narys', 'hoplitas', '2000-01-01 00:00:00', 0),
+(6656, 'Kaip vadinosi 1363 mlietuviu musis su mongolais totoriais: melynieji ...', 'vandenys', '2020-01-29 18:11:04', 0),
+(6657, 'Sunkiai ginkluotas senoves graiku kariuomenes narys', 'hoplitas', '2020-01-29 19:52:44', 0),
 (6658, '4-a labiausiai urbanizuota pasaulio salis (97% miesto gyv.)', 'belgija', '2000-01-01 00:00:00', 0),
 (6659, 'Zvaigzdziu, galaktiku ir kitu kosminiu objektu spindesio matavimo vienetas', 'ryskis', '2000-01-01 00:00:00', 0),
 (6660, 'Vokietijos ginkluotosios pajegos 1935-45 metais', 'vermachtas', '2000-01-01 00:00:00', 0),
@@ -6830,8 +6820,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (6736, 'Zmogus, turintis visuotini pripazinima, ypac gerbiamas', 'autoritetas', '2000-01-01 00:00:00', 0),
 (6737, 'Naktimis svirpiantis vabzdys', 'svirplys', '2000-01-01 00:00:00', 0),
 (6738, 'Kataliku sventoji vieta - kryziaus kelio stotis su koplycia, irengiama paprastai kalvotoje vietoje', 'kalvarija', '2000-01-01 00:00:00', 0),
-(6739, 'Tam tikru budu apdorota zalia oda; iki popieriaus paplitimo ant jos buvo rasoma', 'pergamentas', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(6739, 'Tam tikru budu apdorota zalia oda; iki popieriaus paplitimo ant jos buvo rasoma', 'pergamentas', '2000-01-01 00:00:00', 0),
 (6740, 'Bendra visu organizmu savybe issaugoti ir perduoti proteviu sandaros bei funkciju pozymius palikuonims', 'paveldimumas', '2000-01-01 00:00:00', 0),
 (6741, 'Rusu rasytojas (1814-1841m.), romano \"musu laiku didvyris\", poemu \"demonas\", \"mcyris\" autorius', 'lermontovas', '2000-01-01 00:00:00', 0),
 (6742, 'Turtingo musulmono namo dalis, kurioje gyvena seimininko zmonos ir suguloves', 'haremas', '2000-01-01 00:00:00', 0),
@@ -6841,7 +6830,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (6746, 'Rasytojas, apysaku \"kaimas\", \"suchodolas\", \"mitios meile\", apsakymu \"jerichono roze\", \"saules smugis\", \"antaniniai obuoliai\", \"ponas is san francisko\", romano \"arsenjevo gyvenimas\" autorius (liet.)', 'buninas', '2000-01-01 00:00:00', 0),
 (6747, 'Pozeminiai kapu tuneliai su labirintais, labiausiai paplite i-iii aromoje, neapolyje, aleksandrijoje ir kitur', 'katakombos', '2000-01-01 00:00:00', 0),
 (6748, 'Kas sukonstravo pirmaji volkswagen automobili [orig.]', 'porsche', '2000-01-01 00:00:00', 0),
-(6749, 'Rinkimu lapelis, kuriame isspausdinta kurioje nors rinkimu apygardoje iskelto kandidato pavarde, vardas ir tevo vardas', 'biuletenis', '2000-01-01 00:00:00', 0),
+(6749, 'Rinkimu lapelis, kuriame isspausdinta kurioje nors rinkimu apygardoje iskelto kandidato pavarde, vardas ir tevo vardas', 'biuletenis', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (6750, 'Spaudos atgavimo, kalbos ir knygos diena', 'geguzes 7', '2000-01-01 00:00:00', 0),
 (6751, 'Posakis: \"sunki, neiveikiama uzduotis\": gordijaus ...', 'mazgas', '2000-01-01 00:00:00', 0),
 (6752, 'Kaip vadinamas didziasias nacionalis parkas svedijoje ir europos sajungoje', 'sareka', '2000-01-01 00:00:00', 0),
@@ -6880,7 +6870,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (6785, 'Lietuvos ministras pirmininkas, trumpiausiai isbuves siame poste', 'simenas', '2000-01-01 00:00:00', 0),
 (6786, 'Aliejaus ir balzamo misinys, kuri naudoja dvasininkas, suteikiantis kriksto, sutvirtinimo ir patepimo sakramentus', 'krizma', '2000-01-01 00:00:00', 0),
 (6787, 'Architekturos detale; profiliuotas akmens blokas ant sienos arba kolonos kapitelio arkai atremti', 'impostas', '2000-01-01 00:00:00', 0),
-(6788, 'Kiek celsijaus laipsniu atitinka 0 farenheito laipsniu? (-xx,x)', '-17,8', '2000-01-01 00:00:00', 0),
+(6788, 'Kiek celsijaus laipsniu atitinka 0 farenheito laipsniu? (-xx,x)', '-17.8', '2000-01-01 00:00:00', 0),
 (6789, 'Personazas, kuris voge kaledas', 'grincas', '2000-01-01 00:00:00', 0),
 (6790, 'Vyriausia romenu dievybe', 'jupiteris', '2000-01-01 00:00:00', 0),
 (6791, 'Senoves egipto faraonas, kuriam valdant pastatyta abu simbelio sventykla', 'ramzis ii', '2000-01-01 00:00:00', 0),
@@ -7004,8 +6994,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (6909, 'Pagrindinis graikijos administracinis vienetas', 'provincija', '2000-01-01 00:00:00', 0),
 (6910, 'Mandagus, derinantis savo veiksmus su nustatytomis mandagumo taisyklemis', 'korektiskas', '2000-01-01 00:00:00', 0),
 (6911, 'Gaminys is kakavos, cukraus', 'sokoladas', '2000-01-01 00:00:00', 0),
-(6912, 'Sviesos pluosto isskaidymas bangu ilgiais spektriniame prietaise', 'dispersija', '2000-01-01 00:00:00', 0),
-(6913, 'Elektromagnetines bangos bangos, naudojamos rysiams', 'radijo', '2000-01-01 00:00:00', 0),
+(6912, 'Sviesos pluosto isskaidymas bangu ilgiais spektriniame prietaise', 'dispersija', '2020-01-29 18:16:46', 0),
+(6913, 'Elektromagnetines bangos bangos, naudojamos rysiams', 'radijo', '2020-01-29 20:00:04', 0),
 (6914, 'Nesutaikomas priesininkas, varzovas', 'antagonistas', '2000-01-01 00:00:00', 0),
 (6915, 'Vienos arba keliu transporto priemoniu pralenkimas, susijes su ivaziavimu i priespriesinio eismo juosta', 'lenkimas', '2000-01-01 00:00:00', 0),
 (6916, 'Legendinis xix apabaigos amerikieciu pramonininkas, vienas is kompanijos \"standard oil\" steigeju ir ilgametis jos vadovas (iki suskaidymo 1906 m.)', 'rokfeleris', '2000-01-01 00:00:00', 0),
@@ -7260,8 +7250,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (7165, 'Auksciausias ugnikalnis europoje', 'etna', '2000-01-01 00:00:00', 0),
 (7166, 'Kas parase \"lietuviu senobes bruozai\"', 'klimas', '2000-01-01 00:00:00', 0),
 (7167, 'Krastas, valstybe', 'salis', '2000-01-01 00:00:00', 0),
-(7168, 'Senoves graiku dievaitis, pandoros vyras, charakterizuojamas kaip \"pirma darantis, o po to galvojantis\"', 'epimetejas', '2000-01-01 00:00:00', 0),
-(7169, 'Populiarus sportinis 4/4 metro greito tempo sokis', 'samba', '2000-01-01 00:00:00', 0),
+(7168, 'Senoves graiku dievaitis, pandoros vyras, charakterizuojamas kaip \"pirma darantis, o po to galvojantis\"', 'epimetejas', '2020-01-29 18:17:30', 0),
+(7169, 'Populiarus sportinis 4/4 metro greito tempo sokis', 'samba', '2020-01-29 20:04:18', 0),
 (7170, 'Trumpakojis medzioklinis suo', 'taksas', '2000-01-01 00:00:00', 0),
 (7171, 'Organizmu svytejimas, budingas daugeliui mikroorganizmu, bestuburiams gyvunams, zuvims', 'bioliuminescencija', '2000-01-01 00:00:00', 0),
 (7172, 'Vienintele europos sostine, kuria dalija siena [kaip buvo su berlynu]', 'nikosija', '2000-01-01 00:00:00', 0),
@@ -7314,8 +7304,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (7219, 'Gelezinkelio sviesoforas', 'semaforas', '2000-01-01 00:00:00', 0),
 (7220, 'Iskastinis dramblys, gyvenes sibire, europoje ir samerikoje', 'mamutas', '2000-01-01 00:00:00', 0),
 (7221, 'Supersunkusis vandenilio izotopas, kurio branduolys susideda is vieno protono ir dvieju neutronu', 'tritis', '2000-01-01 00:00:00', 0),
-(7222, 'Kaip vadinamas didelis susikaupimas, susitelkimas, susimastymas', 'kontempliacija', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(7222, 'Kaip vadinamas didelis susikaupimas, susitelkimas, susimastymas', 'kontempliacija', '2000-01-01 00:00:00', 0),
 (7223, 'Egipto religijoje - pirmasis is dievu, pasaulio kurejas; tapatintas su besileidziancia saule', 'atumas', '2000-01-01 00:00:00', 0),
 (7224, 'Meteoritinis krateris', 'astroblema', '2000-01-01 00:00:00', 0),
 (7225, 'Skirtingu oro masiu pereinamoji zona, ju salyginis skiriamasis pavirsius: atmosferos ...', 'frontas', '2000-01-01 00:00:00', 0),
@@ -7329,7 +7318,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (7233, 'Juostele, uzklijuota ant prekes, rodanti, kad sumoketas akcizas arba muitas', 'banderole', '2000-01-01 00:00:00', 0),
 (7234, 'Popgrupes \"depeche mode\" vokalisto pavarde (angl.)', 'gahan', '2000-01-01 00:00:00', 0),
 (7235, 'Skundas aukstesnei instancijai, kuri turi teise is esmes persvarstyti dalyka (byla)', 'apeliacija', '2000-01-01 00:00:00', 0),
-(7236, 'Vaikoma antilope', 'gnu', '2000-01-01 00:00:00', 0),
+(7236, 'Vaikoma antilope', 'gnu', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (7237, 'Koks naminis gyvunas viduramziu daileje simbolizuoja kvailuma ir tinguma', 'asilas', '2000-01-01 00:00:00', 0),
 (7238, 'Brangiakailis zverelis su plaukiojamosiomis uzpakaliniu koju plevelemis', 'audine', '2000-01-01 00:00:00', 0),
 (7239, 'Netiketas siuzeto pasikeitimas', 'peripetija', '2000-01-01 00:00:00', 0),
@@ -7517,9 +7507,9 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (7421, 'Serialas: beverly hills ...', '90210', '2000-01-01 00:00:00', 0),
 (7422, 'Plienine sija traukinio ratams riedeti', 'begis', '2000-01-01 00:00:00', 0),
 (7423, '\"ziedu valdovo\" autorius', 'tolkienas', '2000-01-01 00:00:00', 0),
-(7424, 'Bendroves leidinys, kuriame ji teikia finansine informacija apie pasirengima platinti naujus vertybinius popierius', 'emisijos prospektas', '2000-01-01 00:00:00', 0),
-(7425, 'Be plauku', 'plikas', '2000-01-01 00:00:00', 0),
-(7426, 'Hyper text transfer protocol', 'http', '2000-01-01 00:00:00', 0),
+(7424, 'Bendroves leidinys, kuriame ji teikia finansine informacija apie pasirengima platinti naujus vertybinius popierius', 'emisijos prospektas', '2020-01-29 18:27:31', 0),
+(7425, 'Be plauku', 'plikas', '2020-01-29 20:04:25', 0),
+(7426, 'Hyper text transfer protocol', 'http', '1998-01-01 00:00:00', 0),
 (7427, 'Suolininko i auksti irankis - stiklo pluosto arba kitokiu medziagu ivairaus ilgio strypas, suolio metu naudojamas kaip atrama kunui per kartele perkelti', 'kartis', '2000-01-01 00:00:00', 0),
 (7428, 'Ka lietuviskai reiskia \"bergschlosschen\" pavadinimas, kuriuo iki 1918mvadinosi \"kalnapilio\" alaus darykla', 'pilaite ant kalvos', '2000-01-01 00:00:00', 0),
 (7429, 'Pozeminio vandens geochemija, tymokslas, tiriantis pozeminio vandens kilme, chemine sudeti ir jos kaita del gamtinio ir antropogeninio poveikio', 'hidrogeochemija', '2000-01-01 00:00:00', 0),
@@ -7773,8 +7763,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (7677, 'Sportinio parengtumo dalyvauti kuriose nors auksto rango varzybose (pvz., olimpinese zaidynese) rodiklis; tam tikro sportinio zenklo, vardo orientyras', 'normatyvas', '2000-01-01 00:00:00', 0),
 (7678, 'Patologinis arba dirbtinis kanalas, jungiantis organo ertme su kuno pavirsiumi', 'fistule', '2000-01-01 00:00:00', 0),
 (7679, 'Rasytojas, romanu \"paryziaus katedra\", \"vargdieniai\", \"devyniasdesimt tretieji metai\", \"zmogus, kuris juokiasi\" autorius (liet.)', 'hugo', '2000-01-01 00:00:00', 0),
-(7680, 'Svaros palaikymas', 'higiena', '2000-01-01 00:00:00', 0),
-(7681, 'Vidurio rytuose fraze \"zeme tarp dvieju upiu\" mums yra labiau zinoma kaip ...', 'mesopotamija', '2000-01-01 00:00:00', 0),
+(7680, 'Svaros palaikymas', 'higiena', '2020-01-29 18:34:34', 0),
+(7681, 'Vidurio rytuose fraze \"zeme tarp dvieju upiu\" mums yra labiau zinoma kaip ...', 'mesopotamija', '2020-01-29 20:04:59', 0),
 (7682, 'Eile isvertu pro bure raisciu, kuriais sutraukiama ir surisama apatine bures dalis - sumazinamas bures plotas', 'rifas', '2000-01-01 00:00:00', 0),
 (7683, 'Viduramziu ispanijos teismo ir kitu pareigu vykdytojas, teisejas', 'alkaldas', '2000-01-01 00:00:00', 0),
 (7684, 'Is amerikos kiles judrus akrobatiskas sokis, kuris buvo populiarus xx a4-aji ir 5-aji desimtmeti', 'dziterbagas', '2000-01-01 00:00:00', 0),
@@ -7784,8 +7774,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (7688, 'Kiek metru pakiltu vandenynu lygis, jei istirptu antarktidos bei grenlandijos ledynai', '60', '2000-01-01 00:00:00', 0),
 (7689, 'Itaisas elektros itampai, srovei, elektriniu ar elektromagnetiniu virpesiu galiai mazinti', 'ateniuatorius', '2000-01-01 00:00:00', 0),
 (7690, 'Tarp sio miesto esancio jav ir paryziaus 1915 mivyko pirmas pasaulyje tiesioginis pokalbis telefonukoks tai miestas? [liet.]', 'arlingtonas', '2000-01-01 00:00:00', 0),
-(7691, 'Didziausia upe europoje, kertanti net septyniu valstybiu siena', 'dunojus', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(7691, 'Didziausia upe europoje, kertanti net septyniu valstybiu siena', 'dunojus', '2000-01-01 00:00:00', 0),
 (7692, '\"adijalas\" lietuviskai', 'antklode', '2000-01-01 00:00:00', 0),
 (7693, 'Viena is prestiziniu jav gaminamu masinu (lietuviskai)', 'kadilakas', '2000-01-01 00:00:00', 0),
 (7694, 'Veikiamu elektros sroves disperguotosios fazes daleliu judejimas elektrodu link ir issikrovimas', 'elektroforeze', '2000-01-01 00:00:00', 0),
@@ -7800,7 +7789,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (7703, 'Graiku mitlogijoje trojo, frigijaus karaliaus, sunus ilo brolis', 'ganimedas', '2000-01-01 00:00:00', 0),
 (7704, 'Kaip vadinam placiuju raumenu sausgysle', 'aponeuroze', '2000-01-01 00:00:00', 0),
 (7705, 'Istatymo, akto, deklaracijos arba tarptautines sutarties ivadine dalis', 'preambule', '2000-01-01 00:00:00', 0),
-(7706, 'Zmogaus ir gyvuliu helmintoze, kuria sukelia askaridziu parazitavimas organizme', 'askaridoze', '2000-01-01 00:00:00', 0),
+(7706, 'Zmogaus ir gyvuliu helmintoze, kuria sukelia askaridziu parazitavimas organizme', 'askaridoze', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (7707, 'Jura i kuria iteka dunojus', 'juodoji', '2000-01-01 00:00:00', 0),
 (7708, 'Uolienu dulejimo plutos pavirsinis sluoksnis, apimantis ir dirvozemi', 'gruntas', '2000-01-01 00:00:00', 0),
 (7709, 'Kuriais metais pradeti gaminti buitiniai oro kondicionieriai', '1932', '2000-01-01 00:00:00', 0),
@@ -8030,8 +8020,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (7933, '12-oji graikiskos abeceles raide', 'mi', '2000-01-01 00:00:00', 0),
 (7934, 'Vokieciu romantikas, dramu \"plesikai\", \"vilius telis\"autorius', 'sileris', '2000-01-01 00:00:00', 0),
 (7935, 'Mirusio zmogaus persikunijimas', 'reinkarnacija', '2000-01-01 00:00:00', 0),
-(7936, 'Tradiciniais pripazinti socialiniai paprociai, kuriais vadovaujasi visi socialines grupes nariai', 'nuostatos', '2000-01-01 00:00:00', 0),
-(7937, 'Zmogus, pirmasis atrades bakterijas', 'levenhukas', '2000-01-01 00:00:00', 0),
+(7936, 'Tradiciniais pripazinti socialiniai paprociai, kuriais vadovaujasi visi socialines grupes nariai', 'nuostatos', '2020-01-29 18:36:30', 0),
+(7937, 'Zmogus, pirmasis atrades bakterijas', 'levenhukas', '2020-01-29 20:06:23', 0),
 (7938, 'Kokios salies (vnskilm.) domeno vardas yra \".ml\"', 'malio', '2000-01-01 00:00:00', 0),
 (7939, 'Gedimino dukte, nuo 1325 mlenkijos karaliene', 'aldona', '2000-01-01 00:00:00', 0),
 (7940, 'Vyskupo ar abato lazda, ilga ir puosni, virsuje uzsibaigianti spirale', 'pastoralas', '2000-01-01 00:00:00', 0),
@@ -8255,8 +8245,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (8158, 'Kunigas, xix alietuvoje, kures meiles dainas', 'vienazindys', '2000-01-01 00:00:00', 0),
 (8159, 'Baldas, ant kurio gulima', 'lova', '2000-01-01 00:00:00', 0),
 (8160, 'Bet kurio augalo paselis vietoj zuvusio ar labai menko paselio', 'atselis', '2000-01-01 00:00:00', 0),
-(8161, 'Pokylis, kurio dalyviai su kaukemis devi charakteringus kostiumus', 'maskaradas', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(8161, 'Pokylis, kurio dalyviai su kaukemis devi charakteringus kostiumus', 'maskaradas', '2000-01-01 00:00:00', 0),
 (8162, 'Tanki vieno ar keliu eiliu medziu, krumu juosta, sodinama alejoms, skverams, bulvarams ireminti, sodams ir sodyboms saugoti nuo vejo, dulkiu, vietoje tvoru', 'gyvatvore', '2000-01-01 00:00:00', 0),
 (8163, '\"plafkes\" lietuviskai', 'glaudes', '2000-01-01 00:00:00', 0),
 (8164, 'Gydymas mineraliniu vandeniu', 'balneoterapija', '2000-01-01 00:00:00', 0),
@@ -8273,7 +8262,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (8175, 'Atstumas nuo vandens pavirsiaus iki laivo kilio apacios', 'grimzle', '2000-01-01 00:00:00', 0),
 (8176, 'Eriuko tevas', 'avinas', '2000-01-01 00:00:00', 0),
 (8177, 'Korta, losime vyresne uz bet kuria kitos rusies korta', 'koziris', '2000-01-01 00:00:00', 0),
-(8178, 'Didziausias afrikos pusiasalis', 'somalis', '2000-01-01 00:00:00', 0),
+(8178, 'Didziausias afrikos pusiasalis', 'somalis', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (8179, 'Bendravimas tarp zmoniu kuno judesiais - kuno ..', 'kalba', '2000-01-01 00:00:00', 0),
 (8180, 'Salis, kurioje buvo irengta pirmoji keturlapio dobilo pavidalo estakadine keliu sankryza', 'jav', '2000-01-01 00:00:00', 0),
 (8181, 'Epocha nuo va.-xva.', 'viduramziai', '2000-01-01 00:00:00', 0),
@@ -8287,8 +8277,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (8189, 'Italu tapytojas, \"anarchisto galio laidotuves\" autorius', 'cara', '2000-01-01 00:00:00', 0),
 (8190, 'Pluduriuojanti konstrukcija ivairiems irenginiams ant vandens laikyti arba atlikti kokiems nors darbams', 'pontonas', '2000-01-01 00:00:00', 0),
 (8191, 'Durklas, tiesia dviasmene briaunota gelezte su maza rankena', 'kortikas', '2000-01-01 00:00:00', 0),
-(8192, 'Kokio nors isiminto reiskinio, isgyvenimo sukeltas pedsakas (pakitimas) smegenyse', 'engrama', '2000-01-01 00:00:00', 0),
-(8193, 'Lektuvo korpusas', 'fiuzeliazas', '2000-01-01 00:00:00', 0),
+(8192, 'Kokio nors isiminto reiskinio, isgyvenimo sukeltas pedsakas (pakitimas) smegenyse', 'engrama', '2020-01-29 18:37:38', 0),
+(8193, 'Lektuvo korpusas', 'fiuzeliazas', '2020-01-29 20:16:24', 0),
 (8194, 'Sumeru dievas, valdes pasaulio pagrindus, zeme; taip pat globojes isminti ir pranasystes', 'enkis', '2000-01-01 00:00:00', 0),
 (8195, 'Geriausia akies matymo vieta', 'centrine duobute', '2000-01-01 00:00:00', 0),
 (8196, 'Apdailos sluoksnis, kurio islyginamas ir dekoruojamas isorines arba vidines sienos pavirsius', 'tinkas', '2000-01-01 00:00:00', 0),
@@ -8543,8 +8533,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (8445, 'Dangaus sferos taskas, priesingas zenitui', 'nadyras', '2000-01-01 00:00:00', 0),
 (8446, 'Danijos sostine?', 'kopenhaga', '2000-01-01 00:00:00', 0),
 (8447, 'Dydzio vienetais reiskiamas matmuo', 'dimensija', '2000-01-01 00:00:00', 0),
-(8448, 'Infekcine liga, kuria sukelia bakterijos, vadinamos brucelemis', 'brucelioze', '2000-01-01 00:00:00', 0),
-(8449, 'Teleskopas, kurio sviesa surenkantis elementas yra igaubtas veidrodis', 'reflektorius', '2000-01-01 00:00:00', 0),
+(8448, 'Infekcine liga, kuria sukelia bakterijos, vadinamos brucelemis', 'brucelioze', '2020-01-29 18:37:56', 0),
+(8449, 'Teleskopas, kurio sviesa surenkantis elementas yra igaubtas veidrodis', 'reflektorius', '2020-01-29 20:26:26', 0),
 (8450, 'Uosles susilpnejimas', 'hiposimija', '2000-01-01 00:00:00', 0),
 (8451, 'Italijos futbolo klubas, kurio visa komanda 1949 m zuvo aviakatastrofoje: ac ...', 'torino', '2000-01-01 00:00:00', 0),
 (8452, 'Tarybu sajungos vadovas, komunistu partijos lyderis (1964-1982)', 'breznevas', '2000-01-01 00:00:00', 0),
@@ -8733,8 +8723,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (8635, 'Iskilmingas pareiskimas svarbiais klausimais', 'deklaracija', '2000-01-01 00:00:00', 0),
 (8636, 'Kada priimtas jav sekretoriaus d.marsalo pasiulytas ekonomines pagalbos planas europai atkurti', '1947', '2000-01-01 00:00:00', 0),
 (8637, 'Dvielektrodis elektroninis prietaisas, praleidziantis srove tik viena kryptimi', 'diodas', '2000-01-01 00:00:00', 0),
-(8638, 'Bulimija, rajumas, labai didelis alkio jausmas', 'polifagija', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(8638, 'Bulimija, rajumas, labai didelis alkio jausmas', 'polifagija', '2000-01-01 00:00:00', 0),
 (8639, 'Pirmasis nepriklausomos lenkijos prezidentas (1918m.) [liet.]', 'pilsudskis', '2000-01-01 00:00:00', 0),
 (8640, 'Seniausias islikes pasaulio miestas', 'damaskas', '2000-01-01 00:00:00', 0),
 (8641, '1453mturku uzgrobtas didelis miestas', 'konstantinopolis', '2000-01-01 00:00:00', 0),
@@ -8750,7 +8739,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (8651, 'Sanitarijos priemones, neleidziancios plisti epidemijai', 'karantinas', '2000-01-01 00:00:00', 0),
 (8652, 'Toks pats uzsispyres kaip asilas', 'ozys', '2000-01-01 00:00:00', 0),
 (8653, 'Kokia jura senoves graiku buvo vadinama svetingaja jura', 'juodoji', '2000-01-01 00:00:00', 0),
-(8654, 'Juokingas pasakojimas', 'anekdotas', '2000-01-01 00:00:00', 0),
+(8654, 'Juokingas pasakojimas', 'anekdotas', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (8655, 'Kokia yra virsutine cholesterolio kiekio kraujyje riba, kuria rekomenduojama islaikyti', '200', '2000-01-01 00:00:00', 0),
 (8656, 'Vargonu registras, skleidziantis labai stipru garsa', 'bombarda', '2000-01-01 00:00:00', 0),
 (8657, 'Priestaraujantis logikai, nelogiskas', 'ilogiskas', '2000-01-01 00:00:00', 0),
@@ -8800,8 +8790,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (8701, 'Nacionalinis senegalo medis, pavaizduotas ir sios salies herbe', 'baobabas', '2000-01-01 00:00:00', 0),
 (8702, 'Mokslas apie medziagas, ju savybes, sandara, kitimus, vienu medziagu pavertimo kitomis medziagomis budus.', 'chemija', '2000-01-01 00:00:00', 0),
 (8703, 'Parase \"kapitono blado odiseja\"', 'sabatinis', '2000-01-01 00:00:00', 0),
-(8704, 'Kaip dar vadinamas ankstyvasis gelezies amzius', 'halstatas', '2000-01-01 00:00:00', 0),
-(8705, 'Visu metu dienu sisteminis sarasas, kur suzymeti sekmadieniai, sventes ir svarbus ivykiai', 'kalendorius', '2000-01-01 00:00:00', 0),
+(8704, 'Kaip dar vadinamas ankstyvasis gelezies amzius', 'halstatas', '2020-01-29 18:47:57', 0),
+(8705, 'Visu metu dienu sisteminis sarasas, kur suzymeti sekmadieniai, sventes ir svarbus ivykiai', 'kalendorius', '2020-01-29 20:36:28', 0),
 (8706, 'Auksto rango kataliku dvasininkas', 'pralotas', '2000-01-01 00:00:00', 0),
 (8707, 'Tekilos grupe, baltos spalvos standartine tekila, autentisko ir stipraus skonio [orig.]', 'silver', '2000-01-01 00:00:00', 0),
 (8708, 'Koks vabzdys yra sventuju ambraziejaus ir bernardo klerviecio atributas', 'bite', '2000-01-01 00:00:00', 0),
@@ -9056,8 +9046,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (8957, 'Musamasis muzikos instrumenatas, gongo atmaina', 'tamtamas', '2000-01-01 00:00:00', 0),
 (8958, 'Regos sutrikimas, kai vienas daiktas tinklaineje duoda kelis vaizdus', 'poliopija', '2000-01-01 00:00:00', 0),
 (8959, 'Medicinoje - audiniu suardymas elektros kibirkstimis', 'fulguracija', '2000-01-01 00:00:00', 0),
-(8960, 'Monetos puse su skaiciumi', 'aversas', '2000-01-01 00:00:00', 0),
-(8961, 'Vyrvardas, kiles is lotkalbos, reiskia \"ilgi plaukai\"', 'cezaris', '2000-01-01 00:00:00', 0),
+(8960, 'Monetos puse su skaiciumi', 'aversas', '2020-01-29 18:49:04', 0),
+(8961, 'Vyrvardas, kiles is lotkalbos, reiskia \"ilgi plaukai\"', 'cezaris', '2020-01-29 20:48:37', 0),
 (8962, 'Modernizmo atstovas, romanu \"prarasto laiko beieskant\", \"jaunu zydinciu merginu seselyje\" autorius', 'prustas', '2000-01-01 00:00:00', 0),
 (8963, 'Kuriais metais atidarytas pirmasis pasaulyje kino teatras', '1896', '2000-01-01 00:00:00', 0),
 (8964, 'Male and ____', 'female', '2000-01-01 00:00:00', 0),
@@ -9197,8 +9187,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (9098, 'Kuriais metais kaune pirklys i.bvolfas pastate garini alaus bei salyklo fabrika, siuo metu zinoma \"ragucio\" vardu', '1853', '2000-01-01 00:00:00', 0),
 (9099, 'Daiktu meninis konstravimas, ju estetines isvaizdos kurimas', 'dizainas', '2000-01-01 00:00:00', 0),
 (9100, 'Vandens augalas, vartojamas kepant namine duona', 'ajeras', '2000-01-01 00:00:00', 0),
-(9101, 'Centrines amerikos valstybe, kurios sostine managva', 'nikaragva', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(9101, 'Centrines amerikos valstybe, kurios sostine managva', 'nikaragva', '2000-01-01 00:00:00', 0),
 (9102, 'Siaures korejos pagrindinis pinigas', 'vonas', '2000-01-01 00:00:00', 0),
 (9103, 'Pabuklas, saudantis isgaubta trajektorija', 'haubica', '2000-01-01 00:00:00', 0),
 (9104, 'Rasto zenklas', 'raide', '2000-01-01 00:00:00', 0),
@@ -9215,7 +9204,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (9115, 'Istrizai apatiniu galu prie laivo stiebo pritvirtintas skersinis signaliniam zibintui, veliavai laikyti', 'gafelis', '2000-01-01 00:00:00', 0),
 (9116, 'Salis, kurioje isikurusi imone \"philips\" [pagrindine bustine]', 'olandija', '2000-01-01 00:00:00', 0),
 (9117, 'Taskas kuriame viena linija pereina i kita', 'jungimosi taskas', '2000-01-01 00:00:00', 0),
-(9118, 'Sportiniu zaidimu technikos veiksmas - pasisukimas apie vertikaliaja asi 180??? kampu stovint ant atramines kojos', 'varpste', '2000-01-01 00:00:00', 0),
+(9118, 'Sportiniu zaidimu technikos veiksmas - pasisukimas apie vertikaliaja asi 180??? kampu stovint ant atramines kojos', 'varpste', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (9119, 'Lietuviu rasytojas, romanu \"uzuoveja\", \"miskais ateina ruduo\" autorius', 'katiliskis', '2000-01-01 00:00:00', 0),
 (9120, 'Fermentu sudedamoji dalis, lemianti ju aktyvuma', 'kofermentai', '2000-01-01 00:00:00', 0),
 (9121, 'Lengvas musulmonu veido (arba viso kuno) apdangalas, su plysiu akims; devimas viesose vietose', 'cadra', '2000-01-01 00:00:00', 0),
@@ -9241,7 +9231,6 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (9141, 'Skatinamoji priezastis, akstinas', 'stimulas', '2000-01-01 00:00:00', 0),
 (9142, 'Gaidziu \"karuna\"', 'skiautere', '2000-01-01 00:00:00', 0),
 (9143, 'Is leto teka', 'srovena', '2000-01-01 00:00:00', 0),
-(9144, 'Radiologines diagnostikos metodas, uz kurio isradima gnhaunsfildas ir amkormakas 1979 m\r\n', '', '2000-01-01 00:00:00', 0),
 (9145, 'Hipotetinis judrus skystis, kuriuo iki xviii abuvo aiskinami silumos, magnetizmo, elektros reiskiniai', 'fluidas', '2000-01-01 00:00:00', 0),
 (9146, 'Isimtine salyga', 'islyga', '2000-01-01 00:00:00', 0),
 (9147, 'Koki didziausia greiti, begdamas trumpus atstumus gali pasiekti gepardas', '105', '2000-01-01 00:00:00', 0),
@@ -9313,8 +9302,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (9213, 'Laukinis ir darzeliu augalas sviesiai geltonais ziedynais', 'razeta', '2000-01-01 00:00:00', 0),
 (9214, 'Kaimas silutes raj., kuriame yra bene vienintele trikampe baznycia lietuvoje', 'deguciai', '2000-01-01 00:00:00', 0),
 (9215, 'Mokslas, tiriantis lietuviu kalba, literatura ir tautosaka', 'lituanistika', '2000-01-01 00:00:00', 0),
-(9216, 'Keturi pagrindiniai arbatos gerimo ceremonijos principai: harmonija, pagarba, svara ir ...', 'tyla', '2000-01-01 00:00:00', 0),
-(9217, 'Atskiras statinys, pastato priestatas arba anstatas varpams pakabinti', 'varpine', '2000-01-01 00:00:00', 0),
+(9216, 'Keturi pagrindiniai arbatos gerimo ceremonijos principai: harmonija, pagarba, svara ir ...', 'tyla', '2020-01-29 18:49:30', 0),
+(9217, 'Atskiras statinys, pastato priestatas arba anstatas varpams pakabinti', 'varpine', '2020-01-29 21:14:02', 0),
 (9218, 'Kosovo srities sostine', 'pristina', '2000-01-01 00:00:00', 0),
 (9219, 'Aukstas ldk valdzios pareigunas', 'vaivada', '2000-01-01 00:00:00', 0),
 (9220, 'Franku valstybeje nusigyvenusiuju prasymas turtingesniuju pagalbos', 'prekariumas', '2000-01-01 00:00:00', 0),
@@ -9569,8 +9558,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (9469, 'Prancuzijos valstybes veikejas1666misteige paryziaus mokslu akademija, 1669mkaraliskaja muzikos akademija [liet.]', 'kolberas', '2000-01-01 00:00:00', 0),
 (9470, 'Kiek simfoniju parase francas jozefas haidnas', '107', '2000-01-01 00:00:00', 0),
 (9471, 'Pastato sienos anga, uzdengta stiklu ar kita persvieciama medziaga', 'langas', '2000-01-01 00:00:00', 0),
-(9472, 'Fizikos saka, tirianti tampriuosius svyravimus ir bangas bei ju praktini panaudojima', 'akustika', '2000-01-01 00:00:00', 0),
-(9473, 'Meno paroda, rengiama kas treji metai', 'trienale', '2000-01-01 00:00:00', 0),
+(9472, 'Fizikos saka, tirianti tampriuosius svyravimus ir bangas bei ju praktini panaudojima', 'akustika', '2020-01-29 18:51:05', 0),
+(9473, 'Meno paroda, rengiama kas treji metai', 'trienale', '2020-01-29 21:16:17', 0),
 (9474, 'Cheminis elementas, kurio simbolis \"bi\" [numeris 83]', 'bismutas', '2000-01-01 00:00:00', 0),
 (9475, 'Kelintais metais ivyko austerlico musis, kuriame napoleono armija nugalejo austru ir rusu kariuomene', '1805', '2000-01-01 00:00:00', 0),
 (9476, 'Metalu lydinys arba amzius', 'zalvaris', '2000-01-01 00:00:00', 0),
@@ -9657,8 +9646,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (9557, 'Autorystes nustatymas, kai kurinys anonimiskas ar parasytas pseudonimu, taip pat literaturiniu mistifikaciju atvejis', 'atribucija', '2000-01-01 00:00:00', 0),
 (9558, 'Pagrindine smulkiaburzuazine rusijos socialdemokratijos srove, tarptautinio oportunizmo atmaina', 'mensevizmas', '2000-01-01 00:00:00', 0),
 (9559, '\"kavotis\" lietuviskai', 'sleptis', '2000-01-01 00:00:00', 0),
-(9560, '10 dienu laikotarpis', 'dekada', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(9560, '10 dienu laikotarpis', 'dekada', '2000-01-01 00:00:00', 0),
 (9561, 'Gyvunas, augalas arba jo dalis, parengta anatominiam, histologiniam arba kitokiam tyrimui', 'preparatas', '2000-01-01 00:00:00', 0),
 (9562, 'Siaures amerikos indenu auksciausias dievas', 'manitu', '2000-01-01 00:00:00', 0),
 (9563, 'Isrinktas arba paskirtas valstybes, partijos, kolektyvo atstovas, igaliotas atstovauti ju interesams konferencijoje, posedyje, derybose', 'delegatas', '2000-01-01 00:00:00', 0),
@@ -9677,7 +9665,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (9576, 'Jav gyventojas, multimilijonierius, pirmasis kosmoso turistas [orig.]', 'tito', '2000-01-01 00:00:00', 0),
 (9577, 'Liettelegramu agentura', 'elta', '2000-01-01 00:00:00', 0),
 (9578, 'Japonu puoksciu darymo menas', 'ikebana', '2000-01-01 00:00:00', 0),
-(9579, 'Panevezio alaus darykla', 'kalnapilis', '2000-01-01 00:00:00', 0),
+(9579, 'Panevezio alaus darykla', 'kalnapilis', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (9580, 'Tragikas, tragediju \"persai\", \"prikaltasis prometejas\", trilogijos \"oresteja\" autorius', 'aischilas', '2000-01-01 00:00:00', 0),
 (9581, '46-a valstija, prijungta prie jav 16.11.1907 m., sostine oklahoma sitis [liet.]', 'oklahoma', '2000-01-01 00:00:00', 0),
 (9582, 'Griezta kaltinamoji kalba', 'filipika', '2000-01-01 00:00:00', 0),
@@ -9826,8 +9815,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (9725, 'Vingiuoti, medziais apsodinti parko takai, vedantys i aikste su fontanu', 'labirintas', '2000-01-01 00:00:00', 0),
 (9726, 'Ldk, lietuvos dvaru ir kleboniju vyriausioji namu ukio priziuretoja ir darbu tvarkytoja', 'akmistrine', '2000-01-01 00:00:00', 0),
 (9727, 'Apvalkalelis, i kuri idaromi nemalonaus kvapo ar skonio vaistai', 'kapsule', '2000-01-01 00:00:00', 0),
-(9728, 'Prabangus, gausiai dekoruotas karstas', 'sarkofagas', '2000-01-01 00:00:00', 0),
-(9729, 'Laikini popieriniai pinigai, kuriuos leidzia vietine valdzia ar istaigos', 'bonai', '2000-01-01 00:00:00', 0),
+(9728, 'Prabangus, gausiai dekoruotas karstas', 'sarkofagas', '2020-01-29 18:51:39', 0),
+(9729, 'Laikini popieriniai pinigai, kuriuos leidzia vietine valdzia ar istaigos', 'bonai', '2020-01-29 21:17:13', 0),
 (9730, 'Salis, kurioje pradejo veikti pirmasis slidininku keltuvas', 'vokietija', '2000-01-01 00:00:00', 0),
 (9731, 'Visuomenes dvasinio gyvenimo, zmoniu veiklos, kurybos, galvosenos supasaulietejimas', 'sekuliarizacija', '2000-01-01 00:00:00', 0),
 (9732, 'Senoves romos pareigunas, kriminaliniu bylu tyrejas', 'kvestorius', '2000-01-01 00:00:00', 0),
@@ -10082,8 +10071,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (9981, 'Modernistines dailes kurinys, sukurtas is atskiru daiktu', 'asambliazas', '2000-01-01 00:00:00', 0),
 (9982, 'Medinis siaudelis su galvute is degamojo misinio', 'degtukas', '2000-01-01 00:00:00', 0),
 (9983, 'Spektaklis vieno is jo dalyviu garbei', 'benefisas', '2000-01-01 00:00:00', 0),
-(9984, 'Bosnijos ir hercegovinos sostine', 'sarajevas', '2000-01-01 00:00:00', 0),
-(9985, 'Platus griovys salia pylimo vandeniui nuleisti', 'rezervas', '2000-01-01 00:00:00', 0),
+(9984, 'Bosnijos ir hercegovinos sostine', 'sarajevas', '2020-01-29 18:51:52', 0),
+(9985, 'Platus griovys salia pylimo vandeniui nuleisti', 'rezervas', '2020-01-29 21:33:25', 0),
 (9986, 'Is obuoliu gaminamas panasus i brendi gerimas', 'kalvadosas', '2000-01-01 00:00:00', 0),
 (9987, 'Spaudos, kino filmu, radijos ir televizijos laidu ir kitu viesu renginiu turinio kontrole, kad nebutu platinamos tam tikros zinios ir teorijos', 'cenzura', '2000-01-01 00:00:00', 0),
 (9988, 'Lietuviu poetas, eilerasciu rinkiniu ilgosios varsnos, atodangos, poringes, bename meile autorius', 'zukauskas', '2000-01-01 00:00:00', 0),
@@ -10123,8 +10112,7 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (10022, 'Baltarusijos interneto kodas', 'by', '2000-01-01 00:00:00', 0),
 (10023, 'Ko nors nezinomo radimas', 'atradimas', '2000-01-01 00:00:00', 0),
 (10024, 'Sakoma, kad del jo paprastai nesigincijama', 'skonis', '2000-01-01 00:00:00', 0),
-(10025, 'Pavadinimas, kuriuo anksciau buvo vadinami zarasai', 'ezerenai', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(10025, 'Pavadinimas, kuriuo anksciau buvo vadinami zarasai', 'ezerenai', '2000-01-01 00:00:00', 0),
 (10026, 'Zenklas, daznai rasomas ant kataliku baznycios ir ant kryziu virs nukryziuotojo, sudarytas is lotynu kalbos zodziu ???jesus nazarenus rex judeorum??? pirmuju raidziu', 'inri', '2000-01-01 00:00:00', 0),
 (10027, 'Laikinas cheminio elemento, kurio simbolis uus [numeris 117] pavadinimas', 'ununseptis', '2000-01-01 00:00:00', 0),
 (10028, 'Tusinukas kitaip, lietuviskiau', 'sratinukas', '2000-01-01 00:00:00', 0),
@@ -10141,7 +10129,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (10039, 'Sportiniu reikmenu firma su lanko ar kometos uodegos formos zenklu', 'nike', '2000-01-01 00:00:00', 0),
 (10040, 'Egipto smulkus pinigas', 'piastras', '2000-01-01 00:00:00', 0),
 (10041, 'Kosmose - ivykiu horizonto gaubiama erdves sritis, is kurios negali istrukti jokios elektromagnetines bangos ir daleles', 'juodoji bedugne', '2000-01-01 00:00:00', 0),
-(10042, 'Tolimiausias neptuno palydovas, kuri 1949 matrado g.pkoiperis', 'nereide', '2000-01-01 00:00:00', 0),
+(10042, 'Tolimiausias neptuno palydovas, kuri 1949 matrado g.pkoiperis', 'nereide', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (10043, 'Sritis, uz kurios pasiekimus dar nei viena moteris negavo nobelio premijos', 'ekonomika', '2000-01-01 00:00:00', 0),
 (10044, 'Puosni apeigine kataliku vyskupo kepure', 'infula', '2000-01-01 00:00:00', 0),
 (10045, 'Xvi-xviii alenkijos ir lietuvos valstybes seimo sutartis su kandidatu i valdovus', 'pacta conventa', '2000-01-01 00:00:00', 0),
@@ -10339,8 +10328,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (10237, 'Senoves egiptieciu balzamuotoju dievas', 'anubis', '2000-01-01 00:00:00', 0),
 (10238, 'Danu astronomas, pirmasis nustates sviesos greiti', 'riomeris', '2000-01-01 00:00:00', 0),
 (10239, 'Pasauline kurciuju diena', 'rugsejo 30', '2000-01-01 00:00:00', 0),
-(10240, 'Metaline vinis su sriegiu verzlei', 'varztas', '2000-01-01 00:00:00', 0),
-(10241, 'Virsutinis vyru ir moteru drabuzis, devimas darbe, namie; artimuosiuose rytuose ir vidurineje azijoje devimas kaip iseiginis drabuzis', 'chalatas', '2000-01-01 00:00:00', 0),
+(10240, 'Metaline vinis su sriegiu verzlei', 'varztas', '2020-01-29 18:52:33', 0),
+(10241, 'Virsutinis vyru ir moteru drabuzis, devimas darbe, namie; artimuosiuose rytuose ir vidurineje azijoje devimas kaip iseiginis drabuzis', 'chalatas', '2020-01-29 21:51:16', 0),
 (10242, 'Galvos apsauga', 'salmas', '2000-01-01 00:00:00', 0),
 (10243, 'Renkamas respublikines valdymo formos valstybes vadovas', 'prezidentas', '2000-01-01 00:00:00', 0),
 (10244, 'Kataliku baznbausme, kuria is dvasininko atimama teise atlikineti sventimais suteiktas funkcijas ir eiti turimas baznytines pareigas', 'suspensa', '2000-01-01 00:00:00', 0),
@@ -10589,15 +10578,14 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (10487, 'Kasmetine palaipsniui padengiamos valstybines paskolos ir paskaiciuotu palukanu ismoka', 'anuitetas', '2000-01-01 00:00:00', 0),
 (10488, 'Charakterio tipas, kuriam budinga egocentrizmas, poreikis dominuoti, noras bet kokia kaina atkreipti i save demesi, teatraliskas demesys', 'isteroidas', '2000-01-01 00:00:00', 0),
 (10489, 'Knygos aptaisymas virseliu', 'irisimas', '2000-01-01 00:00:00', 0),
-(10490, 'Romos kataliku misiu dalis, per kuria daugiausiai skaitomi laiskai', 'epistola', '2000-01-01 00:00:00', 0);
-INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
+(10490, 'Romos kataliku misiu dalis, per kuria daugiausiai skaitomi laiskai', 'epistola', '2000-01-01 00:00:00', 0),
 (10491, 'Klasikinis alkkokteilis, dazniausiai susidedantis is pomidoru sulciu, degtines bei prieskoniu', 'kruvinoji meri', '2000-01-01 00:00:00', 0),
 (10492, 'Ruandos siaurine kaimyne', 'burundis', '2000-01-01 00:00:00', 0),
 (10493, 'Eritrejos sostine', 'asmara', '2000-01-01 00:00:00', 0),
 (10494, '(655-731) japonu poetas didikas rases tik penkiaeiliussatyrines poezijos pradininkas', 'torbito', '2000-01-01 00:00:00', 0),
 (10495, 'Zmogus, tarpininkaujantis tarp gyvuju ir mirusiuju pasauliu, t.ytas, kuris, pasineres i transa, kalbasi su dvasiomis, mirusiuju velemis', 'mediumas', '2000-01-01 00:00:00', 0),
-(10496, 'Koks tikrasis karaliauciaus srities baltijsko miesto vardas', 'piliava', '2000-01-01 00:00:00', 0),
-(10497, 'Kas kukuoja: geguciu patinai ar pateles', 'patinai', '2000-01-01 00:00:00', 0),
+(10496, 'Koks tikrasis karaliauciaus srities baltijsko miesto vardas', 'piliava', '2020-01-29 18:53:43', 0),
+(10497, 'Kas kukuoja: geguciu patinai ar pateles', 'patinai', '2020-01-29 21:55:28', 0),
 (10498, 'Kataliku vienuoliu ordinas, ikurtas 1215 mtuluzoje ispanu pamokslininko domininko gusmano', 'domininkonai', '2000-01-01 00:00:00', 0),
 (10499, 'Kataliku baznycios aktas - mirusiojo asmens paskelbimas palaimintuoju', 'beatifikacija', '2000-01-01 00:00:00', 0),
 (10500, 'Geniniu burio geniu seimos paukstis', 'meleta', '2000-01-01 00:00:00', 0),
@@ -10607,7 +10595,8 @@ INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) V
 (10504, 'Wnba komanda is portlendo', 'fire', '2000-01-01 00:00:00', 0),
 (10505, 'Cheminis elementas, kurio simbolis h [numeris 1]', 'vandenilis', '2000-01-01 00:00:00', 0),
 (10506, 'Vokietijos kanclerio srioderio vardas', 'gerhardas', '2000-01-01 00:00:00', 0),
-(10507, 'Koki pakta 1925 mpasirase vokietija, kuriuo ji pripazino savo vakarines sienas su belgija ir prancuzija', 'lokarno', '2000-01-01 00:00:00', 0),
+(10507, 'Koki pakta 1925 mpasirase vokietija, kuriuo ji pripazino savo vakarines sienas su belgija ir prancuzija', 'lokarno', '2000-01-01 00:00:00', 0);
+INSERT INTO `question` (`id`, `question`, `answer`, `time_modified`, `active`) VALUES
 (10508, 'Zmogaus pavidalo ir psichiniu savybiu suteikimas gamtos reiskiniams', 'antropomorfizmas', '2000-01-01 00:00:00', 0),
 (10509, 'Stiprus uzpilas su spiritu, vartojamas medicinoje', 'eliksyras', '2000-01-01 00:00:00', 0),
 (10510, 'Stipri puga per didelius salcius rusijos azijineje dalyje', 'buranas', '2000-01-01 00:00:00', 0),
@@ -10684,13 +10673,66 @@ INSERT INTO `question_answer` (`id`, `user_id`, `question_id`, `time_answered`, 
 (1, 1, 1, '2020-01-01 19:26:44', 'admin'),
 (2, 2, 1, '2019-12-11 19:27:29', NULL),
 (3, 5, 1, '2019-12-28 00:00:00', 'Labas'),
-(4, NULL, 1, '2020-01-01 19:29:20', 'admin'),
-(5, NULL, 2, '2020-01-01 19:33:14', 'admin'),
+(4, 3, 1, '2020-01-01 19:29:20', 'admin'),
+(5, 5, 2, '2020-01-01 19:33:14', 'admin'),
 (6, 2, 1, '2020-01-28 21:03:40', 'tortonas'),
-(7, NULL, 2, '2020-01-28 21:05:19', 'tortonas'),
+(7, 3, 2, '2020-01-28 21:05:19', 'tortonas'),
 (8, 5, 1, '2020-01-01 21:15:46', 'Just Galgaldas'),
 (9, 2, 2, '2020-01-28 21:15:59', 'Just Galgaldas'),
-(10, 5, 1, '2020-01-28 22:31:12', 'Just Galgaldas');
+(10, 5, 1, '2020-01-28 22:31:12', 'Just Galgaldas'),
+(11, 5, 2048, '2020-01-29 15:11:29', 'qweqwe'),
+(12, 5, 2304, '2020-01-29 15:12:13', 'Tortonas'),
+(13, NULL, 5888, '2020-01-29 17:44:03', 'bybys'),
+(14, NULL, 6144, '2020-01-29 17:51:02', 'Tortonas Duhas'),
+(15, NULL, 6912, '2020-01-29 18:16:46', '...'),
+(16, NULL, 7168, '2020-01-29 18:17:30', '...'),
+(17, NULL, 7680, '2020-01-29 18:34:34', 'Mavka'),
+(18, 15, 7936, '2020-01-29 18:36:30', 'xoxo'),
+(19, 15, 8192, '2020-01-29 18:37:38', 'xoxo'),
+(20, NULL, 8448, '2020-01-29 18:37:56', 'Mavka'),
+(21, 17, 8960, '2020-01-29 18:49:04', 'UnbanRampageMane'),
+(22, NULL, 9216, '2020-01-29 18:49:30', 'Karr'),
+(23, 16, 9472, '2020-01-29 18:51:05', 'Mavka'),
+(24, 16, 9728, '2020-01-29 18:51:39', 'Mavka'),
+(25, 16, 9984, '2020-01-29 18:51:52', 'Mavka'),
+(26, 16, 10240, '2020-01-29 18:52:33', 'Mavka'),
+(27, 16, 10496, '2020-01-29 18:53:43', 'Mavka'),
+(28, 16, 513, '2020-01-29 19:04:30', 'Mavka'),
+(29, 16, 769, '2020-01-29 19:04:56', 'Mavka'),
+(30, NULL, 1025, '2020-01-29 19:07:18', 'Gigantas'),
+(31, 16, 1281, '2020-01-29 19:07:46', 'Mavka'),
+(32, 16, 1537, '2020-01-29 19:07:55', 'Mavka'),
+(33, 16, 1793, '2020-01-29 19:08:42', 'Mavka'),
+(34, 16, 2049, '2020-01-29 19:08:50', 'Mavka'),
+(35, 16, 2305, '2020-01-29 19:08:57', 'Mavka'),
+(36, 16, 2561, '2020-01-29 19:09:42', 'Mavka'),
+(37, 16, 2817, '2020-01-29 19:09:47', 'Mavka'),
+(38, NULL, 3073, '2020-01-29 19:11:08', 'sw'),
+(39, 16, 3329, '2020-01-29 19:12:54', 'Mavka'),
+(40, 16, 3585, '2020-01-29 19:13:26', 'Mavka'),
+(41, 16, 3841, '2020-01-29 19:14:27', 'Mavka'),
+(42, 16, 4097, '2020-01-29 19:15:21', 'Mavka'),
+(43, 16, 4353, '2020-01-29 19:15:57', 'Mavka'),
+(44, 16, 4609, '2020-01-29 19:18:09', 'Mavka'),
+(45, NULL, 4865, '2020-01-29 19:19:49', 'Tortonas Duhas'),
+(46, 16, 5121, '2020-01-29 19:20:53', 'Mavka'),
+(47, 21, 5633, '2020-01-29 19:31:56', 'Justina Žičkutė'),
+(48, 21, 5889, '2020-01-29 19:32:01', 'Justina Žičkutė'),
+(49, 21, 6145, '2020-01-29 19:32:40', 'Justina Žičkutė'),
+(50, 22, 6913, '2020-01-29 20:00:04', 'Maria'),
+(51, 22, 7169, '2020-01-29 20:04:18', 'Maria'),
+(52, 22, 7425, '2020-01-29 20:04:25', 'Maria'),
+(53, 22, 7681, '2020-01-29 20:04:59', 'Maria'),
+(54, 22, 7937, '2020-01-29 20:06:23', 'Maria'),
+(55, NULL, 9473, '2020-01-29 21:16:17', 'Quizzer.lt Administratorius'),
+(56, NULL, 9729, '2020-01-29 21:17:13', 'Quizzer.lt Administratorius'),
+(57, NULL, 10497, '2020-01-29 21:55:28', 'Kennedy'),
+(58, NULL, 258, '2020-01-29 21:58:50', 'Kennedy'),
+(59, NULL, 514, '2020-01-29 22:00:07', 'Kennedy'),
+(60, 23, 1026, '2020-01-29 22:10:52', 'Kennedy'),
+(61, 23, 1282, '2020-01-29 22:12:50', 'Kennedy'),
+(62, NULL, 2050, '2020-01-29 22:54:54', 'quizzer-best-game'),
+(63, 5, 2306, '2020-01-29 22:55:11', 'Tortonas');
 
 -- --------------------------------------------------------
 
@@ -10712,12 +10754,29 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `roles`, `password`, `email`, `register_at`) VALUES
-(1, 'admin', '[]', '$argon2id$v=19$m=1024,t=2,p=2$czJUSlFYS2tIaTh4TEhLZA$qqelWpZMWHXb/vy6Sqa49NWk1I2mcq4S2YJqKok6kSs', 'plankton5462@gmail.com', '2020-01-01'),
-(2, 'fedsa', '[]', '$argon2id$v=19$m=65536,t=4,p=1$dUFEMlRjYVYvOUVQVEZleA$O7zxSMo1k1FRtAJ0TxmAyxMKgbiDRlEzAjRpBbtc+E4$argon2id$v=19$m=65536,t=4,p=1$LjJaV0dsS0lXUEV3aWdYRw$SZHvW5rAtje1sIS21UwhgxFMkaqArezwrVkEPw4w5lU$argon2id$v=19$m=65536,t=4,p=1$LjJaV0dsS0lXUEV3aWdYRw$SZHvW5r', 'q@q.c', '2020-01-01'),
+(1, 'admin', '[]', '$argon2id$v=19$m=65536,t=4,p=1$qSKBJMjajRL4bORZ0x7bWA$uiF5GeildoDxAzGqWal0XkoUxXKFzP1vlz/NxlT/G5Y', 'plankton5462@gmail.com', '2020-01-01'),
+(2, 'Frederis41', '[]', '$argon2id$v=19$m=65536,t=4,p=1$dUFEMlRjYVYvOUVQVEZleA$O7zxSMo1k1FRtAJ0TxmAyxMKgbiDRlEzAjRpBbtc+E4$argon2id$v=19$m=65536,t=4,p=1$LjJaV0dsS0lXUEV3aWdYRw$SZHvW5rAtje1sIS21UwhgxFMkaqArezwrVkEPw4w5lU$argon2id$v=19$m=65536,t=4,p=1$LjJaV0dsS0lXUEV3aWdYRw$SZHvW5r', 'q@q.c', '2020-01-01'),
 (3, 'Lape42', '[]', '$argon2id$v=19$m=65536,t=4,p=1$N28zSWxUL2ZwLlcwZk9GLw$5v2ZSYfsR8C16NxBqMuD6M+mKeCTuzuGM3Gdy6GhQG8$argon2id$v=19$m=65536,t=4,p=1$LjJaV0dsS0lXUEV3aWdYRw$SZHvW5rAtje1sIS21UwhgxFMkaqArezwrVkEPw4w5lU', 'admin@admin.com', '2020-01-01'),
 (4, 'Valentinas Kasteckis', '[]', 'google login', 'valentinas.kasteckis@gmail.com', '2020-01-28'),
-(5, 'Just Galgaldas', '[]', 'google login', 'plankton546@gmail.com', '2020-01-28'),
-(6, 'admin2', '[]', '$argon2id$v=19$m=65536,t=4,p=1$LjJaV0dsS0lXUEV3aWdYRw$SZHvW5rAtje1sIS21UwhgxFMkaqArezwrVkEPw4w5lU', 'fadsf@add.com', '2020-01-28');
+(5, 'Tortonas', '[]', 'google login', 'plankton546@gmail.com', '2020-01-28'),
+(6, 'admin2', '[]', '$argon2id$v=19$m=65536,t=4,p=1$LjJaV0dsS0lXUEV3aWdYRw$SZHvW5rAtje1sIS21UwhgxFMkaqArezwrVkEPw4w5lU', 'fadsf@add.com', '2020-01-28'),
+(7, 'Ugnius Šimoliūnas', '[]', 'google login', 'uganiaks@gmail.com', '2020-01-29'),
+(8, 'Tadassi', '[]', '$argon2id$v=19$m=65536,t=4,p=1$RsHRd9dwZcsTkPyc3NLEHw$/bXegCwhn543yA6x48ALxJMXBKwvcHpDaj+BDSgHOUg', 'laikrodas55@gmail.com', '2020-01-29'),
+(9, 'Dovilė Dulskienė', '[]', 'google login', 'doviledulskiene@gmail.com', '2020-01-29'),
+(10, 'Gelmina Brasenko', '[]', 'google login', 'gelminabrasenko@gmail.com', '2020-01-29'),
+(11, 'Ugnea', '[]', '$argon2id$v=19$m=65536,t=4,p=1$3q1ro8e48Gzju47rKVqHVQ$tizumQjhoj/YySqLlTqtJjDsMW5iGppOMbRLVBjaBJU', 'Ugne866@gmail.com', '2020-01-29'),
+(12, 'LTM MOBILE LEGENDS', '[]', 'google login', 'bestvideosforyt@gmail.com', '2020-01-29'),
+(13, 'gab riele', '[]', 'google login', 'cemmon1@gmail.com', '2020-01-29'),
+(14, 'Rutaaa', '[]', '$argon2id$v=19$m=65536,t=4,p=1$/Ie69i/ky/khNX4xAxcYUA$dtNjl4G2Uz9+dUPLmPP3pasG1pHpYQYEGfqclAu4E94', 'rututea@gmail.com', '2020-01-29'),
+(15, 'xoxo', '[]', '$argon2id$v=19$m=65536,t=4,p=1$kFCc2DmcbNnU4KlVHASWgQ$kQ5v12ib+h1tUq+B7o3Z9Zvqx28fvhKKgUjAAil36Ls', 'brigituukas@gmail.com', '2020-01-29'),
+(16, 'Mavka', '[]', '$argon2id$v=19$m=65536,t=4,p=1$Qdq4+bHldX+Jv7GGXJxaoQ$ixUC3PySy6e2xYC/WCdOt0nxd32MDfyP1+ZOephoZhw', 'freckles1@ya.ru', '2020-01-29'),
+(17, 'UnbanRampageMane', '[]', '$argon2id$v=19$m=65536,t=4,p=1$5LXn58kXgLVCTuoEb12THA$o9lBkFEHZXqZToVrTFIwVuJPzArkRqCnGrHRSoDvvOs', 'sarkamonas1@gmail.com', '2020-01-29'),
+(18, 'Aki95', '[]', '$argon2id$v=19$m=65536,t=4,p=1$hFOSJlFmLdxHE6+d5/RUXQ$D/V3b1NGPuJcVktbVbXqawTg9IUdC3CqhxtFvPDCYDU', 'akvile995@gmail.com', '2020-01-29'),
+(19, 'Grozis Grazinskas', '[]', 'google login', 'kosmetikosgrozis@gmail.com', '2020-01-29'),
+(20, 'Arnoldas', '[]', 'google login', 'arnoldautuch4@gmail.com', '2020-01-29'),
+(21, 'Justina Žičkutė', '[]', 'google login', 'zickutejustina1@gmail.com', '2020-01-29'),
+(22, 'Maria', '[]', '$argon2id$v=19$m=65536,t=4,p=1$qdq7fFPJ86HusxHZXN1sZQ$mGDtf+5jLE+W7YzbTh6Y3SFWdVO80l9ix8MVB6C+MPA', 'griciutemarija10@gmail.com', '2020-01-29'),
+(23, 'Kennedy', '[]', '$argon2id$v=19$m=65536,t=4,p=1$7YSIGyCcUPB8Pxd+sUnidQ$atuxLu7sW9JBBCnJD/O2FHaX5uxr2LkWZT588DSSWow', 'sackus13@inbox.lt', '2020-01-29');
 
 --
 -- Indexes for dumped tables
@@ -10765,7 +10824,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `freq_asked_question`
 --
 ALTER TABLE `freq_asked_question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `question`
@@ -10777,13 +10836,13 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `question_answer`
 --
 ALTER TABLE `question_answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
