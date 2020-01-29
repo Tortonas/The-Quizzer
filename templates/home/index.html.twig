@@ -85,7 +85,7 @@
 
 
         <script>
-            var countDownDate = new Date("{{ question[0].timeModified|date_modify(" + 10 minutes")|date('Y-m-d H:i:s') }}").getTime();
+            var countDownDate = new Date("{{ question[0].timeModified|date_modify(" + 3 minutes")|date('Y-m-d H:i:s') }}").getTime();
 
             var x = setInterval(function() {
 

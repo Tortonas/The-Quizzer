@@ -52,7 +52,6 @@ class HomeController extends AbstractController
             }
             else
             {
-                // TODO: Pachekinti ar toks useris neegzistuoja, jeigu egzistuoja neleisti tokio nick deti.
                 $cookie = new Cookie('username', $request->get('username'), strtotime('now + 1 year'));
                 $response = new Response();
                 $response->headers->setCookie($cookie);
@@ -93,7 +92,11 @@ class HomeController extends AbstractController
 
             if($plainAnswer == $plainAnswerSubmission)
             {
-                $this->addFlash('success-submit-form', 'Atsakymas teisingas!');
+                if($this->getUser() == null)
+                {
+                    $this->addFlash('info-submit-form', 'Hey psst, jeigu būtum prisiregistravęs, būtum gavęs tašką. Kodėl neužsiregistravus? 🤗');
+                }
+                $this->addFlash('success-submit-form', 'Atsakymas teisingas! Naujas klausimas užkrautas 😉👍');
                 $newQuestionAnswer = new QuestionAnswer();
                 $newQuestionAnswer->setUser($this->getUser());
                 $newQuestionAnswer->setTimeAnswered(new \DateTime($currentDateTime));
@@ -117,7 +120,7 @@ class HomeController extends AbstractController
 
 
         // Jeigu true, tada keiciam klausima i nauja.
-        $currentQuestionModifyTime = $currentQuestion->getTimeModified()->getTimestamp()+(60*10);
+        $currentQuestionModifyTime = $currentQuestion->getTimeModified()->getTimestamp()+(60*3);
         $currentQuestionModifyTime = date("Y-m-d H:i:s", $currentQuestionModifyTime);
 
         if($currentQuestionModifyTime < $currentDateTime)
