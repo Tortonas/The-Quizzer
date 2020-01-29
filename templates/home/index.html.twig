@@ -63,6 +63,11 @@
                             {{ message }}
                         </div>
                     {% endfor %}
+                    {% for message in app.flashes('info-submit-form') %}
+                        <div class="alert alert-info">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text transparent" id="basic-addon1">🤔</span>

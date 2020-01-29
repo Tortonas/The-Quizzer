@@ -78,13 +78,18 @@ class HomeController extends AbstractController
             $lithuanianLetters = array('ą', 'č', 'ę', 'ė', 'į', 'š', 'ų', 'ū', 'ž', 'Ą', 'Č', 'Ę', 'Ė', 'Į', 'Š', 'Ų', 'Ū', 'Ž');
             $latinLetters = array('a', 'c', 'e', 'e', 'i', 's', 'u', 'u', 'z', 'a', 'c', 'e', 'e', 'i', 's', 'u', 'u', 'z');
 
-            // TODO: Patikrinti ar naudotojo submissionas turi lietuviškų raidžių, jeigu jo, pranešti jam, kad gal nereik.
+            $plainAnswerSubmissionSplit = str_split($plainAnswerSubmission);
 
             $plainAnswerSubmission = str_replace($lithuanianLetters, $latinLetters, $plainAnswerSubmission);
 
             $plainAnswer = strtolower($plainAnswer);
             $plainAnswerSubmission = strtolower($plainAnswerSubmission);
 
+            if(count($plainAnswerSubmissionSplit) != strlen($plainAnswerSubmission) && count($plainAnswerSubmissionSplit) != 1 && strlen($plainAnswerSubmission) != 0)
+            {
+                echo count($plainAnswerSubmissionSplit).strlen($plainAnswerSubmission);
+                $this->addFlash('info-submit-form', 'Hey psst, atsakymus gali rašyti ir be lietuviškų raidžių (gali ir su) 😇 Jeigu jis tiks, jis bus užskaitytas.');
+            }
 
             if($plainAnswer == $plainAnswerSubmission)
             {
