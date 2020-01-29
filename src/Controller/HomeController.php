@@ -94,7 +94,7 @@ class HomeController extends AbstractController
             {
                 if($this->getUser() == null)
                 {
-                    $this->addFlash('info-submit-form', 'Hey psst, jeigu būtum prisiregistravęs, būtum gavęs tašką. Kodėl neužsiregistravus? 🤗');
+                    $this->addFlash('info-submit-form', 'Hey psst, jeigu būtum prisiregistravęs, būtum gavęs tašką. Kodėl neužsiregistravus? Prisijungti gali ir su Google 🤗');
                 }
                 $this->addFlash('success-submit-form', 'Atsakymas teisingas! Naujas klausimas užkrautas 😉👍');
                 $newQuestionAnswer = new QuestionAnswer();
