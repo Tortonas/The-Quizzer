@@ -50,9 +50,9 @@
             <div class="card-body">
                 <h2 class="card-title text-center">Klausimas</h2>
                 {% if lastQuestionAnswererUserId == -1 %}
-                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - {{ lastQuestionAnswerer[0:25] }}</h6>
+                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - {{ lastQuestionAnswerer[0:25] }} (Prieš {{ lastQuestionAnsweredWhen }})</h6>
                 {% else %}
-                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - <a href="{{ path('app_view_other_profile', { 'slug': lastQuestionAnswererUserId }) }}">{{ lastQuestionAnswerer[0:25] }}</a></h6>
+                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - <a href="{{ path('app_view_other_profile', { 'slug': lastQuestionAnswererUserId }) }}">{{ lastQuestionAnswerer[0:25] }}</a> (Prieš {{ lastQuestionAnsweredWhen }})</h6>
                 {% endif %}
                 <h6 id="timer" class="card-subtitle mb-2">Klausimas atsinaujins už</h6>
                 <h3 class="card-text">{{ question[0].question }}</h3>

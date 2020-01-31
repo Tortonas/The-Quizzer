@@ -141,6 +141,8 @@ class HomeController extends AbstractController
         // This checks if previous question answerer (user) has a valid account, then his name will be displayed as link.
 
 
+        $lastQuestionAnsweredWhen = $this->calculateHowMuchTimeAgo(microtime(true) - $lastQuestionAnswerer->getTimeAnswered()->getTimeStamp());
+
         $lastQuestionAnswererUserId = -1;
 
         if($lastQuestionAnswerer->getUser() != null)
@@ -157,6 +159,7 @@ class HomeController extends AbstractController
             'showWelcomeScreen' => $showWelcomeScreen,
             'lastQuestionAnswerer' => $lastQuestionAnswerer->getUsername(),
             'lastQuestionAnswererUserId' => $lastQuestionAnswererUserId,
+            'lastQuestionAnsweredWhen' => $lastQuestionAnsweredWhen,
         ]);
     }
 
@@ -176,5 +179,30 @@ class HomeController extends AbstractController
         $entityManager->persist($newQuestion);
         $entityManager->persist($currentQuestion);
         $entityManager->flush();
+    }
+
+    public function calculateHowMuchTimeAgo($since)
+    {
+        $chunks = array(
+            array(60 * 60 * 24 * 365 , 'metus'),
+            array(60 * 60 * 24 * 30 , 'mėnesį (-ius)'),
+            array(60 * 60 * 24 * 7, 'savaitę (-as)'),
+            array(60 * 60 * 24 , 'dieną (-as)'),
+            array(60 * 60 , 'valandą (-as)'),
+            array(60 , 'minutę (-es)'),
+            array(1 , 'sekundes (-ių)')
+        );
+
+        for ($i = 0, $j = count($chunks); $i < $j; $i++) {
+            $seconds = $chunks[$i][0];
+            $name = $chunks[$i][1];
+            if (($count = floor($since / $seconds)) != 0) {
+                break;
+            }
+        }
+
+        $print = ($count == 1) ? '1 '.$name : "$count {$name}";
+
+        return $print;
     }
 }
