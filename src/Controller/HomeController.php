@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Question;
 use App\Entity\QuestionAnswer;
+use App\Entity\User;
 use App\Form\EmptyFormType;
 use Doctrine\ORM\EntityManager;
 use http\Url;
@@ -98,7 +99,16 @@ class HomeController extends AbstractController
                 }
                 $this->addFlash('success-submit-form', 'Atsakymas teisingas! Naujas klausimas užkrautas 😉👍');
                 $newQuestionAnswer = new QuestionAnswer();
-                $newQuestionAnswer->setUser($this->getUser());
+                // If for example I'm anonymous with nick 'SANDRA' and nickname 'SANDRA' actually exists, so I will be earning point for real account.
+                if($this->getUser() == null)
+                {
+                    $targetedUser = $entityManager->getRepository(User::class)->findOneBy(array('username' => $request->cookies->get('username')));
+                    $newQuestionAnswer->setUser($targetedUser);
+                }
+                else
+                {
+                    $newQuestionAnswer->setUser($this->getUser());
+                }
                 $newQuestionAnswer->setTimeAnswered(new \DateTime($currentDateTime));
                 if($this->getUser() != null)
                     $newQuestionAnswer->setUsername($this->getUser()->getUsername());
