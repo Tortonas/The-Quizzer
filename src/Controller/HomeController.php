@@ -93,10 +93,6 @@ class HomeController extends AbstractController
 
             if($plainAnswer == $plainAnswerSubmission)
             {
-                if($this->getUser() == null)
-                {
-                    $this->addFlash('info-submit-form', 'Hey psst, jeigu būtum prisiregistravęs, būtum gavęs tašką. Kodėl neužsiregistravus? Prisijungti gali ir su Google 🤗');
-                }
                 $this->addFlash('success-submit-form', 'Atsakymas teisingas! Naujas klausimas užkrautas 😉👍');
                 $newQuestionAnswer = new QuestionAnswer();
                 // If for example I'm anonymous with nick 'SANDRA' and nickname 'SANDRA' actually exists, so I will be earning point for real account.
@@ -104,6 +100,10 @@ class HomeController extends AbstractController
                 {
                     $targetedUser = $entityManager->getRepository(User::class)->findOneBy(array('username' => $request->cookies->get('username')));
                     $newQuestionAnswer->setUser($targetedUser);
+                    if($targetedUser == null)
+                    {
+                        $this->addFlash('info-submit-form', 'Hey psst, jeigu būtum prisiregistravęs, būtum gavęs tašką. Kodėl neužsiregistravus? Prisijungti gali ir su Google 🤗');
+                    }
                 }
                 else
                 {
