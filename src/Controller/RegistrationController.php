@@ -25,6 +25,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -35,17 +36,30 @@ class RegistrationController extends AbstractController
 
             $user->setRegisterAt(new \DateTime(date('Y-m-d')));
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
 
-            // do anything else you need here, like send an email
+            // checking if new registering user email is unique
 
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+            $userWithSameEmail = $entityManager->getRepository(User::class)->findOneBy(array('email' => $user->getEmail()));
+
+
+            if($userWithSameEmail != null)
+            {
+                $this->addFlash('danger', 'Atsiprašome, bet šis email yra užimtas!');
+            }
+            else
+            {
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                // do anything else you need here, like send an email
+
+                return $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main' // firewall name in security.yaml
+                );
+            }
         }
 
         return $this->render('registration/register.html.twig', [

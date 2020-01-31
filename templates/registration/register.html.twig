@@ -7,6 +7,12 @@
         <div class="">
             <h1 class="mt-5">Registracija</h1>
 
+            {% for message in app.flashes('danger') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
             {{ form_start(registrationForm) }}
             {{ form_row(registrationForm.username , {'attr': {'class': 'form-control transparent'}}) }}
             {{ form_row(registrationForm.plainPassword , {'attr': {'class': 'form-control transparent'}}) }}
