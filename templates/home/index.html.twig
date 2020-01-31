@@ -45,6 +45,12 @@
         </div>
 
     {% else %}
+        <div id="lastQuestion" class="card mx-auto mt-5 transparent card-size">
+            <div class="card-body">
+                <h5 class="card-subtitle mb-2">Prieš tai buvęs klausimas - {{ previousQuestion.question }}</h5>
+                <h6 class="card-subtitle mb-2">Atsakymas - {{ previousQuestion.answer }}</h6>
+            </div>
+        </div>
 
         <div class="card mx-auto mt-5 transparent card-size">
             <div class="card-body">
@@ -54,7 +60,8 @@
                 {% else %}
                     <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - <a href="{{ path('app_view_other_profile', { 'slug': lastQuestionAnswererUserId }) }}">{{ lastQuestionAnswerer[0:25] }}</a> (Prieš {{ lastQuestionAnsweredWhen }})</h6>
                 {% endif %}
-                <h6 id="timer" class="card-subtitle mb-2">Klausimas atsinaujins už kelių minučių.</h6>
+                <h6 id="timer" class="card-subtitle">Klausimas atsinaujins už kelių minučių.</h6>
+                <h6><a href="#" id="showPreviousQuestion">Parodyti prieš tai buvusį klausimą</a></h6>
                 <h3 class="card-text">{{ question[0].question }}</h3>
                 {{ form_start(submitAnswerForm) }}
                     {% for message in app.flashes('danger-submit-form') %}
@@ -83,8 +90,37 @@
             </div>
         </div>
 
+        <div class="alert alert-info card-size mx-auto mt-5">
+            2020-01-31 atnaujinimai:
+            <ul>
+                <li>Rodys prieš kiek laiko atsakytas paskutinis klausimas</li>
+                <li>Jeigu kitas žmogus atsako į klausimą, sekundės begyje persikraus (su nauju klausimu)</li>
+                <li>Jeigu turėjote atsakę klausimų prieš registraciją, jie jum bus priskaičiuoti užsiregistravus</li>
+                <li>Anonimas su jūsų slapyvardžiu atsakęs į klausimą, jums uždirbs tašką</li>
+                <li>Galima sužinoti atsakymą į prieš tai buvusį klausimą</li>
+                <li>Keli saugumo patobulinimai</li>
+            </ul>
+        </div>
+
 
         <script>
+            document.getElementById("lastQuestion").style.display = 'none';
+
+            var el = document.getElementById('showPreviousQuestion');
+            el.onclick = togglePreviousQuestion;
+            function togglePreviousQuestion()
+            {
+                if(document.getElementById("lastQuestion").style.display === 'none')
+                {
+
+                    document.getElementById("lastQuestion").style.display = 'flex';
+                }
+                else
+                {
+                    document.getElementById("lastQuestion").style.display = 'none';
+                }
+            }
+
             var countDownDate = new Date("{{ question[0].timeModified|date_modify(" + 3 minutes")|date('Y-m-d H:i:s') }}").getTime();
 
             var now = new Date().getTime();
@@ -117,7 +153,6 @@
             var y = setInterval(function() {
                 // API patikrinti ar klausimas atsakytas.
             }, 5000);
-
         </script>
 
     {% endif %}

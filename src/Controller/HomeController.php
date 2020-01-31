@@ -150,6 +150,11 @@ class HomeController extends AbstractController
             $lastQuestionAnswererUserId = $lastQuestionAnswerer->getUser()->getId();
         }
 
+        // This gets previous ANSWERED or NOT ANSWERED question. Newest modified date + active = 0, it means thats the question.
+
+        $previousQuestionArray = $entityManager->getRepository(Question::class)->findBy(array('active' => 0), array('timeModified' => 'DESC'), 1);
+        $previousQuestion = $previousQuestionArray[0];
+
         return $this->render('home/index.html.twig', [
             'closePopupForm' => $closePopupForm->createView(),
             'question' => $question,
@@ -160,6 +165,7 @@ class HomeController extends AbstractController
             'lastQuestionAnswerer' => $lastQuestionAnswerer->getUsername(),
             'lastQuestionAnswererUserId' => $lastQuestionAnswererUserId,
             'lastQuestionAnsweredWhen' => $lastQuestionAnsweredWhen,
+            'previousQuestion' => $previousQuestion,
         ]);
     }
 
