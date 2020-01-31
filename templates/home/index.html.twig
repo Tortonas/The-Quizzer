@@ -21,7 +21,7 @@
     {% if not showQuestion %}
 
         <div class="card mx-auto transparent mt-5 card-size">
-            <img src="https://i.imgur.com/i4SufCS.png" class="card-img-top" alt="SUSIGALVOTI ALT DECSRIPTION">
+            <img src="{{ asset('img/welcome.png') }}" class="card-img-top" alt="welcoming photo">
             <div class="card-body">
                 <h3 class="card-title">Labas! Prašau, nusistatyk savo slapyvardį!</h3>
                 <p class="card-text">Norint atsakyti į klausimus, būtina nurodyti savo slapyvardį arba <a href="#">užsiregistruoti</a>. Esi jau narys? Tada prašau tavęs <a href="#">prisijungti</a>! Tą gali padaryti ir per
@@ -50,9 +50,9 @@
             <div class="card-body">
                 <h2 class="card-title text-center">Klausimas</h2>
                 {% if lastQuestionAnswererUserId == -1 %}
-                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - {{ lastQuestionAnswerer }}</h6>
+                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - {{ lastQuestionAnswerer[0:25] }}</h6>
                 {% else %}
-                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - <a href="{{ path('app_view_other_profile', { 'slug': lastQuestionAnswererUserId }) }}">{{ lastQuestionAnswerer }}</a></h6>
+                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - <a href="{{ path('app_view_other_profile', { 'slug': lastQuestionAnswererUserId }) }}">{{ lastQuestionAnswerer[0:25] }}</a></h6>
                 {% endif %}
                 <h6 id="timer" class="card-subtitle mb-2">Klausimas atsinaujins už</h6>
                 <h3 class="card-text">{{ question[0].question }}</h3>
