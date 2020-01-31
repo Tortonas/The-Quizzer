@@ -54,7 +54,7 @@
                 {% else %}
                     <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - <a href="{{ path('app_view_other_profile', { 'slug': lastQuestionAnswererUserId }) }}">{{ lastQuestionAnswerer[0:25] }}</a> (Prieš {{ lastQuestionAnsweredWhen }})</h6>
                 {% endif %}
-                <h6 id="timer" class="card-subtitle mb-2">Klausimas atsinaujins už</h6>
+                <h6 id="timer" class="card-subtitle mb-2">Klausimas atsinaujins už kelių minučių.</h6>
                 <h3 class="card-text">{{ question[0].question }}</h3>
                 {{ form_start(submitAnswerForm) }}
                     {% for message in app.flashes('danger-submit-form') %}
@@ -87,14 +87,21 @@
         <script>
             var countDownDate = new Date("{{ question[0].timeModified|date_modify(" + 3 minutes")|date('Y-m-d H:i:s') }}").getTime();
 
+            var now = new Date().getTime();
+
+            var distance = countDownDate - now;
+
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = "Klausimas atsinaujins už " + minutes + "m " + seconds + "s ";
+
             var x = setInterval(function() {
 
                 var now = new Date().getTime();
 
                 var distance = countDownDate - now;
 
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -106,11 +113,13 @@
                     location.reload();
                 }
             }, 1000);
+
+            var y = setInterval(function() {
+                // API patikrinti ar klausimas atsakytas.
+            }, 5000);
+
         </script>
 
     {% endif %}
-
-
-
 
 {% endblock %}
