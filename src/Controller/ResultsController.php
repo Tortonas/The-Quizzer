@@ -51,10 +51,14 @@ class ResultsController extends AbstractController
         $statement->execute();
         $resultTopUsersMonthly = $statement->fetchAll();
 
+        $entityManager = $this->getDoctrine()->getManager();
+        $questionAnswerCount = $entityManager->getRepository(QuestionAnswer::class)->findAll();
+
         return $this->render('results/index.html.twig', [
             'globalTopUsers' => $resultTopUsersGlobal,
             'weeklyTopUsers' => $resultTopUsersWeekly,
             'monthlyTopUsers' => $resultTopUsersMonthly,
+            'allQuestionAnswersCount' => count($questionAnswerCount),
         ]);
     }
 }
