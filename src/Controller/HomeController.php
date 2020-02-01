@@ -27,6 +27,18 @@ class HomeController extends AbstractController
     public function index(Request $request)
     {
         date_default_timezone_set('Europe/Vilnius');
+
+        if($this->getUser() != null)
+        {
+            if($request->cookies->get('username') != $this->getUser()->getUsername())
+            {
+                $cookie = new Cookie('username', $this->getUser()->getUsername(), strtotime('now + 1 year'));
+                $response = new Response();
+                $response->headers->setCookie($cookie);
+                $response->send();
+            }
+        }
+
         $closePopupForm = $this->createForm(EmptyFormType::class);
         $closePopupForm->handleRequest($request);
 

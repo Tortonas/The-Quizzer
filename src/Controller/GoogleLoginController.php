@@ -10,6 +10,7 @@ use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\GoogleUser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -81,6 +82,10 @@ class GoogleLoginController extends AbstractController
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_main', serialize($token));
 
+            $cookie = new Cookie('username', $userInDatabase->getUsername(), strtotime('now + 1 year'));
+            $response = new Response();
+            $response->headers->setCookie($cookie);
+            $response->send();
 
             //echo $user->getFirstName().$user->getLastName().$user->getEmail();
 
