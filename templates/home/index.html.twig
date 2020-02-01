@@ -61,7 +61,7 @@
                     <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - <a href="{{ path('app_view_other_profile', { 'slug': lastQuestionAnswererUserId }) }}">{{ lastQuestionAnswerer[0:25] }}</a> (Prieš {{ lastQuestionAnsweredWhen }})</h6>
                 {% endif %}
                 <h6 id="timer" class="card-subtitle">Klausimas atsinaujins už kelių minučių.</h6>
-                <h6><a href="#" id="showPreviousQuestion">Parodyti prieš tai buvusį klausimą</a></h6>
+                <h6><a href="javascript:;" id="showPreviousQuestion">Parodyti prieš tai buvusį klausimą</a></h6>
                 <h3 class="card-text">{{ question[0].question }}</h3>
                 {{ form_start(submitAnswerForm) }}
                     {% for message in app.flashes('danger-submit-form') %}
@@ -114,10 +114,12 @@
                 {
 
                     document.getElementById("lastQuestion").style.display = 'flex';
+                    document.getElementById("showPreviousQuestion").innerText = 'Paslėpti prieš tai buvusį klausimą'
                 }
                 else
                 {
                     document.getElementById("lastQuestion").style.display = 'none';
+                    document.getElementById("showPreviousQuestion").innerText = 'Parodyti prieš tai buvusį klausimą'
                 }
             }
 
@@ -130,8 +132,9 @@
             let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById("timer").innerHTML = "Klausimas atsinaujins už " + minutes + "m " + seconds + "s ";
-
+            if(minutes >= 0 && seconds >= 0){
+                document.getElementById("timer").innerHTML = "Klausimas atsinaujins už " + minutes + "m " + seconds + "s ";
+            }
 
             let x = setInterval(function() {
                 let now = new Date().getTime();
@@ -144,7 +147,6 @@
                 if(minutes >= 0 && seconds >= 0)
                 {
                     document.getElementById("timer").innerHTML = "Klausimas atsinaujins už " + minutes + "m " + seconds + "s ";
-                    //console.log(minutes + " " + seconds);
                 }
 
                 if (distance < 0) {
