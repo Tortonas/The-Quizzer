@@ -27,11 +27,11 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Slapyvardis'
             ])
             ->add('agreeTerms', CheckboxType::class, [
-                'label' => 'Sutinku su taisyklėmis ',
+                'label' => 'Sutinku su taisyklėmis',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Jums reikėtu sutikti su taisyklėmis.',
                     ]),
                 ],
             ])
@@ -42,11 +42,11 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Prašau įrašykite slaptažodį',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Jūsų slaptažodis turėtu būti iš {{ limit }} simbolių',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
