@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\QuestionAnswer;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
@@ -41,6 +42,13 @@ class RegistrationController extends AbstractController
 
             $userWithSameEmail = $entityManager->getRepository(User::class)->findOneBy(array('email' => $user->getEmail()));
 
+            $questionsWithThatNickname = $entityManager->getRepository(QuestionAnswer::class)->
+                findBy(array('username' => $form->get('username')->getData(),
+                             'user' => null));
+            for($i = 0; $i < count($questionsWithThatNickname); $i++)
+            {
+                $questionsWithThatNickname[$i]->setUser($user);
+            }
 
             if($userWithSameEmail != null)
             {

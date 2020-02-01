@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\QuestionAnswer;
 use App\Entity\User;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
 use KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient;
@@ -63,6 +64,14 @@ class GoogleLoginController extends AbstractController
                 $userInDatabase->setPassword('google login');
                 $userInDatabase->setUsername($user->getName());
                 $userInDatabase->setRegisterAt(new \DateTime(date('Y-m-d')));
+
+                $questionsWithThatNickname = $entityManager->getRepository(QuestionAnswer::class)->
+                findBy(array('username' => $user->getName(),
+                    'user' => null));
+                for($i = 0; $i < count($questionsWithThatNickname); $i++)
+                {
+                    $questionsWithThatNickname[$i]->setUser($userInDatabase);
+                }
 
                 $entityManager->persist($userInDatabase);
                 $entityManager->flush();
