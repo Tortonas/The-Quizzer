@@ -3,9 +3,9 @@
 
 {% block title %}
     {% if user is null %}
-        Quizzer - Neegzistuojamas profilis
+        Neegzistuojamas profilis - Quizzer
     {% else %}
-        Quizzer - {{ user.username }} profilis
+        {{ user.username }} profilis - Quizzer
     {% endif %}
 {% endblock %}
 

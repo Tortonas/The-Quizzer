@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /profilis/
+Disallow: /style/
 
 Sitemap: https://quizzer.lt/sitemap.xml
