@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Galvosukiai vaikams ir ne tik, su atsakymais - Quizzer{% endblock %}
+{% block title %}Galvosūkiai vaikams ir ne tik, su atsakymais - Quizzer{% endblock %}
 
 {% block body %}
 
     {% if not app.request.cookies.get('closeWelcomeScreen') == 'true' and showWelcomeScreen %}
         <div class="card mx-auto mt-5 transparent card-size">
             <div class="card-body">
-                <h1>Sveiki atvykę į The Quizzer!</h1>
+                <h1>The Quizzer - įvairūs loginiai, linksmi klausimai su atsakymais!</h1>
                 <h3 class="text-muted">- Kas mes?</h3>
                 <h4>- Automatizuota klausimanijos sistema kurioje Jūs galite atsakinėti į klausimus bei varžytis su kitais nariais 😍 Daugiau apie mus galite sužinoti <a href="#">čia</a></h4>
-
                 {{ form_start(closePopupForm) }}
                 <button name="closeBtn" value="closeBtn" type="submit" class="btn btn-danger">Panaikinti langą!</button>
                 {{ form_end(closePopupForm) }}
@@ -54,6 +53,7 @@
 
         <div class="card mx-auto mt-5 transparent card-size">
             <div class="card-body">
+                <h1 class="h2 text-center">The Quizzer - įvairūs loginiai, linksmi klausimai su atsakymais!</h1>
                 <h2 class="card-title text-center">Klausimas</h2>
                 {% if lastQuestionAnswererUserId == -1 %}
                     <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - {{ lastQuestionAnswerer[0:25] }} (Prieš {{ lastQuestionAnsweredWhen }})</h6>
