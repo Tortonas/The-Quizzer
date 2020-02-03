@@ -24,7 +24,8 @@
             <div class="card-body">
                 <h3 class="card-title">Labas! Prašau, nusistatyk savo slapyvardį!</h3>
                 <p class="card-text">Norint atsakyti į klausimus, būtina nurodyti savo slapyvardį arba <a href="#">užsiregistruoti</a>. Esi jau narys? Tada prašau tavęs <a href="#">prisijungti</a>! Tą gali padaryti ir per
-                    <a href="{{ path('connect_google_start') }}"><img class="rounded" style="width:150px;" src="{{ asset('img/google-login.png') }}" alt="google login button"></a></p>
+                    <a href="{{ path('connect_google_start') }}"><img class="rounded" style="width:150px;" src="{{ asset('img/google-login.png') }}" alt="google login button"></a>
+                    <a href="{{ path('connect_facebook_start') }}"><img class="rounded" style="width:150px;" src="{{ asset('img/facebook-login.png') }}" alt="facebook login button"></a></p>
                     {% for message in app.flashes('danger-nickname-form') %}
                         <div class="alert alert-danger">
                             {{ message }}

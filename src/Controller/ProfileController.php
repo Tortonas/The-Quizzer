@@ -42,7 +42,7 @@ class ProfileController extends AbstractController
         {
             $normalPasswordChangeForm = true; // true - normal; false - google login and password wasn't set
 
-            if($this->getUser()->getPassword() == 'google login')
+            if($this->getUser()->getPassword() == 'google login' || $this->getUser()->getPassword() == 'facebook login')
             {
                 $normalPasswordChangeForm = false;
                 if($request->isMethod('POST'))
@@ -102,8 +102,18 @@ class ProfileController extends AbstractController
         {
             if($request->isMethod('POST'))
             {
-                echo $request->get('newEmail');
-                $this->addFlash('danger', 'test');
+                if (filter_var($request->get('newEmail'), FILTER_VALIDATE_EMAIL))
+                {
+                    $this->addFlash('success', 'Pakeista!');
+                    $this->getUser()->setEmail($request->get('newEmail'));
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($this->getUser());
+                    $entityManager->flush();
+                }
+                else
+                {
+                    $this->addFlash('danger', 'Blogai nurodytas naujas el. paštas!');
+                }
             }
             return $this->render('profile/changeEmail.html.twig', [
                 'user' => $this->getUser(),
