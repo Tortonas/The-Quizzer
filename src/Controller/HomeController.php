@@ -135,7 +135,14 @@ class HomeController extends AbstractController
             }
             else
             {
-                $this->addFlash('danger-submit-form', 'Atsakymas neteisingas!');
+                if(strlen($plainAnswerSubmission) == 0)
+                {
+                    $this->addFlash('danger-submit-form', 'Pamiršote įvesti tekstą! 😊');
+                }
+                else
+                {
+                    $this->addFlash('danger-submit-form', 'Atsakymas neteisingas!');
+                }
             }
         }
 
