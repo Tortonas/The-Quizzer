@@ -63,7 +63,37 @@ class GoogleLoginController extends AbstractController
                 $userInDatabase = new User();
                 $userInDatabase->setEmail($user->getEmail());
                 $userInDatabase->setPassword('google login');
-                $userInDatabase->setUsername($user->getName());
+
+                $newUserNickname = $user->getName();
+                $newUserNicknameCount = 0;
+                $firstTime = true;
+
+                while(true)
+                {
+                    $tempUserUsername = $user->getName();
+                    $checkingUserForUniqueName = null;
+                    if($newUserNicknameCount == 0)
+                    {
+                        $checkingUserForUniqueName = $entityManager->getRepository(User::class)->findOneBy(array(
+                            'username' => $tempUserUsername));
+                        $newUserNicknameCount++;
+                    }
+                    else
+                    {
+                        $tempUserUsername = $tempUserUsername.$newUserNicknameCount;
+                        $checkingUserForUniqueName = $entityManager->getRepository(User::class)->findOneBy(array(
+                            'username' => $tempUserUsername));
+                        $newUserNicknameCount++;
+                    }
+                    if($checkingUserForUniqueName == null)
+                    {
+                        $newUserNickname = $tempUserUsername;
+                        break;
+                    }
+                }
+
+
+                $userInDatabase->setUsername($newUserNickname);
                 $userInDatabase->setRegisterAt(new \DateTime(date('Y-m-d')));
 
                 $questionsWithThatNickname = $entityManager->getRepository(QuestionAnswer::class)->
