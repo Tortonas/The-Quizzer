@@ -6,10 +6,11 @@ use App\Entity\Question;
 use App\Entity\QuestionAnswer;
 use App\Entity\User;
 use App\Form\EmptyFormType;
+use App\Helper\QuestionsHelper;
 use Doctrine\ORM\EntityManager;
-use http\Url;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +29,8 @@ class HomeController extends AbstractController
     {
         date_default_timezone_set('Europe/Vilnius');
 
+        // If User is logged, his `username` cookie will be his username.
+
         if($this->getUser() != null)
         {
             if($request->cookies->get('username') != $this->getUser()->getUsername())
@@ -39,6 +42,7 @@ class HomeController extends AbstractController
             }
         }
 
+        // Handling Welcome screen
         $closePopupForm = $this->createForm(EmptyFormType::class);
         $closePopupForm->handleRequest($request);
 
@@ -53,6 +57,8 @@ class HomeController extends AbstractController
             $showWelcomeScreen = false;
         }
 
+
+        // Handling custom nickname
         $customNicknameForm = $this->createForm(EmptyFormType::class);
 
         $customNicknameForm->handleRequest($request);
@@ -73,7 +79,7 @@ class HomeController extends AbstractController
             }
         }
 
-
+        // Handling submitting answers!
         $submitAnswerForm = $this->createForm(EmptyFormType::class);
         $submitAnswerForm->handleRequest($request);
 
@@ -88,20 +94,17 @@ class HomeController extends AbstractController
             $plainAnswer = $currentQuestion->getAnswer();
             $plainAnswerSubmission = $request->get('answer');
 
-            $lithuanianLetters = array('ą', 'č', 'ę', 'ė', 'į', 'š', 'ų', 'ū', 'ž', 'Ą', 'Č', 'Ę', 'Ė', 'Į', 'Š', 'Ų', 'Ū', 'Ž');
-            $latinLetters = array('a', 'c', 'e', 'e', 'i', 's', 'u', 'u', 'z', 'a', 'c', 'e', 'e', 'i', 's', 'u', 'u', 'z');
-
             $plainAnswerSubmissionSplit = str_split($plainAnswerSubmission);
 
-            $plainAnswerSubmission = str_replace($lithuanianLetters, $latinLetters, $plainAnswerSubmission);
+            $plainAnswerSubmission = QuestionsHelper::toLowerAndReplaceLetters($plainAnswerSubmission);
 
-            $plainAnswer = strtolower($plainAnswer);
-            $plainAnswerSubmission = strtolower($plainAnswerSubmission);
-
+            // TODO: Make more normal lithuanian letter checker.
             if(count($plainAnswerSubmissionSplit) != strlen($plainAnswerSubmission) && count($plainAnswerSubmissionSplit) != 1 && strlen($plainAnswerSubmission) != 0)
             {
                 $this->addFlash('info-submit-form', 'Hey psst, atsakymus gali rašyti ir be lietuviškų raidžių (gali ir su) 😇 Jeigu jis tiks, jis bus užskaitytas.');
             }
+
+            $plainAnswer = QuestionsHelper::toLowerAndReplaceLetters($plainAnswer);
 
             if($plainAnswer == $plainAnswerSubmission)
             {
@@ -121,6 +124,7 @@ class HomeController extends AbstractController
                 {
                     $newQuestionAnswer->setUser($this->getUser());
                 }
+                // Changing answered question to the new one. Also modifying "modification date".
                 $newQuestionAnswer->setTimeAnswered(new \DateTime($currentDateTime));
                 if($this->getUser() != null)
                     $newQuestionAnswer->setUsername($this->getUser()->getUsername());
@@ -146,9 +150,7 @@ class HomeController extends AbstractController
             }
         }
 
-
-
-        // Jeigu true, tada keiciam klausima i nauja.
+        // If true, then changing questions to new one.
         $currentQuestionModifyTime = $currentQuestion->getTimeModified()->getTimestamp()+(60*3);
         $currentQuestionModifyTime = date("Y-m-d H:i:s", $currentQuestionModifyTime);
 
@@ -169,8 +171,7 @@ class HomeController extends AbstractController
 
         // This checks if previous question answerer (user) has a valid account, then his name will be displayed as link.
 
-
-        $lastQuestionAnsweredWhen = $this->calculateHowMuchTimeAgo(microtime(true) - $lastQuestionAnswerer->getTimeAnswered()->getTimeStamp());
+        $lastQuestionAnsweredWhen = QuestionsHelper::calculateHowMuchTimeAgo(microtime(true) - $lastQuestionAnswerer->getTimeAnswered()->getTimeStamp());
 
         $lastQuestionAnswererUserId = -1;
 
@@ -214,30 +215,5 @@ class HomeController extends AbstractController
         $entityManager->persist($newQuestion);
         $entityManager->persist($currentQuestion);
         $entityManager->flush();
-    }
-
-    public function calculateHowMuchTimeAgo($since)
-    {
-        $chunks = array(
-            array(60 * 60 * 24 * 365 , 'metus'),
-            array(60 * 60 * 24 * 30 , 'mėnesį (-ius)'),
-            array(60 * 60 * 24 * 7, 'savaitę (-as)'),
-            array(60 * 60 * 24 , 'dieną (-as)'),
-            array(60 * 60 , 'valandą (-as)'),
-            array(60 , 'minutę (-es)'),
-            array(1 , 'sekundes (-ių)')
-        );
-
-        for ($i = 0, $j = count($chunks); $i < $j; $i++) {
-            $seconds = $chunks[$i][0];
-            $name = $chunks[$i][1];
-            if (($count = floor($since / $seconds)) != 0) {
-                break;
-            }
-        }
-
-        $print = ($count == 1) ? '1 '.$name : "$count {$name}";
-
-        return $print;
     }
 }
