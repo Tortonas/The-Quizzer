@@ -26,15 +26,6 @@ class RegistrationFormType extends AbstractType
             ->add('username', TextType::class, [
                 'label' => 'Slapyvardis'
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'label' => 'Sutinku su taisyklėmis',
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Jums reikėtu sutikti su taisyklėmis.',
-                    ]),
-                ],
-            ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
