@@ -25,6 +25,9 @@ services:
     App\Controller\Integration\:
         resource: '../src/Controller/Integration'
         tags: ['controller.service_arguments']
+    App\Controller\Api\:
+        resource: '../src/Controller/Api'
+        tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
