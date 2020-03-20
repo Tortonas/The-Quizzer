@@ -66,7 +66,6 @@ class GoogleLoginController extends AbstractController
 
                 $newUserNickname = $user->getName();
                 $newUserNicknameCount = 0;
-                $firstTime = true;
 
                 while(true)
                 {
