@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Integration;
 
 use App\Entity\QuestionAnswer;
 use App\Entity\User;
@@ -43,6 +43,7 @@ class FacebookLoginController extends AbstractController
      *
      * @Route("/login/facebook/check", name="connect_facebook_check")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function connectCheckAction(Request $request, ClientRegistry $clientRegistry)
     {

@@ -94,7 +94,7 @@ class ProfileController extends AbstractController
             }
 
 
-            return $this->render('profile/changePass.html.twig', [
+            return $this->render('profile/change/changePass.html.twig', [
                 'normalPasswordChangeForm' => $normalPasswordChangeForm
             ]);
         }
@@ -115,7 +115,7 @@ class ProfileController extends AbstractController
                     $this->addFlash('danger', 'Blogai nurodytas naujas el. paštas!');
                 }
             }
-            return $this->render('profile/changeEmail.html.twig', [
+            return $this->render('profile/change/changeEmail.html.twig', [
                 'user' => $this->getUser(),
             ]);
         }
@@ -142,7 +142,7 @@ class ProfileController extends AbstractController
             $allTimeQuestions = $this->getQuestionCountAllTime($slugUser->getId());
         }
 
-        return $this->render('profile/viewOtherProfile.html.twig', [
+        return $this->render('profile/other/viewOtherProfile.html.twig', [
             'user' => $slugUser,
             'weeklyAnswers' => $weeklyAnswers,
             'monthlyAnswers' => $monthlyAnswers,

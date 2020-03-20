@@ -91,25 +91,6 @@
             </div>
         </div>
 
-
-        {# Vėliau išjungt #}
-        {% if date() < date('2020-02-03') %}
-
-            <div class="alert alert-info card-size mx-auto mt-5">
-                2020-01-31 atnaujinimai:
-                <ul>
-                    <li>Rodys prieš kiek laiko atsakytas paskutinis klausimas</li>
-                    <li>Jeigu kitas žmogus atsako į klausimą, sekundės begyje persikraus (su nauju klausimu)</li>
-                    <li>Jeigu turėjote atsakę klausimų prieš registraciją, jie jum bus priskaičiuoti užsiregistravus</li>
-                    <li>Anonimas su jūsų slapyvardžiu atsakęs į klausimą, jums uždirbs tašką</li>
-                    <li>Galima sužinoti atsakymą į prieš tai buvusį klausimą</li>
-                    <li>Keli saugumo patobulinimai</li>
-                </ul>
-            </div>
-
-        {% endif %}
-
-
         <script>
             document.getElementById("lastQuestion").style.display = 'none';
 
