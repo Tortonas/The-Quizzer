@@ -1,0 +1,21 @@
+name: PHP unit tests workflow
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: composer install
+
+    - name: Run PHPUNIT tests
+      run: ./vendor/bin/phpunit
