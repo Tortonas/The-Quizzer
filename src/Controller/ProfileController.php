@@ -142,7 +142,7 @@ class ProfileController extends AbstractController
             $allTimeQuestions = $this->getQuestionCountAllTime($slugUser->getId());
         }
 
-        return $this->render('profile/other/viewOtherProfile.html.twig', [
+        return $this->render('profile/other profile/viewOtherProfile.html.twig', [
             'user' => $slugUser,
             'weeklyAnswers' => $weeklyAnswers,
             'monthlyAnswers' => $monthlyAnswers,
