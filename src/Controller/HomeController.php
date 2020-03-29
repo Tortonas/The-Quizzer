@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Form\EmptyFormType;
 use App\Helper\QuestionsHelper;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -167,7 +168,9 @@ class HomeController extends AbstractController
             $showQuestion = true;
         }
 
-        $lastQuestionAnswerer = $entityManager->getRepository(QuestionAnswer::class)->findOneBy(array(), array('id' => 'DESC'));
+        /** @var EntityRepository $questionAnswerRepository */
+        $questionAnswerRepository = $entityManager->getRepository(QuestionAnswer::class);
+        $lastQuestionAnswerer = $questionAnswerRepository->findOneBy(array(), array('id' => 'DESC'));
 
         // This checks if previous question answerer (user) has a valid account, then his name will be displayed as link.
 

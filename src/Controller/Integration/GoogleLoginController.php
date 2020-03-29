@@ -30,7 +30,7 @@ class GoogleLoginController extends AbstractController
             ->getClient('google')
             ->redirect([
                 'profile', 'email'
-            ])
+            ], [])
             ;
     }
 
@@ -47,13 +47,13 @@ class GoogleLoginController extends AbstractController
      */
     public function connectCheckAction(Request $request, ClientRegistry $clientRegistry)
     {
-        /** @var GoogleUser $user */
         $client = $clientRegistry->getClient('google');
 
         try {
             // the exact class depends on which provider you're using
 
             $entityManager = $this->getDoctrine()->getManager();
+            /** @var GoogleUser $user */
             $user = $client->fetchUser();
             $userInDatabase = $entityManager->getRepository(User::class)->findOneBy(array(
                 'email' => $user->getEmail()));

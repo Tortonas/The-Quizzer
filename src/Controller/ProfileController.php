@@ -119,11 +119,14 @@ class ProfileController extends AbstractController
                 'user' => $this->getUser(),
             ]);
         }
+        else {
+            return $this->render('bundles/TwigBundle/Exception/error404.html.twig');
+        }
     }
 
     /**
      * @Route("/profilis/{slug}", name="app_view_other_profile")
-     * @param $slug
+     * @param string $slug
      * @return Response
      */
     public function viewOtherProfile($slug)

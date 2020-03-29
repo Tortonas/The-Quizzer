@@ -19,3 +19,5 @@ jobs:
 
     - name: Run PHPUNIT tests
       run: ./vendor/bin/phpunit
+    - name: Run phpstan
+      run: ./vendor/bin/phpstan analyse src --level 5

@@ -8,6 +8,8 @@ class QuestionsHelper
 {
     public static function calculateHowMuchTimeAgo($since)
     {
+        $count = -1;
+        $name = null;
         $chunks = array(
             array(60 * 60 * 24 * 365 , 'metus'),
             array(60 * 60 * 24 * 30 , 'mėnesį (-ius)'),

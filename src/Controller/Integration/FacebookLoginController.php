@@ -6,6 +6,8 @@ use App\Entity\QuestionAnswer;
 use App\Entity\User;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use League\OAuth2\Client\Provider\FacebookUser;
+use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +31,7 @@ class FacebookLoginController extends AbstractController
             ->getClient('facebook')
             ->redirect([
                 'public_profile', 'email' // the scopes you want to access
-            ])
+            ], [])
             ;
     }
 
@@ -50,12 +52,14 @@ class FacebookLoginController extends AbstractController
         $client = $clientRegistry->getClient('facebook');
 
         $entityManager = $this->getDoctrine()->getManager();
+        /** @var FacebookUser $user */
         $user = $client->fetchUser();
         $userInDatabase = $entityManager->getRepository(User::class)->findOneBy(array(
             'email' => $user->getEmail()));
 
         if($userInDatabase == null)
         {
+            /** @var User $userInDatabase */
             $userInDatabase = new User();
             $userInDatabase->setEmail($user->getEmail());
             $userInDatabase->setPassword('facebook login');
