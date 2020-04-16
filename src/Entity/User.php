@@ -53,9 +53,9 @@ class User implements UserInterface
     private $questionAnswers;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private $lastVisit;
+    private $lastVisit = null;
 
     public function __construct()
     {
