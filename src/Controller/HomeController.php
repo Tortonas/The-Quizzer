@@ -7,6 +7,7 @@ use App\Entity\QuestionAnswer;
 use App\Entity\User;
 use App\Form\EmptyFormType;
 use App\Helper\QuestionsHelper;
+use App\Manager\ActivityManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
@@ -20,6 +21,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+    /* @var ActivityManager $activityManager */
+    private $activityManager;
+    public function __construct(ActivityManager $activityManager)
+    {
+        $this->activityManager = $activityManager;
+    }
+
     /**
      * @Route("/", name="app_home")
      * @param Request $request

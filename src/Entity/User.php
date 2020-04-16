@@ -52,6 +52,11 @@ class User implements UserInterface
      */
     private $questionAnswers;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $lastVisit;
+
     public function __construct()
     {
         $this->questionAnswers = new ArrayCollection();
@@ -191,5 +196,21 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastVisit()
+    {
+        return $this->lastVisit;
+    }
+
+    /**
+     * @param mixed $lastVisit
+     */
+    public function setLastVisit($lastVisit): void
+    {
+        $this->lastVisit = $lastVisit;
     }
 }
