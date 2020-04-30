@@ -119,6 +119,34 @@ class ProfileController extends AbstractController
                 'user' => $this->getUser(),
             ]);
         }
+        else if($request->get('v') == 'n')
+        {
+            if($request->isMethod('POST') && $request->get('newName'))
+            {
+                $submittedNewName = $request->get('newName');
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $userWithSameUsername = $entityManager->getRepository(User::class)->findBy([
+                    "username" => $submittedNewName
+                ]);
+
+                if (empty($userWithSameUsername))
+                {
+                    $this->addFlash('success', 'Slapyvardis pakeistas!');
+                    $this->getUser()->setUsername($request->get('newName'));
+
+                    $entityManager->persist($this->getUser());
+                    $entityManager->flush();
+                }
+                else
+                {
+                    $this->addFlash('danger', 'Atsiprašau, bet toks slapyvardis sistemoje jau egzistuoja.');
+                }
+            }
+            return $this->render('profile/change/changeName.html.twig', [
+                'user' => $this->getUser(),
+            ]);
+        }
         else {
             return $this->render('bundles/TwigBundle/Exception/error404.html.twig');
         }

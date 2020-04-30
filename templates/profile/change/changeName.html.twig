@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Slaptažodžio keitimo forma - Quizzer{% endblock %}
+{% block description %}Forma kurioje vartotojas gali pasikeisti slaptažodį mūsų sistemoje.{% endblock %}
+
+{% block body %}
+    <div class="mt-5 card card-size transparent mx-auto">
+        <div class="card-body">
+            <a href="javascript:history.go(-1)">Grįžti</a>
+            <form class="mt-3" method="POST">
+                {% for message in app.flashes('danger') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="newName">Naujas slapyvardis</label>
+                    <input name="newName" type="text" class="form-control transparent" id="newName" placeholder="Įveskite slapyvardį">
+                </div>
+                <button type="submit" class="btn btn-danger">Keisti slapyvardį!</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
