@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\GlobalNotification;
 use App\Entity\Question;
 use App\Entity\QuestionAnswer;
 use App\Entity\User;
 use App\Form\EmptyFormType;
 use App\Helper\QuestionsHelper;
 use App\Manager\ActivityManager;
+use App\Manager\GlobalNotificationManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
@@ -23,9 +25,14 @@ class HomeController extends AbstractController
 {
     /* @var ActivityManager $activityManager */
     private $activityManager;
-    public function __construct(ActivityManager $activityManager)
+
+    /* @var GlobalNotificationManager $activityManager */
+    private $globalNotificationManager;
+
+    public function __construct(ActivityManager $activityManager, GlobalNotificationManager $globalNotificationManager)
     {
         $this->activityManager = $activityManager;
+        $this->globalNotificationManager = $globalNotificationManager;
     }
 
     /**
@@ -196,6 +203,9 @@ class HomeController extends AbstractController
         $previousQuestionArray = $entityManager->getRepository(Question::class)->findBy(array('active' => 0), array('timeModified' => 'DESC'), 1);
         $previousQuestion = $previousQuestionArray[0];
 
+        /** @var GlobalNotification $globalNotifications */
+        $globalNotifications = $this->globalNotificationManager->getAllAvailableNotifications();
+
         return $this->render('home/index.html.twig', [
             'closePopupForm' => $closePopupForm->createView(),
             'question' => $question,
@@ -207,6 +217,7 @@ class HomeController extends AbstractController
             'lastQuestionAnswererUserId' => $lastQuestionAnswererUserId,
             'lastQuestionAnsweredWhen' => $lastQuestionAnsweredWhen,
             'previousQuestion' => $previousQuestion,
+            'globalNotifications' => $globalNotifications
         ]);
     }
 

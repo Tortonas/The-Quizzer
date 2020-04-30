@@ -52,7 +52,17 @@
             </div>
         </div>
 
-        <div class="card mx-auto mt-5 transparent card-size">
+        {% for notification in globalNotifications %}
+            <div class="card mx-auto mt-3 transparent card-size">
+                <div class="card-body">
+                    <div class="alert alert-primary" role="alert">
+                        {{ notification.text }} test
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="card mx-auto mt-3 transparent card-size">
             <div class="card-body">
                 <h1 class="h2 text-center">The Quizzer - įvairūs loginiai, linksmi klausimai su atsakymais!</h1>
                 <h2 class="card-title text-center">Klausimas</h2>
