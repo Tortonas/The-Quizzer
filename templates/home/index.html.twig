@@ -101,68 +101,7 @@
             </div>
         </div>
 
-        <script>
-            document.getElementById("lastQuestion").style.display = 'none';
 
-            let el = document.getElementById('showPreviousQuestion');
-            el.onclick = togglePreviousQuestion;
-            function togglePreviousQuestion()
-            {
-                if(document.getElementById("lastQuestion").style.display === 'none')
-                {
-
-                    document.getElementById("lastQuestion").style.display = 'flex';
-                    document.getElementById("showPreviousQuestion").innerText = 'Paslėpti prieš tai buvusį klausimą'
-                }
-                else
-                {
-                    document.getElementById("lastQuestion").style.display = 'none';
-                    document.getElementById("showPreviousQuestion").innerText = 'Parodyti prieš tai buvusį klausimą'
-                }
-            }
-
-            let countDownDate = new Date("{{ question[0].timeModified|date_modify(" + 3 minutes")|date('Y-m-d H:i:s') }}").getTime();
-
-            let now = new Date().getTime();
-
-            let distance = countDownDate - now;
-
-            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            if(minutes >= 0 && seconds >= 0){
-                document.getElementById("timer").innerHTML = "Klausimas atsinaujins už " + minutes + "m " + seconds + "s ";
-            }
-
-            let x = setInterval(function() {
-                let now = new Date().getTime();
-
-                let distance = countDownDate - now;
-
-                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                if(minutes >= 0 && seconds >= 0)
-                {
-                    document.getElementById("timer").innerHTML = "Klausimas atsinaujins už " + minutes + "m " + seconds + "s ";
-                }
-
-                if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementById("timer").innerHTML = "Klausimas atsinaujina!";
-                    location.reload();
-                }
-            }, 1000);
-
-            let y = setInterval( async function() {
-                const response = await fetch('./api/question');
-                const myText = await response.text();
-                if(myText !== '{{ question[0].question }}')
-                {
-                    location.reload();
-                }
-            }, 3000);
-        </script>
 
     {% endif %}
 
