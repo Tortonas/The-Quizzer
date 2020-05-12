@@ -15,13 +15,6 @@ class ResultsController extends AbstractController
     {
         $conn = $this->getDoctrine()->getConnection();
 
-        $queryTopUsersGlobal = 'SELECT user_id, user.username, COUNT(user_id) as count
-                FROM question_answer
-                JOIN user ON user.id = question_answer.user_id
-                WHERE user_id IS NOT NULL
-                GROUP BY user_id
-                ORDER BY count DESC, user.username DESC
-                LIMIT 5';
 
         $queryTopUsersWeekly = 'SELECT user_id, user.username, COUNT(user_id) as count
                 FROM question_answer
@@ -41,9 +34,8 @@ class ResultsController extends AbstractController
                 ORDER BY count DESC, user.username DESC
                 LIMIT 5';
 
-        $statement = $conn->prepare($queryTopUsersGlobal);
-        $statement->execute();
-        $resultTopUsersGlobal = $statement->fetchAll();
+
+        $resultTopUsersGlobal = $this->getGlobalUsers();
         $statement = $conn->prepare($queryTopUsersWeekly);
         $statement->execute();
         $resultTopUsersWeekly = $statement->fetchAll();
@@ -60,5 +52,22 @@ class ResultsController extends AbstractController
             'monthlyTopUsers' => $resultTopUsersMonthly,
             'allQuestionAnswersCount' => count($questionAnswerCount),
         ]);
+    }
+
+    public function getGlobalUsers()
+    {
+        $conn = $this->getDoctrine()->getConnection();
+
+        $queryTopUsersGlobal = 'SELECT user_id, user.username, COUNT(user_id) as count
+                FROM question_answer
+                JOIN user ON user.id = question_answer.user_id
+                WHERE user_id IS NOT NULL
+                GROUP BY user_id
+                ORDER BY count DESC, user.username DESC
+                LIMIT 5';
+
+        $statement = $conn->prepare($queryTopUsersGlobal);
+        $statement->execute();
+        return $statement->fetchAll();
     }
 }

@@ -29,10 +29,23 @@ class HomeController extends AbstractController
     /* @var GlobalNotificationManager $activityManager */
     private $globalNotificationManager;
 
-    public function __construct(ActivityManager $activityManager, GlobalNotificationManager $globalNotificationManager)
+    /* @var ResultsController $activityManager */
+    private $resultsController;
+
+    /* @var EmailController $emailController */
+    private $emailController;
+
+    public function __construct(
+        ActivityManager $activityManager,
+        GlobalNotificationManager $globalNotificationManager,
+        ResultsController $resultsController,
+        EmailController $emailController
+    )
     {
         $this->activityManager = $activityManager;
         $this->globalNotificationManager = $globalNotificationManager;
+        $this->resultsController = $resultsController;
+        $this->emailController = $emailController;
     }
 
     /**
@@ -124,6 +137,8 @@ class HomeController extends AbstractController
 
             if($plainAnswer == $plainAnswerSubmission)
             {
+                $arrayOfGlobalResultsGlobalPrevious = $this->resultsController->getGlobalUsers();
+
                 $this->addFlash('success-submit-form', 'Atsakymas teisingas! Naujas klausimas užkrautas 😉👍');
                 $newQuestionAnswer = new QuestionAnswer();
                 // If for example I'm anonymous with nick 'SANDRA' and nickname 'SANDRA' actually exists, so I will be earning point for real account.
@@ -152,6 +167,9 @@ class HomeController extends AbstractController
 
                 $entityManager->persist($newQuestionAnswer);
                 $entityManager->flush();
+
+                $arrayOfGlobalResultsGlobalAfter = $this->resultsController->getGlobalUsers();
+                $this->emailController->sendMessageYouHaveBeenPassed($arrayOfGlobalResultsGlobalPrevious, $arrayOfGlobalResultsGlobalAfter);
             }
             else
             {
