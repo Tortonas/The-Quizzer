@@ -16,7 +16,7 @@ class EmailController extends AbstractController
     public function index(\Swift_Mailer $mailer)
     {
         $message = (new \Swift_Message('Hello Email'))
-            ->setFrom('noreply@quizzer.lt')
+            ->setFrom('quizzerlt@gmail.com')
             ->setTo('plankton546@gmail.com')
             ->setBody(
                 $this->renderView(
