@@ -57,6 +57,11 @@ class User implements UserInterface
      */
     private $lastVisit = null;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=false, options={"default" : 1})
+     */
+    private $emailSubscription = true;
+
     public function __construct()
     {
         $this->questionAnswers = new ArrayCollection();
@@ -212,5 +217,21 @@ class User implements UserInterface
     public function setLastVisit($lastVisit): void
     {
         $this->lastVisit = $lastVisit;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmailSubscription(): bool
+    {
+        return $this->emailSubscription;
+    }
+
+    /**
+     * @param bool $emailSubscription
+     */
+    public function setEmailSubscription(bool $emailSubscription): void
+    {
+        $this->emailSubscription = $emailSubscription;
     }
 }

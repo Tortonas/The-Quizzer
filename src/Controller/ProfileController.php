@@ -15,14 +15,26 @@ class ProfileController extends AbstractController
      * @Route("/profilis", name="app_profile")
      * @IsGranted("ROLE_USER")
      */
-    public function index()
+    public function index(Request $request)
     {
+        /** @var User $loggedUser */
+        $loggedUser = $this->getUser();
+
         $weeklyAnswers = $this->getQuestionCount($this->getUser()->getId(), 7);
         $monthlyAnswers = $this->getQuestionCount($this->getUser()->getId(), 30);
         $allTimeQuestions = $this->getQuestionCountAllTime($this->getUser()->getId());
 
+        if ($request->get('emailSub')) {
+            if ($loggedUser->getEmailSubscription()) {
+                $loggedUser->setEmailSubscription(false);
+            } else {
+                $loggedUser->setEmailSubscription(true);
+            }
+            $this->getDoctrine()->getManager()->flush();
+        }
+
         return $this->render('profile/index.html.twig', [
-            'user' => $this->getUser(),
+            'user' => $loggedUser,
             'weeklyAnswers' => $weeklyAnswers,
             'monthlyAnswers' => $monthlyAnswers,
             'allTimeAnswers' => $allTimeQuestions,
