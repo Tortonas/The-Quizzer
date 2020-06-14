@@ -45,7 +45,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->andWhere('u.lastTimeGotEmail < :lastMonth')
             ->andWhere('u.emailSubscription = true')
             ->setParameter('lastMonth', $dateTimeLastMonth)
-            ->setMaxResults(10)
+            ->setMaxResults(1) // Maybe change this later. I keep it low cuz I use gmail
             ->getQuery()
             ->getResult()
             ;
