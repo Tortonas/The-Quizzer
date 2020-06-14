@@ -31,6 +31,10 @@ class EmailController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @param mixed $arrayOfGlobalResultsGlobalPrevious
+     * @param mixed $arrayOfGlobalResultsGlobalAfter
+     */
     public function sendMessageYouHaveBeenPassed($arrayOfGlobalResultsGlobalPrevious, $arrayOfGlobalResultsGlobalAfter)
     {
         $usersThatGoingUp = [];
@@ -54,9 +58,11 @@ class EmailController extends AbstractController
         $this->sendEmailToUsersWhoAreGoingDownInGlobalScoreboard($usersThatGoingDown);
     }
 
+    /**
+     * @param User[] $usersThatAreGoingUp
+     */
     private function sendEmailToUsersWhoAreGoingUpInGlobalScoreboard($usersThatAreGoingUp)
     {
-        /** @var User $user */
         foreach ($usersThatAreGoingUp as $user) {
             if ($user->getEmailSubscription()) {
                 $message = (new \Swift_Message('QUIZZER - TU APLENKEI KITA NARI! SAUNUOLIS!'))
@@ -75,9 +81,11 @@ class EmailController extends AbstractController
         }
     }
 
+    /**
+     * @param User[] $usersThatAreGoingDown
+     */
     private function sendEmailToUsersWhoAreGoingDownInGlobalScoreboard($usersThatAreGoingDown)
     {
-        /** @var User $user */
         foreach ($usersThatAreGoingDown as $user) {
             if ($user->getEmailSubscription()) {
                 $message = (new \Swift_Message('QUIZZER - TU BUVAI APLENKTAS!'))

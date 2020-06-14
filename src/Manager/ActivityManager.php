@@ -18,6 +18,11 @@ class ActivityManager
     /* @var User $currentUser */
     private $currentUser;
 
+    /**
+     * ActivityManager constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param TokenStorageInterface $tokenStorage
+     */
     public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage)
     {
         $this->entityManager = $entityManager;
@@ -25,7 +30,9 @@ class ActivityManager
         $this->updateLastTimeLoggedIn();
     }
 
-    /* Every time this function is called, it will update lastVisit property on User entity */
+    /**
+     * Every time this function is called, it will update lastVisit property on User entity
+     */
     public function updateLastTimeLoggedIn()
     {
         date_default_timezone_set('Europe/Vilnius');

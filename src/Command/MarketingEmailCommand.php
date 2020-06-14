@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class MarketingEmailCommand extends Command
 {
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     private $entityManager;
 
@@ -25,8 +25,17 @@ class MarketingEmailCommand extends Command
      */
     private $emailController;
 
+    /**
+     * @var string
+     */
     protected static $defaultName = 'email:marketing-send';
 
+    /**
+     * MarketingEmailCommand constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param EmailController $emailController
+     * @param string|null $name
+     */
     public function __construct(EntityManagerInterface $entityManager, EmailController $emailController, string $name = null)
     {
         parent::__construct($name);
@@ -34,11 +43,19 @@ class MarketingEmailCommand extends Command
         $this->emailController = $emailController;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $counter = 0;
 
-        $users = $this->entityManager->getRepository(User::class)->getUsersThatNeedMarketingEmail();
+        /** @var UserRepository $userRepository */
+        $userRepository = $this->entityManager->getRepository(User::class);
+
+        $users = $userRepository->getUsersThatNeedMarketingEmail();
 
         /** @var User $user */
         foreach ($users as $user) {

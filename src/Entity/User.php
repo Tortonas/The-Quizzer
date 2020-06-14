@@ -241,7 +241,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return null
+     * @return \DateTime
      */
     public function getLastTimeGotEmail()
     {
@@ -249,7 +249,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param null $lastTimeGotEmail
+     * @param \DateTime $lastTimeGotEmail
      */
     public function setLastTimeGotEmail($lastTimeGotEmail): void
     {
