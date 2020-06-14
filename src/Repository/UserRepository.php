@@ -35,4 +35,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
+
+    public function getUsersThatNeedMarketingEmail()
+    {
+        $dateTimeLastMonth = new \DateTime();
+        $dateTimeLastMonth->modify('-30 days');
+
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.lastTimeGotEmail < :lastMonth')
+            ->andWhere('u.emailSubscription = true')
+            ->setParameter('lastMonth', $dateTimeLastMonth)
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

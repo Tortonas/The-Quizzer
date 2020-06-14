@@ -95,4 +95,26 @@ class EmailController extends AbstractController
             }
         }
     }
+
+    /**
+     * @param User $user
+     */
+    public function sendMarketingEmail(User $user)
+    {
+        if ($user->getEmailSubscription()) {
+            $message = (new \Swift_Message('The Quizzer - ar vis dar pameni Žalgirio mūšio datą?'))
+                ->setFrom(['quizzerlt@gmail.com' => 'Ponas Quizzer'])
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/marketing.html.twig',
+                        ['name' => $user->getUsername()]
+                    ),
+                    'text/html'
+                );
+
+            $this->mailer->send($message);
+            $user->setLastTimeGotEmail(new \DateTime());
+        }
+    }
 }

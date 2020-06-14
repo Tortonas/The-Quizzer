@@ -62,6 +62,11 @@ class User implements UserInterface
      */
     private $emailSubscription = true;
 
+    /**
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     */
+    private $lastTimeGotEmail = null;
+
     public function __construct()
     {
         $this->questionAnswers = new ArrayCollection();
@@ -233,5 +238,21 @@ class User implements UserInterface
     public function setEmailSubscription(bool $emailSubscription): void
     {
         $this->emailSubscription = $emailSubscription;
+    }
+
+    /**
+     * @return null
+     */
+    public function getLastTimeGotEmail()
+    {
+        return $this->lastTimeGotEmail;
+    }
+
+    /**
+     * @param null $lastTimeGotEmail
+     */
+    public function setLastTimeGotEmail($lastTimeGotEmail): void
+    {
+        $this->lastTimeGotEmail = $lastTimeGotEmail;
     }
 }
