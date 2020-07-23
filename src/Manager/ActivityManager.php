@@ -33,7 +33,7 @@ class ActivityManager
     /**
      * Every time this function is called, it will update lastVisit property on User entity
      */
-    public function updateLastTimeLoggedIn()
+    public function updateLastTimeLoggedIn(): void
     {
         date_default_timezone_set('Europe/Vilnius');
         if ($this->currentUser instanceof User) {

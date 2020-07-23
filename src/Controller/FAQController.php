@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\FreqAskedQuestion;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FAQController extends AbstractController
@@ -11,7 +12,7 @@ class FAQController extends AbstractController
     /**
      * @Route("/duk", name="app_faq")
      */
-    public function index()
+    public function index(): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 

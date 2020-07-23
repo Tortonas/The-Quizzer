@@ -23,7 +23,7 @@ class GlobalNotificationManager
     /**
      * @return GlobalNotification[]
      */
-    public function getAllAvailableNotifications()
+    public function getAllAvailableNotifications(): array
     {
         return $this->entityManager->getRepository(GlobalNotification::class)->findNewerNotificationsThan(new \DateTime());
     }

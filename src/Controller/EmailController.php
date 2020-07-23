@@ -13,12 +13,12 @@ class EmailController extends AbstractController
     /**
      * @var \Swift_Mailer
      */
-    private $mailer;
+    private \Swift_Mailer $mailer;
 
     /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * EmailController constructor.
@@ -35,7 +35,7 @@ class EmailController extends AbstractController
      * @param mixed $arrayOfGlobalResultsGlobalPrevious
      * @param mixed $arrayOfGlobalResultsGlobalAfter
      */
-    public function sendMessageYouHaveBeenPassed($arrayOfGlobalResultsGlobalPrevious, $arrayOfGlobalResultsGlobalAfter)
+    public function sendMessageYouHaveBeenPassed($arrayOfGlobalResultsGlobalPrevious, $arrayOfGlobalResultsGlobalAfter): void
     {
         $usersThatGoingUp = [];
         $usersThatGoingDown = [];
@@ -61,7 +61,7 @@ class EmailController extends AbstractController
     /**
      * @param User[] $usersThatAreGoingUp
      */
-    private function sendEmailToUsersWhoAreGoingUpInGlobalScoreboard($usersThatAreGoingUp)
+    private function sendEmailToUsersWhoAreGoingUpInGlobalScoreboard(array $usersThatAreGoingUp): void
     {
         foreach ($usersThatAreGoingUp as $user) {
             if ($user->getEmailSubscription()) {
@@ -84,7 +84,7 @@ class EmailController extends AbstractController
     /**
      * @param User[] $usersThatAreGoingDown
      */
-    private function sendEmailToUsersWhoAreGoingDownInGlobalScoreboard($usersThatAreGoingDown)
+    private function sendEmailToUsersWhoAreGoingDownInGlobalScoreboard(array $usersThatAreGoingDown): void
     {
         foreach ($usersThatAreGoingDown as $user) {
             if ($user->getEmailSubscription()) {
@@ -107,7 +107,7 @@ class EmailController extends AbstractController
     /**
      * @param User $user
      */
-    public function sendMarketingEmail(User $user)
+    public function sendMarketingEmail(User $user): void
     {
         if ($user->getEmailSubscription()) {
             $message = (new \Swift_Message('The Quizzer - ar vis dar pameni Žalgirio mūšio datą?'))

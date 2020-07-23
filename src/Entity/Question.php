@@ -16,22 +16,22 @@ class Question
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=1000)
      */
-    private $question;
+    private string $question;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $answer;
+    private string $answer;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $timeModified;
+    private \DateTimeInterface $timeModified;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\QuestionAnswer", mappedBy="question", orphanRemoval=true)
@@ -41,7 +41,7 @@ class Question
     /**
      * @ORM\Column(type="integer")
      */
-    private $active;
+    private int $active;
 
     public function __construct()
     {

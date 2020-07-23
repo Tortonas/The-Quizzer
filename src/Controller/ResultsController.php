@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\QuestionAnswer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ResultsController extends AbstractController
@@ -11,7 +12,7 @@ class ResultsController extends AbstractController
     /**
      * @Route("/rezultatai", name="app_results")
      */
-    public function index()
+    public function index(): Response
     {
         $conn = $this->getDoctrine()->getConnection();
 
@@ -54,7 +55,7 @@ class ResultsController extends AbstractController
         ]);
     }
 
-    public function getGlobalUsers()
+    public function getGlobalUsers(): array
     {
         $conn = $this->getDoctrine()->getConnection();
 

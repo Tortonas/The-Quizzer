@@ -23,17 +23,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    /* @var ActivityManager $activityManager */
-    private $activityManager;
+    private ActivityManager $activityManager;
 
-    /* @var GlobalNotificationManager $activityManager */
-    private $globalNotificationManager;
+    private GlobalNotificationManager $globalNotificationManager;
 
-    /* @var ResultsController $activityManager */
-    private $resultsController;
+    private ResultsController $resultsController;
 
-    /* @var EmailController $emailController */
-    private $emailController;
+    private EmailController $emailController;
 
     public function __construct(
         ActivityManager $activityManager,
@@ -54,7 +50,7 @@ class HomeController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         date_default_timezone_set('Europe/Vilnius');
 
@@ -239,7 +235,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    public function setNewQuestion($entityManager, $currentDateTime, $currentQuestion)
+    public function setNewQuestion($entityManager, $currentDateTime, $currentQuestion): void
     {
         $newQuestionArray = $entityManager->getRepository(Question::class)->findBy(array('active' => 0), array('timeModified' => 'ASC'), 1);
         $newQuestion = $newQuestionArray[0];

@@ -6,7 +6,7 @@ namespace App\Helper;
 
 class QuestionsHelper
 {
-    public static function calculateHowMuchTimeAgo($since)
+    public static function calculateHowMuchTimeAgo(float $since): string
     {
         $count = -1;
         $name = null;
@@ -33,7 +33,7 @@ class QuestionsHelper
         return $print;
     }
 
-    public static function toLowerAndReplaceLetters($text)
+    public static function toLowerAndReplaceLetters(string $text): string
     {
         $lithuanianLetters = array('ą', 'č', 'ę', 'ė', 'į', 'š', 'ų', 'ū', 'ž', 'Ą', 'Č', 'Ę', 'Ė', 'Į', 'Š', 'Ų', 'Ū', 'Ž');
         $latinLetters = array('a', 'c', 'e', 'e', 'i', 's', 'u', 'u', 'z', 'a', 'c', 'e', 'e', 'i', 's', 'u', 'u', 'z');

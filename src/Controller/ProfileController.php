@@ -15,7 +15,7 @@ class ProfileController extends AbstractController
      * @Route("/profilis", name="app_profile")
      * @IsGranted("ROLE_USER")
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         /** @var User $loggedUser */
         $loggedUser = $this->getUser();
@@ -48,7 +48,7 @@ class ProfileController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request): Response
     {
         if($request->get('v') == 'p')
         {
@@ -169,7 +169,7 @@ class ProfileController extends AbstractController
      * @param string $slug
      * @return Response
      */
-    public function viewOtherProfile($slug)
+    public function viewOtherProfile(string $slug): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $slugUser = $entityManager->getRepository(User::class)->find($slug);
@@ -193,7 +193,7 @@ class ProfileController extends AbstractController
         ]);
     }
 
-    private function getQuestionCount($userId, $dayCount)
+    private function getQuestionCount(int $userId, int $dayCount): int
     {
         $conn = $this->getDoctrine()->getConnection();
         $query = 'SELECT user_id, COUNT(user_id) as count
@@ -214,7 +214,7 @@ class ProfileController extends AbstractController
         return $answers[0]['count'];
     }
 
-    private function getQuestionCountAllTime($userId)
+    private function getQuestionCountAllTime(int $userId): int
     {
         $conn = $this->getDoctrine()->getConnection();
         $query = 'SELECT user_id, COUNT(user_id) as count
