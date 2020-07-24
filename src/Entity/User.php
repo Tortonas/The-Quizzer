@@ -24,12 +24,12 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private string $username;
+    private string $username = "";
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private string $email;
+    private string $email = "";
 
     /**
      * @ORM\Column(type="json")
@@ -40,7 +40,7 @@ class User implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private string $password;
+    private string $password = "";
 
     /**
      * @ORM\Column(type="date")

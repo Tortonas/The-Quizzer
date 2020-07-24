@@ -93,6 +93,7 @@ class FacebookLoginController extends AbstractController
 
             $userInDatabase->setUsername($newUserNickname);
             $userInDatabase->setRegisterAt(new \DateTime(date('Y-m-d')));
+            $userInDatabase->setLastTimeGotEmail(new \DateTime());
 
             $questionsWithThatNickname = $entityManager->getRepository(QuestionAnswer::class)->
             findBy(array('username' => $user->getName(),
