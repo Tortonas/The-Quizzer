@@ -1,0 +1,18 @@
+version: "3"
+services:
+  web:
+    build: ./.docker
+    volumes:
+      - ./:/var/www/html/
+    ports:
+      - "80:8080"
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: the_quizzer
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+    ports:
+      - "9906:3306"

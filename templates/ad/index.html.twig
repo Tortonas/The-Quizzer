@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="quizzer,quiz,klausimanija,klausimynas,mokiniams,darbuotojams,loginiai,sukti,learning,training,brain,linksmi,klausimai,lietuviskas,lithuanian,iq,lavinimas,tobulejimas,intelektuolsu,intelektinis">
+    <meta name="description" content="{% block description %}Klausimanijos klausimai online, skirti mokiniams, vaikams, darbuotojams linksmai praleisti laiką. Įdomus, loginiai, sukti bei linksmi klausimai.{% endblock %}">
+    <meta name="author" content="Valentinas Kasteckis">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/ico" sizes="16x16">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('style/stylesheet.css') }}">
+    <style>
+        body {
+            background: url({{ asset('img/background.jpg') }}) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+            height: 100vh;
+        }
+    </style>
+    <title>{% block title %}Quizzer.lt{% endblock %}</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="card transparent mx-auto">
+        <div class="card-body">
+            <h5 class="card-title">Ar žinai atsakymą į šį klausimą?</h5>
+            <h5 class="card-text font-weight-bold">{{ currentQuestion.question }}</h5>
+            <h5 class="card-text">Žinai? Apsilankyk <span class="font-weight-bold">QUIZZER.LT</span> ir atsakyk į klausimą</h5>
+        </div>
+    </div>
+</div>
+
+<script>
+    let y = setInterval( async function() {
+        const response = await fetch('./api/question');
+        const myText = await response.text();
+        if(myText !== '{{ currentQuestion.question }}')
+        {
+            location.reload();
+        }
+    }, 3000);
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
