@@ -34,6 +34,10 @@
 </div>
 
 <script>
+    let x = setInterval( async function() {
+        await fetch('./api/reload');
+    }, 10000);
+
     let y = setInterval( async function() {
         const response = await fetch('./api/question');
         const myText = await response.text();
