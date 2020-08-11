@@ -1,16 +1,5 @@
 version: "3"
 services:
-  web:
-    build: ./.docker
-    networks:
-      default:
-        ipv4_address: 192.168.2.2
-    volumes:
-      - ./:/var/www/html/
-      - ./.docker/virtualhost.conf:/etc/apache2/sites-available/000-default.conf
-    ports:
-      - "80:8080"
-
   mysql:
     image: mysql:5.7
     networks:
@@ -25,6 +14,28 @@ services:
     ports:
       - "9906:3306"
 
+  web:
+    build: ./.docker
+    networks:
+      default:
+        ipv4_address: 192.168.2.2
+    volumes:
+      - ./:/var/www/html/
+      - ./.docker/virtualhost.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - "80:8080"
+    depends_on:
+      - "mysql"
+  develop_init:
+    build: ./.docker
+    volumes:
+      - ./:/var/www/html/
+      - ./.docker/init_symfony.sh:/usr/local/bin/init_symfony.sh
+    depends_on:
+      - "mysql"
+      - "web"
+    command: "init_symfony.sh"
+    
 networks:
   default:
     driver: bridge
