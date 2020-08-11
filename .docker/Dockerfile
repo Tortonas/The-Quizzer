@@ -9,7 +9,3 @@ RUN docker-php-ext-install zip intl mysqli pdo pdo_mysql
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 # Install symfony command
 RUN curl -sS https://get.symfony.com/cli/installer | bash && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
-# Install composer dependencies
-#RUN composer install
-# Update database SCHEMA
-#RUN php bin/console d:s:u --force
