@@ -15,7 +15,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Docker compose up
-        run: docker-compose up -d
+        run: docker-compose up -d --build
+      - name: Install dependencies via composer
+        run: composer install
       - name: Run PHPUNIT
         run: docker exec quizzer_web ./vendor/bin/phpunit
       - name: Run PHPSTAN
