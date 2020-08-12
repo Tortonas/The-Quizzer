@@ -17,7 +17,7 @@ jobs:
       - name: Docker compose up
         run: docker-compose up -d --build
       - name: Install dependencies via composer
-        run: composer install
+        run: docker exec quizzer_web composer install
       - name: Run PHPUNIT
         run: docker exec quizzer_web ./vendor/bin/phpunit
       - name: Run PHPSTAN
