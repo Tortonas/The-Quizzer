@@ -2,6 +2,7 @@ version: "3"
 services:
   mysql:
     image: mysql:5.7
+    container_name: quizzer_mysql
     networks:
       default:
         ipv4_address: 192.168.2.3
@@ -13,9 +14,25 @@ services:
       MYSQL_PASSWORD:
     ports:
       - "9906:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: quizzer_phpmyadmin
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    networks:
+      default:
+        ipv4_address: 192.168.2.4
+    ports:
+      - 8183:80
 
   web:
     build: ./.docker
+    container_name: quizzer_web
     networks:
       default:
         ipv4_address: 192.168.2.2
@@ -28,6 +45,7 @@ services:
       - "mysql"
   develop_init:
     build: ./.docker
+    container_name: quizzer_develop_init
     volumes:
       - ./:/var/www/html/
       - ./.docker/init_symfony.sh:/usr/local/bin/init_symfony.sh
