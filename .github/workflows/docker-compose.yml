@@ -16,9 +16,7 @@ jobs:
 
       - name: Docker compose up
         run: docker-compose up -d
-      - name: Connect to docker server bash
-        run: docker exec -it quizzer_web bash
       - name: Run PHPUNIT
-        run: ./vendor/bin/phpunit
+        run: docker exec -it quizzer_web ./vendor/bin/phpunit
       - name: Run PHPSTAN
-        run: ./vendor/bin/phpstan analyse src --level 5
+        run: docker exec -it quizzer_web ./vendor/bin/phpstan analyse src --level 5
