@@ -26,10 +26,18 @@ class AppFixtures extends Fixture
 
     private function doINeedToUploadFixtures(): bool
     {
-        $userCount = $this->manager->getRepository(User::class)->count([]);
-        $questionCount = $this->manager->getRepository(Question::class)->count([]);
-        $questionAnswerCount = $this->manager->getRepository(QuestionAnswer::class)->count([]);
-        $faqCount = $this->manager->getRepository(FreqAskedQuestion::class)->count([]);
+        /** @var \Doctrine\ORM\EntityRepository */
+        $userRepository = $this->manager->getRepository(User::class);
+        /** @var \Doctrine\ORM\EntityRepository */
+        $questionRepository = $this->manager->getRepository(Question::class);
+        /** @var \Doctrine\ORM\EntityRepository */
+        $questionAnswerRepository = $this->manager->getRepository(QuestionAnswer::class);
+        /** @var \Doctrine\ORM\EntityRepository */
+        $faqRepository = $this->manager->getRepository(FreqAskedQuestion::class);
+        $userCount = $userRepository->count([]);
+        $questionCount = $questionRepository->count([]);
+        $questionAnswerCount = $questionAnswerRepository->count([]);
+        $faqCount = $faqRepository->count([]);
 
         // If true, then I don't need to upload fixtures
         if ($userCount >= 1 && $questionCount >= 3 && $questionAnswerCount >= 1 && $faqCount  >= 3) {
@@ -43,7 +51,7 @@ class AppFixtures extends Fixture
     {
         $user = new User();
         $user->setEmail('quizzer@quizzer.dev');
-        $user->setEmailSubscription(0);
+        $user->setEmailSubscription(false);
         $user->setLastTimeGotEmail(new \DateTime('2020-01-01'));
         // hashed password of this string -> quizzer
         $user->setPassword('$argon2id$v=19$m=65536,t=4,p=1$BcBVS+gbaxnApK/kFTEBOw$hZbYuLENZ34yWzvhT05XZHQJSBwkBojLoBoCNgOBp6Y');
