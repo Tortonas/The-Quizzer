@@ -36,6 +36,7 @@ class RegistrationController extends AbstractController
             );
 
             $user->setRegisterAt(new \DateTime(date('Y-m-d')));
+            $user->setLastTimeGotEmail(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
 
             // checking if new registering user email is unique
