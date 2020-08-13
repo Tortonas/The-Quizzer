@@ -43,6 +43,16 @@ services:
       - "80:8080"
     depends_on:
       - "mysql"
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
+    networks:
+      default:
+        ipv4_address: 192.168.2.5
+
   develop_init:
     build: ./.docker
     container_name: quizzer_develop_init

@@ -67,9 +67,15 @@ class User implements UserInterface
      */
     private $lastTimeGotEmail = null;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Email", mappedBy="user")
+     */
+    private $emails;
+
     public function __construct()
     {
         $this->questionAnswers = new ArrayCollection();
+        $this->emails = new ArrayCollection();
     }
 
     /**
@@ -254,5 +260,36 @@ class User implements UserInterface
     public function setLastTimeGotEmail($lastTimeGotEmail): void
     {
         $this->lastTimeGotEmail = $lastTimeGotEmail;
+    }
+
+    /**
+     * @return Collection|Email[]
+     */
+    public function getEmails(): Collection
+    {
+        return $this->emails;
+    }
+
+    public function addEmail(Email $email): self
+    {
+        if (!$this->emails->contains($email)) {
+            $this->emails[] = $email;
+            $email->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmail(Email $email): self
+    {
+        if ($this->emails->contains($email)) {
+            $this->emails->removeElement($email);
+            // set the owning side to null (unless already changed)
+            if ($email->getUser() === $this) {
+                $email->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

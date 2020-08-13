@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email cancellation{% endblock %}
+
+{% block body %}
+    <div class="card transparent mt-5">
+        <div class="card-body">
+            {% if response == 'success' %}
+                <h5 class="card-title">Email prenumerata išjungta</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ user.email }}</h6>
+                <p class="card-text">Netyčia paspaudėi? Vėl užsiprenumeruoti gali prisijungęs ir nuėjus į profilio informacija!</p>
+            {% else %}
+                <h5 class="card-title">Klaida. Neegzistuojantis raktas</h5>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

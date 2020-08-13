@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Email;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,6 +30,40 @@ class EmailController extends AbstractController
     {
         $this->mailer = $mailer;
         $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @Route("/cancel/email/{cancelHash}", name="cancel_hash")
+     * @param string $cancelHash
+     * @return Response
+     */
+    public function cancelEmail(string $cancelHash): Response
+    {
+        /** @var Email $email */
+        $email = $this->entityManager->getRepository(Email::class)->findOneBy(
+            [
+                'cancelEmailSubHash' => $cancelHash,
+                'cancelledEmailSub' => false
+            ]
+        );
+
+        $user = null;
+
+        if ($email) {
+            $user = $email->getUser();
+            $user->setEmailSubscription(false);
+            $email->setCancelledEmailSub(true);
+            $this->entityManager->flush();
+            return $this->render('emails/cancel_email.html.twig', [
+                'response' => 'success',
+                'user' => $user
+            ]);
+        }
+
+        return $this->render('emails/cancel_email.html.twig', [
+            'response' => 'error',
+            'user' => $user
+        ]);
     }
 
     /**
@@ -65,18 +100,25 @@ class EmailController extends AbstractController
     {
         foreach ($usersThatAreGoingUp as $user) {
             if ($user->getEmailSubscription()) {
-                $message = (new \Swift_Message('QUIZZER - TU APLENKEI KITA NARI! SAUNUOLIS!'))
+                $title = 'QUIZZER - TU APLENKEI KITA NARI! SAUNUOLIS!';
+                $cancelEmailHash = $this->buildEmailHash();
+                $message = (new \Swift_Message($title))
                     ->setFrom(['quizzerlt@gmail.com' => 'Ponas Quizzer'])
                     ->setTo($user->getEmail())
                     ->setBody(
                         $this->renderView(
                             'emails/took_lead.html.twig',
-                            ['name' => $user->getUsername()]
+                            [
+                                'name' => $user->getUsername(),
+                                'cancelEmailHash' => $cancelEmailHash
+                            ]
                         ),
                         'text/html'
                     );
 
                 $this->mailer->send($message);
+
+                $this->createEmailEntity($user, $title, $cancelEmailHash);
             }
         }
     }
@@ -88,41 +130,75 @@ class EmailController extends AbstractController
     {
         foreach ($usersThatAreGoingDown as $user) {
             if ($user->getEmailSubscription()) {
-                $message = (new \Swift_Message('QUIZZER - TU BUVAI APLENKTAS!'))
+                $title = 'QUIZZER - TU BUVAI APLENKTAS!';
+                $cancelEmailHash = $this->buildEmailHash();
+                $message = (new \Swift_Message($title))
                     ->setFrom(['quizzerlt@gmail.com' => 'Ponas Quizzer'])
                     ->setTo($user->getEmail())
                     ->setBody(
                         $this->renderView(
                             'emails/surpassed.html.twig',
-                            ['name' => $user->getUsername()]
+                            [
+                                'name' => $user->getUsername(),
+                                'cancelEmailHash' => $cancelEmailHash
+                            ]
                         ),
                         'text/html'
                     );
 
                 $this->mailer->send($message);
+
+                $this->createEmailEntity($user, $title, $cancelEmailHash);
             }
         }
     }
 
     /**
      * @param User $user
+     * @throws \Exception
      */
     public function sendMarketingEmail(User $user): void
     {
         if ($user->getEmailSubscription()) {
-            $message = (new \Swift_Message('The Quizzer - ar vis dar pameni Žalgirio mūšio datą?'))
+            $title = 'The Quizzer - ar vis dar pameni Žalgirio mūšio datą?';
+            $cancelEmailHash = $this->buildEmailHash();
+            $message = (new \Swift_Message($title))
                 ->setFrom(['quizzerlt@gmail.com' => 'Ponas Quizzer'])
                 ->setTo($user->getEmail())
                 ->setBody(
                     $this->renderView(
                         'emails/marketing.html.twig',
-                        ['name' => $user->getUsername()]
+                        [
+                            'name' => $user->getUsername(),
+                            'cancelEmailHash' => $cancelEmailHash
+                        ]
                     ),
                     'text/html'
                 );
 
             $this->mailer->send($message);
             $user->setLastTimeGotEmail(new \DateTime());
+
+            $this->createEmailEntity($user, $title, $cancelEmailHash);
         }
+    }
+
+    private function buildEmailHash(): string
+    {
+        return time() . bin2hex(random_bytes(16)) . 'quizzer';
+    }
+
+    private function createEmailEntity(User $user, string $title, string $cancelEmailHash): void
+    {
+        $email = new Email();
+        $email->setUser($user)
+            ->setEmail($user->getEmail())
+            ->setDate(new \DateTime())
+            ->setTitle($title)
+            ->setCancelEmailSubHash($cancelEmailHash)
+            ->setCancelledEmailSub(false);
+
+        $this->entityManager->persist($email);
+        $this->entityManager->flush();
     }
 }
