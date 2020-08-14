@@ -39,7 +39,7 @@ class EmailController extends AbstractController
      */
     public function cancelEmail(string $cancelHash): Response
     {
-        /** @var Email $email */
+        /** @var Email|null $email */
         $email = $this->entityManager->getRepository(Email::class)->findOneBy(
             [
                 'cancelEmailSubHash' => $cancelHash,
