@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Atgauk savo slaptažodį - Quizzer{% endblock %}
+
+{% block body %}
+    <div class="card transparent mx-auto mt-5 w-50">
+        <div class="card-body mx-auto">
+            {% if formSubmitted %}
+                <div class="alert alert-success" role="alert">
+                    Jeigu toks el. paštas sistemoje yra registruotas, išsiuntėme jam laišką. Laiškas turėtu ateiti iš karto.
+                </div>
+            {% endif %}
+            <h5 class="card-title">Slaptažodžio susigrąžinimo forma</h5>
+            {{ form_start(form) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.submit) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
