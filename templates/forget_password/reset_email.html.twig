@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Naujo slaptažodžio generavimas - Quizzer{% endblock %}
+
+{% block body %}
+    <div class="card transparent mx-auto mt-5 w-50">
+        <div class="card-body mx-auto">
+            {% if response == 'success' %}
+                <div class="alert alert-success" role="alert">
+                    Išsiuntėme jums į el. paštą {{ email }} naują sugeneruotą slaptažodį. Kuo skubiau jį pasikeiskite.
+                </div>
+            {% else %}
+                <div class="alert alert-danger" role="alert">
+                    Kodas slaptažodžio susigrąžinimui neegzistuoja, buvo panaudotas arba pasibaigė galiojimas. Kiekvienas sugeneruotas kodas galioja 1 valandą.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

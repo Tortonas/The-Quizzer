@@ -183,7 +183,55 @@ class EmailController extends AbstractController
         }
     }
 
-    private function buildEmailHash(): string
+    public function sendPasswordReminder(User $user, string $passwordToken): void
+    {
+        $title = 'The Quizzer - slaptažodžio susigrąžinimo forma';
+        $cancelEmailHash = $this->buildEmailHash();
+
+        $message = (new \Swift_Message($title))
+            ->setFrom(['quizzerlt@gmail.com' => 'Ponas Quizzer'])
+            ->setTo($user->getEmail())
+            ->setBody(
+                $this->renderView(
+                    'emails/password_reminder.html.twig',
+                    [
+                        'user' => $user,
+                        'passwordToken' => $passwordToken
+                    ]
+                ),
+                'text/html'
+            );
+
+        $this->mailer->send($message);
+
+        $this->createEmailEntity($user, $title, $cancelEmailHash);
+    }
+
+    public function sendGeneratedPassword(User $user, string $newPassword): void
+    {
+        $title = 'The Quizzer - tavo naujas slaptažodis';
+        $cancelEmailHash = $this->buildEmailHash();
+
+        $message = (new \Swift_Message($title))
+            ->setFrom(['quizzerlt@gmail.com' => 'Ponas Quizzer'])
+            ->setTo($user->getEmail())
+            ->setBody(
+                $this->renderView(
+                    'emails/password_reminder_new_pass.html.twig',
+                    [
+                        'user' => $user,
+                        'newPassword' => $newPassword
+                    ]
+                ),
+                'text/html'
+            );
+
+        $this->mailer->send($message);
+
+        $this->createEmailEntity($user, $title, $cancelEmailHash);
+    }
+
+    public function buildEmailHash(): string
     {
         return time() . bin2hex(random_bytes(16)) . 'quizzer';
     }

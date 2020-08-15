@@ -72,10 +72,16 @@ class User implements UserInterface
      */
     private $emails;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PasswordReminder", mappedBy="user")
+     */
+    private $passwordReminders;
+
     public function __construct()
     {
         $this->questionAnswers = new ArrayCollection();
         $this->emails = new ArrayCollection();
+        $this->passwordReminders = new ArrayCollection();
     }
 
     /**
@@ -287,6 +293,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($email->getUser() === $this) {
                 $email->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PasswordReminder[]
+     */
+    public function getPasswordReminders(): Collection
+    {
+        return $this->passwordReminders;
+    }
+
+    public function addPasswordReminder(PasswordReminder $passwordReminder): self
+    {
+        if (!$this->passwordReminders->contains($passwordReminder)) {
+            $this->passwordReminders[] = $passwordReminder;
+            $passwordReminder->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePasswordReminder(PasswordReminder $passwordReminder): self
+    {
+        if ($this->passwordReminders->contains($passwordReminder)) {
+            $this->passwordReminders->removeElement($passwordReminder);
+            // set the owning side to null (unless already changed)
+            if ($passwordReminder->getUser() === $this) {
+                $passwordReminder->setUser(null);
             }
         }
 
