@@ -5,6 +5,12 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install git zlib1g-dev libxml2-dev libzip-dev -y
 # Install PHP extensions
 RUN docker-php-ext-install zip intl mysqli pdo pdo_mysql
+# Install XDEBUG
+RUN pecl install xdebug-2.9.6 && docker-php-ext-enable xdebug
+RUN echo 'zend_extension="/usr/local/lib/php/extensions/no-debug-non-zts-20190902/xdebug.so"' >> /usr/local/etc/php/php.ini
+RUN echo 'xdebug.remote_port=9000' >> /usr/local/etc/php/php.ini
+RUN echo 'xdebug.remote_enable=1' >> /usr/local/etc/php/php.ini
+RUN echo 'xdebug.remote_connect_back=1' >> /usr/local/etc/php/php.ini
 # Install composer command
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 # Install symfony command
