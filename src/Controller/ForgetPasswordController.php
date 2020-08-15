@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\PasswordReminder;
 use App\Entity\User;
 use App\Form\RemindPasswordFormType;
+use App\Repository\PasswordReminderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,9 +64,10 @@ class ForgetPasswordController extends AbstractController
      */
     public function resetPassword(string $reminderToken)
     {
+        /** @var PasswordReminderRepository $passwordReminderRepo */
+        $passwordReminderRepo = $this->getDoctrine()->getManager()->getRepository(PasswordReminder::class);
         /** @var PasswordReminder|null $passwordReminder */
-        $passwordReminder = $this->getDoctrine()->getManager()->getRepository(PasswordReminder::class)
-            ->findPasswordReminderByToken($reminderToken);
+        $passwordReminder = $passwordReminderRepo->findPasswordReminderByToken($reminderToken);
 
         if ($passwordReminder) {
             $newPassword = bin2hex(random_bytes(4));
