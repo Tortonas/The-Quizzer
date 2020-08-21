@@ -17,7 +17,6 @@ jobs:
       - name: Run PHPSTAN
         run: docker exec quizzer_web ./vendor/bin/phpstan analyse src --level 5
       - name: Deploy to live
-          uses: distributhor/workflow-webhook@v1
-          env:
-            webhook_url: ${{ secrets.WEBHOOK_URL }}
-            webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
+        uses: distributhor/workflow-webhook@v1
+        env:
+          webhook_url: ${{ secrets.DEPLOY_WEBHOOK }}
