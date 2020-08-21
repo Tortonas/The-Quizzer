@@ -1,0 +1,2 @@
+*.html.twig linguist-vendored
+*.sql linguist-vendored
