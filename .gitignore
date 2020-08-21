@@ -24,3 +24,6 @@
 
 ###docker
 docker-compose.override.yml
+
+#npm
+node_modules
