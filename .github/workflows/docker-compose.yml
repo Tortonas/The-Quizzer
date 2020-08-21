@@ -15,6 +15,6 @@ jobs:
         run: docker exec quizzer_web ./vendor/bin/phpunit
       - name: Run PHPSTAN
         run: docker exec quizzer_web ./vendor/bin/phpstan analyse src --level 5
-      - if: ${{ github.ref }} == 'master'
-        name: Deploy to live
+      - name: Deploy to live
+        if: ${{ github.ref == 'master' }}
         run: wget ${{ secrets.DEPLOY_WEBHOOK }}
