@@ -167,7 +167,7 @@ class EmailController extends AbstractController
                 ->setTo($user->getEmail())
                 ->setBody(
                     $this->renderView(
-                        'emails/marketing_purple.html.twig',
+                        'emails/marketing_with_girl.html.twig',
                         [
                             'name' => $user->getUsername(),
                             'cancelEmailHash' => $cancelEmailHash
