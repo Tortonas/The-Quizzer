@@ -77,11 +77,17 @@ class User implements UserInterface
      */
     private $passwordReminders;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\DiscordUser", mappedBy="user")
+     */
+    private $discordUsers;
+
     public function __construct()
     {
         $this->questionAnswers = new ArrayCollection();
         $this->emails = new ArrayCollection();
         $this->passwordReminders = new ArrayCollection();
+        $this->discordUsers = new ArrayCollection();
     }
 
     /**
@@ -324,6 +330,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($passwordReminder->getUser() === $this) {
                 $passwordReminder->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DiscordUser[]
+     */
+    public function getDiscordUsers(): Collection
+    {
+        return $this->discordUsers;
+    }
+
+    public function addDiscordUser(DiscordUser $discordUser): self
+    {
+        if (!$this->discordUsers->contains($discordUser)) {
+            $this->discordUsers[] = $discordUser;
+            $discordUser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDiscordUser(DiscordUser $discordUser): self
+    {
+        if ($this->discordUsers->contains($discordUser)) {
+            $this->discordUsers->removeElement($discordUser);
+            // set the owning side to null (unless already changed)
+            if ($discordUser->getUser() === $this) {
+                $discordUser->setUser(null);
             }
         }
 
