@@ -90,9 +90,42 @@ class DiscordIntegrationController extends AbstractController
         return $this->failedToDeserializeJSON();
     }
 
+    /**
+     * @Route("/api/discord/current_question", name="discord_current_question")
+     * @return JsonResponse
+     */
+    public function discordCurrentQuestion(): JsonResponse
+    {
+        $currentQuestion = $this->getCurrentQuestion();
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $currentQuestionModifyTime = $currentQuestion->getTimeModified()->getTimestamp()+(60*3);
+        $currentQuestionModifyTime = date("Y-m-d H:i:s", $currentQuestionModifyTime);
+
+        $currentDateTimeString = date('Y-m-d H:i:s');
+        if($currentQuestionModifyTime < $currentDateTimeString)
+        {
+            $this->homeController->setNewQuestion($entityManager, $currentDateTimeString, $currentQuestion);
+        }
+
+        $currentQuestion = $this->getCurrentQuestion();
+        $secondsTillNewQuestion = $this->whenQuestionWillResetSeconds($currentQuestion);
+
+        $responseText = 'Klausimas - ' . $currentQuestion->getQuestion() . '. Klausimas atsinaujins po '
+            . $secondsTillNewQuestion . ' sekundžių.';
+
+        return $this->json($responseText);
+    }
+
     private function failedToDeserializeJSON(): JsonResponse
     {
         return $this->json('Bad JSON data, failed to deserialize')->setStatusCode(400);
+    }
+
+    private function whenQuestionWillResetSeconds(Question $currentQuestion): int
+    {
+        $currentDateTime = new \DateTime();
+        return $currentQuestion->getTimeModified()->getTimestamp()+(60*3) - $currentDateTime->getTimestamp();
     }
 
     private function getCurrentQuestion(): ?Question
