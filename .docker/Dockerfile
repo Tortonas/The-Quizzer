@@ -5,6 +5,14 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install git zlib1g-dev libxml2-dev libzip-dev -y
 # Install PHP extensions
 RUN docker-php-ext-install zip intl mysqli pdo pdo_mysql
+# Install NPM
+RUN apt-get install npm -y
+# Install node manager - n
+RUN npm install -g n
+# Install latest stable node version
+RUN n stable
+# Upgrade npm to latest version
+RUN npm install -g npm
 # Install XDEBUG
 RUN pecl install xdebug-2.9.6 && docker-php-ext-enable xdebug
 RUN echo 'zend_extension="/usr/local/lib/php/extensions/no-debug-non-zts-20190902/xdebug.so"' >> /usr/local/etc/php/php.ini
