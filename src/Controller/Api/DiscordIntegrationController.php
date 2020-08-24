@@ -117,6 +117,40 @@ class DiscordIntegrationController extends AbstractController
         return $this->json($responseText);
     }
 
+    /**
+     * @Route("/api/discord/skip_question", name="discord_skip_question")
+     * @return JsonResponse
+     */
+    public function discordSkipQuestion(): JsonResponse
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $currentDateTimeString = date('Y-m-d H:i:s');
+
+        $currentQuestion = $this->getCurrentQuestion();
+        $secondsTillNewQuestion = $this->whenQuestionWillResetSeconds($currentQuestion) - 150;
+
+        if ($secondsTillNewQuestion >= 0) {
+            return $this->json('Nepraėjo 30 sekundžių. Skipinti negalima. Dar liko - ' . $secondsTillNewQuestion . 'sec.');
+        } else {
+            $this->homeController->setNewQuestion($entityManager, $currentDateTimeString, $currentQuestion);
+            return $this->json('Praeitas klausimas praleistas! Užkrautas naujas! Atsakymas buvo - ' . $currentQuestion->getAnswer());
+        }
+    }
+
+    /**
+     * @Route("/api/discord/prev_question_answer", name="discord_prev_question_answer")
+     * @return JsonResponse
+     */
+    public function discordPrevQuestion(): JsonResponse
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $previousQuestionArray = $entityManager->getRepository(Question::class)->findBy(array('active' => 0), array('timeModified' => 'DESC'), 1);
+        $previousQuestion = $previousQuestionArray[0];
+
+        return $this->json('Praeitas klausimas - ' . $previousQuestion->getQuestion() . ' (Ats: ' . $previousQuestion->getAnswer() . ')');
+    }
+
     private function failedToDeserializeJSON(): JsonResponse
     {
         return $this->json('Bad JSON data, failed to deserialize')->setStatusCode(400);
