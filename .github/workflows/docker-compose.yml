@@ -11,6 +11,10 @@ jobs:
         run: docker-compose up -d --build
       - name: Install dependencies via composer
         run: docker exec quizzer_web composer install
+      - name: Update database scheme
+        run: docker exec quizzer_web bin/console d:s:u --force
+      - name: Add fixtures
+        run: docker exec quizzer_web bin/console doctrine:fixtures:load --append
       - name: Run PHPUNIT
         run: docker exec quizzer_web ./vendor/bin/phpunit
       - name: Run PHPSTAN
