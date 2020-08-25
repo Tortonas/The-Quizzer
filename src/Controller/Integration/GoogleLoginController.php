@@ -4,11 +4,13 @@ namespace App\Controller\Integration;
 
 use App\Entity\QuestionAnswer;
 use App\Entity\User;
+use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
 use KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\GoogleUser;
+use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -53,9 +55,12 @@ class GoogleLoginController extends AbstractController
             // the exact class depends on which provider you're using
 
             $entityManager = $this->getDoctrine()->getManager();
-            /** @var GoogleUser $user */
-            $user = $client->fetchUser();
-            $userInDatabase = $entityManager->getRepository(User::class)->findOneBy(array(
+            /** @var GoogleUser|null $user */
+            $user = $this->fetchUserIfPossible($client);
+
+            if (!$user) {
+                return $this->redirectToRoute('app_home');
+            }            $userInDatabase = $entityManager->getRepository(User::class)->findOneBy(array(
                 'email' => $user->getEmail()));
 
             if($userInDatabase == null)
@@ -127,6 +132,15 @@ class GoogleLoginController extends AbstractController
             // something went wrong!
             // probably you should return the reason to the user
             var_dump($e->getMessage()); die;
+        }
+    }
+
+    private function fetchUserIfPossible(OAuth2ClientInterface $client): ?ResourceOwnerInterface
+    {
+        try {
+            return $client->fetchUser();
+        } catch (\Exception $exception) {
+            return null;
         }
     }
 }

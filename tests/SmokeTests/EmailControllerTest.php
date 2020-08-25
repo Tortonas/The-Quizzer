@@ -13,10 +13,13 @@ class EmailControllerTest extends TestCase
 
     public function setUp(): void
     {
-        $this->client = new Client(['base_uri' => $_ENV['LOCAL_WEB_DEV_IP']]);
+        $this->client = new Client([
+            'base_uri' => $_ENV['LOCAL_WEB_DEV_IP'],
+            'http_errors' => false
+        ]);
     }
 
-    public function testCancelEmailHash()
+    public function testCancelEmailHash(): void
     {
         $response = $this->client->request('GET', '/cancel/email/5252525');
 

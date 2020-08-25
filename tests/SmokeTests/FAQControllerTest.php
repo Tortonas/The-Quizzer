@@ -13,10 +13,13 @@ class FAQControllerTest extends TestCase
 
     public function setUp(): void
     {
-        $this->client = new Client(['base_uri' => $_ENV['LOCAL_WEB_DEV_IP']]);
+        $this->client = new Client([
+            'base_uri' => $_ENV['LOCAL_WEB_DEV_IP'],
+            'http_errors' => false
+        ]);
     }
 
-    public function testDukEndpoint()
+    public function testDukEndpoint(): void
     {
         $response = $this->client->request('GET', '/duk');
 

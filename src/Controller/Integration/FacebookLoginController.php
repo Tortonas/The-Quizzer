@@ -5,6 +5,8 @@ namespace App\Controller\Integration;
 use App\Entity\QuestionAnswer;
 use App\Entity\User;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
+use KnpU\OAuth2ClientBundle\Client\Provider\FacebookClient;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\FacebookUser;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
@@ -52,8 +54,14 @@ class FacebookLoginController extends AbstractController
         $client = $clientRegistry->getClient('facebook');
 
         $entityManager = $this->getDoctrine()->getManager();
-        /** @var FacebookUser $user */
-        $user = $client->fetchUser();
+
+        /** @var FacebookUser|null $user */
+        $user = $this->fetchUserIfPossible($client);
+
+        if (!$user) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $userInDatabase = $entityManager->getRepository(User::class)->findOneBy(array(
             'email' => $user->getEmail()));
 
@@ -117,5 +125,14 @@ class FacebookLoginController extends AbstractController
         $response->send();
 
         return $this->redirectToRoute('app_home');
+    }
+
+    private function fetchUserIfPossible(OAuth2ClientInterface $client): ?ResourceOwnerInterface
+    {
+        try {
+            return $client->fetchUser();
+        } catch (\Exception $exception) {
+            return null;
+        }
     }
 }

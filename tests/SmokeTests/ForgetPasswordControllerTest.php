@@ -7,7 +7,7 @@ namespace App\Tests\SmokeTests;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
 
-class AdControllerTest extends TestCase
+class ForgetPasswordControllerTest extends TestCase
 {
     private Client $client;
 
@@ -19,9 +19,16 @@ class AdControllerTest extends TestCase
         ]);
     }
 
-    public function testAdEndpoint(): void
+    public function testForgetPassword(): void
     {
-        $response = $this->client->request('GET', '/ad');
+        $response = $this->client->request('GET', '/forget/password');
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function testResetPassword(): void
+    {
+        $response = $this->client->request('GET', '/reset/password/42424224');
 
         $this->assertEquals(200, $response->getStatusCode());
     }

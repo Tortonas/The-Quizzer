@@ -7,7 +7,7 @@ namespace App\Tests\SmokeTests;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
 
-class AdControllerTest extends TestCase
+class SecurityControllerTest extends TestCase
 {
     private Client $client;
 
@@ -19,9 +19,9 @@ class AdControllerTest extends TestCase
         ]);
     }
 
-    public function testAdEndpoint(): void
+    public function testDukEndpoint(): void
     {
-        $response = $this->client->request('GET', '/ad');
+        $response = $this->client->request('GET', '/duk');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
