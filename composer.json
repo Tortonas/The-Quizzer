@@ -5,6 +5,9 @@
         "php": "^7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
+        "easycorp/easyadmin-bundle": "^3.1",
+        "guzzlehttp/guzzle": "^6.0",
         "knpuniversity/oauth2-client-bundle": "^1.32",
         "league/oauth2-facebook": "^2.0",
         "league/oauth2-google": "^3.0",
@@ -34,9 +37,7 @@
         "symfony/twig-pack": "*",
         "symfony/validator": "5.0.*",
         "symfony/web-link": "5.0.*",
-        "symfony/yaml": "5.0.*",
-        "guzzlehttp/guzzle": "^6.0",
-        "ext-json": "*"
+        "symfony/yaml": "5.0.*"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",

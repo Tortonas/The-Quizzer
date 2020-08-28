@@ -90,6 +90,11 @@ class User implements UserInterface
         $this->discordUsers = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->username . ' (' . $this->email . ')';
+    }
+
     /**
      * @return mixed
      */

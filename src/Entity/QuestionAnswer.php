@@ -59,6 +59,15 @@ class QuestionAnswer
         return $this->user;
     }
 
+    public function getUserFullName(): ?string
+    {
+        if ($this->user) {
+            return $this->user->getUsername();
+        }
+
+        return null;
+    }
+
     public function setUser(?User $user): self
     {
         $this->user = $user;

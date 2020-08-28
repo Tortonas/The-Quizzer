@@ -14,17 +14,17 @@ class GlobalNotification
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $text;
+    private ?string $text = null;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTimeInterface $endDate;
+    private ?\DateTimeInterface $endDate = null;
 
     public function getId(): ?int
     {
