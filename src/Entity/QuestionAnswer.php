@@ -14,28 +14,28 @@ class QuestionAnswer
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTimeInterface $timeAnswered;
+    private ?\DateTimeInterface $timeAnswered = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="questionAnswers")
      */
-    private ?User $user;
+    private ?User $user = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $username;
+    private ?string $username = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Question", inversedBy="questionAnswers")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?Question $question;
+    private ?Question $question = null;
 
     public function getId(): ?int
     {

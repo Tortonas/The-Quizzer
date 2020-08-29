@@ -135,4 +135,9 @@ class Question
     {
         $this->active = $active;
     }
+
+    public function __toString()
+    {
+        return $this->question;
+    }
 }

@@ -14,17 +14,17 @@ class FreqAskedQuestion
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $question;
+    private string $question = "";
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $answer;
+    private string $answer = "";
 
     public function getId(): ?int
     {

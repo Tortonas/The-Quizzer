@@ -19,7 +19,7 @@ class User implements UserInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -45,12 +45,12 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="date")
      */
-    private \DateTimeInterface $registerAt;
+    private ?\DateTimeInterface $registerAt = null;
     
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\QuestionAnswer", mappedBy="user")
      */
-    private $questionAnswers;
+    private $questionAnswers = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -70,17 +70,17 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Email", mappedBy="user")
      */
-    private $emails;
+    private $emails = [];
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\PasswordReminder", mappedBy="user")
      */
-    private $passwordReminders;
+    private $passwordReminders = [];
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\DiscordUser", mappedBy="user")
      */
-    private $discordUsers;
+    private $discordUsers = [];
 
     public function __construct()
     {

@@ -20,7 +20,8 @@ class QuestionAnswerCrudController extends AbstractCrudController
         return [
             DateTimeField::new('timeAnswered'),
             TextField::new('username'),
-            AssociationField::new('user')
+            AssociationField::new('user'),
+            AssociationField::new('question')
         ];
     }
 }
