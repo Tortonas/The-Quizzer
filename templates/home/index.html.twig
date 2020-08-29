@@ -47,8 +47,8 @@
     {% else %}
         <div id="lastQuestion" class="card mx-auto mt-5 transparent card-size">
             <div class="card-body">
-                <h5 class="card-subtitle mb-2">Prieš tai buvęs klausimas - {{ previousQuestion.question }}</h5>
-                <h6 class="card-subtitle mb-2">Atsakymas - {{ previousQuestion.answer }}</h6>
+                <h5 class="card-subtitle mb-2" id="previousQuestion">Prieš tai buvęs klausimas - {{ previousQuestion.question }}</h5>
+                <h6 class="card-subtitle mb-2" id="previousQuestionAnswer">Atsakymas - {{ previousQuestion.answer }}</h6>
             </div>
         </div>
 
@@ -67,13 +67,13 @@
                 <h1 class="h2 text-center">The Quizzer - įvairūs loginiai, linksmi klausimai su atsakymais!</h1>
                 <h2 class="card-title text-center">Klausimas</h2>
                 {% if lastQuestionAnswererUserId == -1 %}
-                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - {{ lastQuestionAnswerer[0:25] }} (Prieš {{ lastQuestionAnsweredWhen }})</h6>
+                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - {{ lastQuestionAnswerer[0:25] }} <span id="lastQuestionAnsweredWhen">(Prieš {{ lastQuestionAnsweredWhen }})</span></h6>
                 {% else %}
-                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - <a href="{{ path('app_view_other_profile', { 'slug': lastQuestionAnswererUserId }) }}">{{ lastQuestionAnswerer[0:25] }}</a> (Prieš {{ lastQuestionAnsweredWhen }})</h6>
+                    <h6 class="card-subtitle mb-2">Į paskutinį klausimą atsakė - <a id="lastQuestionAnswererWithIdHref" href="{{ path('app_view_other_profile', { 'slug': lastQuestionAnswererUserId }) }}">{{ lastQuestionAnswerer[0:25] }}</a> <span id="lastQuestionAnsweredWhen">(Prieš {{ lastQuestionAnsweredWhen }})</span></h6>
                 {% endif %}
                 <h6 id="timer" class="card-subtitle">Klausimas atsinaujins už kelių minučių.</h6>
                 <h6><a href="javascript:;" id="showPreviousQuestion">Parodyti prieš tai buvusį klausimą</a></h6>
-                <h3 class="card-text">{{ question[0].question }}</h3>
+                <h3 class="card-text" id="currentQuestion">{{ question[0].question }}</h3>
                 {{ form_start(submitAnswerForm) }}
                     {% for message in app.flashes('danger-submit-form') %}
                         <div class="alert alert-danger">
@@ -155,12 +155,14 @@
             }, 1000);
 
             let y = setInterval( async function() {
-                const response = await fetch('./api/question');
-                const myText = await response.text();
-                if(myText !== '{{ question[0].question }}')
-                {
-                    location.reload();
-                }
+                const response = await fetch('./api/front_page_info');
+                const frontPageInfoJson = await response.text();
+                const frontPageInfoObj = JSON.parse(frontPageInfoJson);
+                document.getElementById("currentQuestion").innerHTML = frontPageInfoObj.currentQuestion;
+                document.getElementById("previousQuestion").innerHTML = frontPageInfoObj.previousQuestion;
+                document.getElementById("previousQuestionAnswer").innerHTML = frontPageInfoObj.previousQuestionAnswer;
+                document.getElementById("lastQuestionAnsweredWhen").innerHTML = '(Prieš ' + frontPageInfoObj.lastQuestionAnsweredWhen + ')';
+
             }, 3000);
         </script>
 

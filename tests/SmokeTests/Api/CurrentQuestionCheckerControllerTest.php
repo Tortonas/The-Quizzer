@@ -32,4 +32,11 @@ class CurrentQuestionCheckerControllerTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
     }
+
+    public function testFrontPageInfo(): void
+    {
+        $response = $this->client->request('GET', '/api/front_page_info');
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }
