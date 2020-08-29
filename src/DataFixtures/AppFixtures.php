@@ -50,12 +50,24 @@ class AppFixtures extends Fixture
     private function generateUser(): User
     {
         $user = new User();
-        $user->setEmail('quizzer@quizzer.dev');
-        $user->setEmailSubscription(false);
+        $user->setEmail('admin@admin.dev');
+        $user->setEmailSubscription(true);
         $user->setLastTimeGotEmail(new \DateTime('2020-01-01'));
-        // hashed password of this string -> quizzer
-        $user->setPassword('$argon2id$v=19$m=65536,t=4,p=1$BcBVS+gbaxnApK/kFTEBOw$hZbYuLENZ34yWzvhT05XZHQJSBwkBojLoBoCNgOBp6Y');
-        $user->setUsername('quizzer');
+        // hashed password of this string -> admin
+        $user->setPassword('$argon2id$v=19$m=65536,t=4,p=1$Z0dFckxiSDJSelpqc0I3Tg$VqckwJeFQ8JA3pOYN4664C9uejMbpTcYy7d+1++9eFQ');
+        $user->setUsername('Admin');
+        $user->setRegisterAt(new \DateTime());
+        $user->setLastVisit(new \DateTime());
+        $user->setRoles(['ROLE_ADMIN']);
+        $this->manager->persist($user);
+
+        $user = new User();
+        $user->setEmail('user@user.dev');
+        $user->setEmailSubscription(true);
+        $user->setLastTimeGotEmail(new \DateTime('2020-01-01'));
+        // hashed password of this string -> user
+        $user->setPassword('$argon2id$v=19$m=65536,t=4,p=1$DCnChjDNGC4QmtrQWIv5mw$euEzmgQS8ry9vLWjIYi29sobJsa7WTRqDNmwa8h2VzY');
+        $user->setUsername('User');
         $user->setRegisterAt(new \DateTime());
         $user->setLastVisit(new \DateTime());
         $user->setRoles([]);
@@ -88,7 +100,7 @@ class AppFixtures extends Fixture
         $this->manager->persist($question);
 
         $questionAnswer = new QuestionAnswer();
-        $questionAnswer->setUsername('Quizzer');
+        $questionAnswer->setUsername('Admin');
         $questionAnswer->setUser($user);
         $questionAnswer->setQuestion($question);
         $questionAnswer->setTimeAnswered(new \DateTime());
