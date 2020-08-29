@@ -9,6 +9,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Docker compose up
         run: docker-compose up -d --build
+      - name: Remove bundles from public dir
+        run: docker exec quizzer_web rm -rf ./public/bundles/
       - name: Install dependencies via composer
         run: docker exec quizzer_web composer install
       - name: Update database scheme
