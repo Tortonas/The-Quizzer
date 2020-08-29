@@ -4,6 +4,8 @@ namespace App\Controller\Crud;
 
 use App\Entity\GlobalNotification;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class GlobalNotificationCrudController extends AbstractCrudController
 {
@@ -12,14 +14,11 @@ class GlobalNotificationCrudController extends AbstractCrudController
         return GlobalNotification::class;
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('text'),
+            DateTimeField::new('endDate'),
         ];
     }
-    */
 }

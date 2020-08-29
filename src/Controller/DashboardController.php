@@ -23,7 +23,7 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        if ($this->getUser() && $this->getUser()->getRoles()[0] == 'ROLE_ADMIN') {
+        if ($this->isGranted('ROLE_ADMIN')) {
             $routeBuilder = $this->get(CrudUrlGenerator::class)->build();
 
             return $this->redirect($routeBuilder->setController(QuestionCrudController::class)->generateUrl());
@@ -40,13 +40,14 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Questions', 'icon class', Question::class);
-        yield MenuItem::linkToCrud('Question answers', 'icon class', QuestionAnswer::class);
-        yield MenuItem::linkToCrud('Discord users', 'icon class', DiscordUser::class);
-        yield MenuItem::linkToCrud('Users', 'icon class', User::class);
-        yield MenuItem::linkToCrud('FAQ\'s', 'icon class', FreqAskedQuestion::class);
-        yield MenuItem::linkToCrud('Global notifications', 'icon class', GlobalNotification::class);
-
+        if ($this->isGranted('ROLE_ADMIN')) {
+            yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
+            yield MenuItem::linkToCrud('Questions', 'icon class', Question::class);
+            yield MenuItem::linkToCrud('Question answers', 'icon class', QuestionAnswer::class);
+            yield MenuItem::linkToCrud('Discord users', 'icon class', DiscordUser::class);
+            yield MenuItem::linkToCrud('Users', 'icon class', User::class);
+            yield MenuItem::linkToCrud('FAQ\'s', 'icon class', FreqAskedQuestion::class);
+            yield MenuItem::linkToCrud('Global notifications', 'icon class', GlobalNotification::class);
+        }
     }
 }

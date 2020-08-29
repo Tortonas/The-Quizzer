@@ -4,6 +4,7 @@ namespace App\Controller\Crud;
 
 use App\Entity\FreqAskedQuestion;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class FreqAskedQuestionCrudController extends AbstractCrudController
 {
@@ -12,14 +13,11 @@ class FreqAskedQuestionCrudController extends AbstractCrudController
         return FreqAskedQuestion::class;
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('question'),
+            TextField::new('answer'),
         ];
     }
-    */
 }

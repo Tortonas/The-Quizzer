@@ -79,21 +79,21 @@ class AppFixtures extends Fixture
     private function generateQuestionsWithAnswers(User $user): void
     {
         $question = new Question();
-        $question->setActive(1);
+        $question->setActive(true);
         $question->setQuestion('Whats 2+2?');
         $question->setAnswer('4');
         $question->setTimeModified(new \DateTime('2020-01-01'));
         $this->manager->persist($question);
 
         $question = new Question();
-        $question->setActive(0);
+        $question->setActive(false);
         $question->setQuestion('Whats 3+3?');
         $question->setAnswer('6');
         $question->setTimeModified(new \DateTime('2020-01-02'));
         $this->manager->persist($question);
 
         $question = new Question();
-        $question->setActive(0);
+        $question->setActive(false);
         $question->setQuestion('Whats 5+5?');
         $question->setAnswer('10');
         $question->setTimeModified(new \DateTime('2020-01-03'));

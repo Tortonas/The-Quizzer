@@ -237,14 +237,14 @@ class HomeController extends AbstractController
 
     public function setNewQuestion($entityManager, $currentDateTime, $currentQuestion): void
     {
-        $newQuestionArray = $entityManager->getRepository(Question::class)->findBy(array('active' => 0), array('timeModified' => 'ASC'), 1);
+        $newQuestionArray = $entityManager->getRepository(Question::class)->findBy(array('active' => false), array('timeModified' => 'ASC'), 1);
         $newQuestion = $newQuestionArray[0];
         /** @var Question $newQuestion */
-        $newQuestion->setActive(1);
+        $newQuestion->setActive(true);
         $newQuestion->setTimeModified(new \DateTime($currentDateTime));
 
         /** @var Question $currentQuestion */
-        $currentQuestion->setActive(0);
+        $currentQuestion->setActive(false);
         $currentQuestion->setTimeModified(new \DateTime($currentDateTime));
 
         /** @var EntityManager $entityManager */

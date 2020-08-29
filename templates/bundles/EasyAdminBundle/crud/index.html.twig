@@ -30,15 +30,6 @@
     <a href="{{ path('app_home') }}">Atgal į quizzer.lt</a>
     {{ parent() }}
 
-    {# TODO:
-    {% block batch_actions %}
-        {% for batchAction in ea.crud.actions.batchActions %}
-            {{ include(batchAction.templatePath, { action: batchAction }, with_context = false) }}
-        {% endfor %}
-
-        {{ include('@EasyAdmin/crud/includes/_batch_action_modal.html.twig', {}, with_context = false) }}
-    {% endblock %}
-    #}
 {% endblock content_header %}
 
 {% block main %}

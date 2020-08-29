@@ -39,9 +39,9 @@ class Question
     private $questionAnswers = [];
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="boolean")
      */
-    private ?int $active = null;
+    private ?bool $active = null;
 
     public function __construct()
     {
