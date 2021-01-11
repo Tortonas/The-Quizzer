@@ -82,6 +82,11 @@ class DiscordUser
         return $this->admin;
     }
 
+    public function isAdmin(): ?bool
+    {
+        return $this->getAdmin();
+    }
+
     public function setAdmin(bool $admin): self
     {
         $this->admin = $admin;

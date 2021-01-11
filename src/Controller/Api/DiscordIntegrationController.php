@@ -58,7 +58,7 @@ class DiscordIntegrationController extends AbstractController
             if ($user) {
                 return $this->json('Slapyvardis nustatytas!');
             } else {
-                return $this->json('Toks slapyvardis neegzistuoja sistemoje, bet vistiek gali atsakinėti į klausimus. Neprarask taškų atsakinėdamas ir užsiregistruok https://quizzer.lt/register');
+                return $this->json('Toks slapyvardis neegzistuoja sistemoje, bet vistiek gali atsakinėti į klausimus. Neprarask taškų atsakinėdamas ir užsiregistruok https://raskladuske.wtf/register');
             }
         }
 
@@ -119,18 +119,31 @@ class DiscordIntegrationController extends AbstractController
 
     /**
      * @Route("/api/discord/skip_question", name="discord_skip_question")
+     * @param Request $request
      * @return JsonResponse
      */
-    public function discordSkipQuestion(): JsonResponse
+    public function discordSkipQuestion(Request $request): JsonResponse
     {
+        $data = json_decode($request->getContent());
+
         $entityManager = $this->getDoctrine()->getManager();
-
         $currentDateTimeString = date('Y-m-d H:i:s');
-
         $currentQuestion = $this->getCurrentQuestion();
+
         $secondsTillNewQuestion = $this->whenQuestionWillResetSeconds($currentQuestion) - 150;
 
         if ($secondsTillNewQuestion >= 0) {
+            if ($data && property_exists($data, 'discord')) {
+                $discordUser = $entityManager->getRepository(DiscordUser::class)->findOneBy([
+                    'discordId' => $data['discordId']
+                ]);
+
+                if ($discordUser && $discordUser->isAdmin()) {
+                    $this->homeController->setNewQuestion($entityManager, $currentDateTimeString, $currentQuestion);
+                    return $this->json('Kadangi jūs adminas, todėl praeitas klausimas praleistas be laikmačio! Užkrautas naujas! Atsakymas buvo - ' . $currentQuestion->getAnswer());
+                }
+            }
+
             return $this->json('Nepraėjo 30 sekundžių. Skipinti negalima. Dar liko - ' . $secondsTillNewQuestion . 'sec.');
         } else {
             $this->homeController->setNewQuestion($entityManager, $currentDateTimeString, $currentQuestion);
