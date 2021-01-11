@@ -42,12 +42,12 @@ class DashboardController extends AbstractDashboardController
     {
         if ($this->isGranted('ROLE_ADMIN')) {
             yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-            yield MenuItem::linkToCrud('Questions', 'icon class', Question::class);
-            yield MenuItem::linkToCrud('Question answers', 'icon class', QuestionAnswer::class);
-            yield MenuItem::linkToCrud('Discord users', 'icon class', DiscordUser::class);
-            yield MenuItem::linkToCrud('Users', 'icon class', User::class);
-            yield MenuItem::linkToCrud('FAQ\'s', 'icon class', FreqAskedQuestion::class);
-            yield MenuItem::linkToCrud('Global notifications', 'icon class', GlobalNotification::class);
+            yield MenuItem::linkToCrud('Questions', 'fas fa-question', Question::class);
+            yield MenuItem::linkToCrud('Question answers', 'fab fa-acquisitions-incorporated', QuestionAnswer::class);
+            yield MenuItem::linkToCrud('Discord users', 'fab fa-discord', DiscordUser::class);
+            yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
+            yield MenuItem::linkToCrud('FAQ\'s', 'far fa-question-circle', FreqAskedQuestion::class);
+            yield MenuItem::linkToCrud('Global notifications', 'fas fa-bell', GlobalNotification::class);
         }
     }
 }
