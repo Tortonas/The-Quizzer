@@ -53,17 +53,6 @@ services:
     networks:
       default:
         ipv4_address: 192.168.2.5
-
-  develop_init:
-    build: ./.docker
-    container_name: quizzer_develop_init
-    volumes:
-      - ./:/var/www/html/
-      - ./.docker/init_symfony.sh:/usr/local/bin/init_symfony.sh
-    depends_on:
-      - "mysql"
-      - "web"
-    command: "init_symfony.sh"
     
 networks:
   default:
