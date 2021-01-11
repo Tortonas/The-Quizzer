@@ -34,7 +34,7 @@ class DiscordUser
     /**
      * @ORM\Column(type="boolean")
      */
-    private $admin;
+    private $admin = false;
 
     public function getId(): ?int
     {
