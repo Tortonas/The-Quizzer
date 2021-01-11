@@ -135,7 +135,7 @@ class DiscordIntegrationController extends AbstractController
         if ($secondsTillNewQuestion >= 0) {
             if ($data && property_exists($data, 'discord')) {
                 $discordUser = $entityManager->getRepository(DiscordUser::class)->findOneBy([
-                    'discordId' => $data['discordId']
+                    'discordId' => $data['discord']
                 ]);
 
                 if ($discordUser && $discordUser->isAdmin()) {
