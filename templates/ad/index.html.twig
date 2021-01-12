@@ -12,7 +12,7 @@
     <style>
         body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; }
     </style>
-    <title>{% block title %}Quizzer.lt{% endblock %}</title>
+    <title>{% block title %}{{ DOMAIN }}{% endblock %}</title>
 </head>
 <body>
 
@@ -21,7 +21,7 @@
         <div class="card-body">
             <h5 class="card-title">Ar žinai atsakymą į šį klausimą?</h5>
             <h5 class="card-text font-weight-bold">{{ currentQuestion.question }}</h5>
-            <h5 class="card-text">Žinai? Apsilankyk <span class="font-weight-bold">QUIZZER.LT</span> ir atsakyk į klausimą</h5>
+            <h5 class="card-text">Žinai? Apsilankyk <span class="font-weight-bold">{{ DOMAIN }}</span> ir atsakyk į klausimą</h5>
         </div>
     </div>
 </div>

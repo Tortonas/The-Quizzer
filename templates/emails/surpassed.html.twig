@@ -350,7 +350,7 @@
                                 <tr>
                                     <td>
                                         <p>Labas {{ name }},</p>
-                                        <p>Rašau tau, nes tu buvai TOP5 lentelėje per quizzer.lt ir tu buvai aplenktas! Ar gi taip viską paliksi?</p>
+                                        <p>Rašau tau, nes tu buvai TOP5 lentelėje per {{ DOMAIN }} ir tu buvai aplenktas! Ar gi taip viską paliksi?</p>
                                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                                             <tbody>
                                             <tr>
@@ -358,7 +358,7 @@
                                                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                                         <tbody>
                                                         <tr>
-                                                            <td> <a href="https://quizzer.lt" target="_blank">Eiti į QUIZZER.LT</a> </td>
+                                                            <td> <a href="https://{{ DOMAIN }}" target="_blank">Eiti į {{ DOMAIN }}</a> </td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -381,8 +381,8 @@
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td class="content-block">
-                                <span class="apple-link">Quizzer.lt komanda</span>
-                                <br> Nepatinka el. laiškai? <a href="https://quizzer.lt/cancel/email/{{ cancelEmailHash }}" target="_blank">Atsisakyti prenumeratos. Spauskite čia.</a>.
+                                <span class="apple-link">{{ DOMAIN }} komanda</span>
+                                <br> Nepatinka el. laiškai? <a href="https://{{ DOMAIN }}/cancel/email/{{ cancelEmailHash }}" target="_blank">Atsisakyti prenumeratos. Spauskite čia.</a>.
                             </td>
                         </tr>
                     </table>

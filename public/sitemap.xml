@@ -6,27 +6,27 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 <url>
-  <loc>https://quizzer.lt/</loc>
+  <loc>https://raskladuske.wtf/</loc>
   <lastmod>2020-01-29T13:38:21+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://quizzer.lt/rezultatai</loc>
+  <loc>https://raskladuske.wtf/rezultatai</loc>
   <lastmod>2020-01-29T13:38:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://quizzer.lt/duk</loc>
+  <loc>https://raskladuske.wtf/duk</loc>
   <lastmod>2020-01-29T13:38:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://quizzer.lt/login</loc>
+  <loc>https://raskladuske.wtf/login</loc>
   <lastmod>2020-01-29T13:38:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://quizzer.lt/register</loc>
+  <loc>https://raskladuske.wtf/register</loc>
   <lastmod>2020-01-29T13:38:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
