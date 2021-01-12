@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
@@ -28,7 +29,12 @@ class UserCrudController extends AbstractCrudController
             DateTimeField::new('lastVisit'),
             BooleanField::new('emailSubscription'),
             DateTimeField::new('lastTimeGotEmail'),
-            ArrayField::new('roles')
+            ChoiceField::new('roles')
+            ->setChoices([
+                'Admin' => 'ROLE_ADMIN',
+                'User' => 'ROLE_USER'
+            ])
+            ->allowMultipleChoices()
         ];
     }
 }
