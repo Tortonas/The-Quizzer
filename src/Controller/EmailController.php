@@ -160,7 +160,7 @@ class EmailController extends AbstractController
     public function sendMarketingEmail(User $user): void
     {
         if ($user->getEmailSubscription()) {
-            $title = 'Sveikas, gal turi istorinių žinių ir nori laimėt?';
+            $title = 'Laabukas, gal turi istorinių žinių ir nori laimėt?';
             $cancelEmailHash = $this->buildEmailHash();
             $message = (new \Swift_Message($title))
                 ->setFrom(['quizzerlt@gmail.com' => 'Ponas Quizzer'])
