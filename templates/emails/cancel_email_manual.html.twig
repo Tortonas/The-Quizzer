@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}El. laiškų rankinis nutraukimas - Quizzer{% endblock %}
+
+{% block body %}
+    <div class="card transparent mt-5">
+        <div class="card-body">
+            <h1 class="text-center">Prenumeratos el. paštu atsisakymas</h1>
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {{ form(form) }}
+        </div>
+    </div>
+{% endblock %}

@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Email;
 use App\Entity\User;
+use App\Form\CancelEmailFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,6 +32,36 @@ class EmailController extends AbstractController
     {
         $this->mailer = $mailer;
         $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @Route("/cancel/email/manual", name="cancel_email_manual")
+     * @param Request $request
+     * @return Response
+     */
+    public function cancelEmailManual(Request $request): Response
+    {
+        $cancelEmailForm = $this->createForm(CancelEmailFormType::class);
+
+        $cancelEmailForm->handleRequest($request);
+
+        if ($cancelEmailForm->isSubmitted() && $cancelEmailForm->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $user = $entityManager->getRepository(User::class)->findOneBy([
+                'email' => $cancelEmailForm->getData()['email']
+            ]);
+
+            if ($user) {
+                $user->setEmailSubscription(false);
+                $entityManager->flush();
+            }
+
+            $this->addFlash('success', 'Jeigu su įvestu el. paštu buvo prenumeruojami laiškai, tai jie dabar atšaukti. Pasitikrinti galite prisijungę prie paskyros ir peržiūrėje statusą profilio informacijoje. :)');
+        }
+
+        return $this->render('emails/cancel_email_manual.html.twig', [
+            'form' => $cancelEmailForm->createView()
+        ]);
     }
 
     /**
