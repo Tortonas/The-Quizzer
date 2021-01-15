@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Email;
+use App\Entity\EmailCancelRequest;
 use App\Entity\User;
 use App\Form\CancelEmailFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -51,10 +52,22 @@ class EmailController extends AbstractController
                 'email' => $cancelEmailForm->getData()['email']
             ]);
 
+            $emailCancelRequest = new EmailCancelRequest();
+
+            $emailCancelRequest->setEmail($cancelEmailForm->getData()['email']);
+            $emailCancelRequest->setIp($request->getClientIp());
+
             if ($user) {
+                $emailCancelRequest->setUser($user);
+                if ($user->getEmailSubscription()) {
+                    $emailCancelRequest->setWasUserAffected(true);
+                }
+
                 $user->setEmailSubscription(false);
-                $entityManager->flush();
             }
+
+            $entityManager->persist($emailCancelRequest);
+            $entityManager->flush();
 
             $this->addFlash('success', 'Jeigu su įvestu el. paštu buvo prenumeruojami laiškai, tai jie dabar atšaukti. Pasitikrinti galite prisijungę prie paskyros ir peržiūrėje statusą profilio informacijoje. :)');
         }

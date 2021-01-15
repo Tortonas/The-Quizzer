@@ -25,4 +25,11 @@ class EmailControllerTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
     }
+
+    public function testCancelEmailManual(): void
+    {
+        $response = $this->client->request('GET', '/cancel/email/manual');
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

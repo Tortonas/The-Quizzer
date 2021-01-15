@@ -82,12 +82,18 @@ class User implements UserInterface
      */
     private $discordUsers = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\EmailCancelRequest", mappedBy="user")
+     */
+    private $date;
+
     public function __construct()
     {
         $this->questionAnswers = new ArrayCollection();
         $this->emails = new ArrayCollection();
         $this->passwordReminders = new ArrayCollection();
         $this->discordUsers = new ArrayCollection();
+        $this->date = new ArrayCollection();
     }
 
     public function __toString()
@@ -366,6 +372,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($discordUser->getUser() === $this) {
                 $discordUser->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|EmailCancelRequest[]
+     */
+    public function getDate(): Collection
+    {
+        return $this->date;
+    }
+
+    public function addDate(EmailCancelRequest $date): self
+    {
+        if (!$this->date->contains($date)) {
+            $this->date[] = $date;
+            $date->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDate(EmailCancelRequest $date): self
+    {
+        if ($this->date->contains($date)) {
+            $this->date->removeElement($date);
+            // set the owning side to null (unless already changed)
+            if ($date->getUser() === $this) {
+                $date->setUser(null);
             }
         }
 
