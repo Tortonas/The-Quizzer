@@ -6,6 +6,7 @@ use App\Entity\Email;
 use App\Entity\EmailCancelRequest;
 use App\Entity\User;
 use App\Form\CancelEmailFormType;
+use App\Manager\Notification\DiscordNotification;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,6 +66,11 @@ class EmailController extends AbstractController
 
                 $user->setEmailSubscription(false);
             }
+
+            $discordNotification = new DiscordNotification();
+            $discordNotification
+                ->setMessage($cancelEmailForm->getData()['email'] . ' cancelled emails!')
+                ->send();
 
             $entityManager->persist($emailCancelRequest);
             $entityManager->flush();
