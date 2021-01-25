@@ -117,14 +117,14 @@ class EventLogManager implements EventSubscriber
     private function objectToJson($object)
     {
         return []; //pafixint kad objekta i masyva transformintu normaliai
-        $jsonArray = [];
-
-        $objectReflection = new \ReflectionClass($object);
-        $objectProperties = $objectReflection->getProperties();
-        foreach ($objectProperties as $property) {
-            $jsonArray[$property->getName()] = $object->get[$property->getName()];
-        }
-
-        return $jsonArray;
+//        $jsonArray = [];
+//
+//        $objectReflection = new \ReflectionClass($object);
+//        $objectProperties = $objectReflection->getProperties();
+//        foreach ($objectProperties as $property) {
+//            $jsonArray[$property->getName()] = $object->get[$property->getName()];
+//        }
+//
+//        return $jsonArray;
     }
 }
