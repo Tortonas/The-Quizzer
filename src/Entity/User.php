@@ -87,6 +87,11 @@ class User implements UserInterface
      */
     private $date;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\EventLog", mappedBy="user")
+     */
+    private $eventLogs;
+
     public function __construct()
     {
         $this->questionAnswers = new ArrayCollection();
@@ -94,6 +99,7 @@ class User implements UserInterface
         $this->passwordReminders = new ArrayCollection();
         $this->discordUsers = new ArrayCollection();
         $this->date = new ArrayCollection();
+        $this->eventLogs = new ArrayCollection();
     }
 
     public function __toString()
@@ -404,6 +410,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($date->getUser() === $this) {
                 $date->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|EventLog[]
+     */
+    public function getEventLogs(): Collection
+    {
+        return $this->eventLogs;
+    }
+
+    public function addEventLog(EventLog $eventLog): self
+    {
+        if (!$this->eventLogs->contains($eventLog)) {
+            $this->eventLogs[] = $eventLog;
+            $eventLog->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventLog(EventLog $eventLog): self
+    {
+        if ($this->eventLogs->contains($eventLog)) {
+            $this->eventLogs->removeElement($eventLog);
+            // set the owning side to null (unless already changed)
+            if ($eventLog->getUser() === $this) {
+                $eventLog->setUser(null);
             }
         }
 
