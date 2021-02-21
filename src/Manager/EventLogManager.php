@@ -107,7 +107,7 @@ class EventLogManager implements EventSubscriber
 
     private function getUser(): ?UserInterface
     {
-        $user = $this->tokenStorage->getToken()->getUser();
+        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
         if ($user instanceof User) {
             return $user;
