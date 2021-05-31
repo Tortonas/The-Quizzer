@@ -1,7 +1,7 @@
 version: "3"
 services:
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     container_name: quizzer_mysql
     networks:
       default:
@@ -9,9 +9,9 @@ services:
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
       MYSQL_ROOT_PASSWORD:
-      MYSQL_DATABASE: the_quizzer
-      MYSQL_USER: root
-      MYSQL_PASSWORD:
+      MYSQL_DATABASE: project
+      MYSQL_USER: project
+      MYSQL_PASSWORD: project
     ports:
       - "9906:3306"
   phpmyadmin:
@@ -23,7 +23,6 @@ services:
       PMA_HOST: mysql
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
-    restart: always
     networks:
       default:
         ipv4_address: 192.168.2.4
